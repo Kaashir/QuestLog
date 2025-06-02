@@ -1,0 +1,2 @@
+class QuestController < ApplicationController
+end
