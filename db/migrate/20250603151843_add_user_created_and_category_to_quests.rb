@@ -1,4 +1,4 @@
-class AddUserCreatedandCategoryToQuests < ActiveRecord::Migration[7.1]
+class AddUserCreatedAndCategoryToQuests < ActiveRecord::Migration[7.1]
   def change
     add_column :quests, :user_created, :boolean, default: false
     add_reference :quests, :quest_category, foreign_key: true

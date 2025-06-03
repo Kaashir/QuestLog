@@ -1,16 +1,6 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
 
-# db/seeds.rb
 
-User.delete_all!
+User.destroy_all
 puts "Deleted all users."
 
 users = [
@@ -20,12 +10,16 @@ users = [
   { username: "dawikir", first_name: 'Daniel', last_name: 'Suarez', email: 'ndanielmnv@gmail.com', password: '123123', address: 'Rotterdam', date_birth: "23/07/1990"}
 ]
 
+# Create users
 users.each do |user_data|
   User.create!(user_data)
-  puts "Created user: #{user_data[:first_name]}"
+  puts "Created user: #{user_data[:first_name]} with ID: #{User.last.id}"
 end
 
 puts "#{User.all.count} users created."
+
+UserClass.destroy_all
+puts "Deleted all user classes."
 
 # Create user classes
 classes = [
@@ -35,13 +29,19 @@ classes = [
   { class_type: 'Warrior', xp: 0, level: 1 }
 ]
 
+user_id = User.first.id # Start from the first user ID
 classes.each do |class_data|
-  UserClass.create!(class_data)
-  UserClass.user = User.all.sample # Assign a random user to each class
-  puts "Created user class: #{class_data[:class_type]}"
+  user_class = UserClass.new(class_data)
+  user_class.user = User.find(user_id)
+  user_id += 1
+  user_class.save!
+  puts "Created user class: #{class_data[:class_type]} for user #{user_class.user.username}"
 end
 
 puts "#{UserClass.all.count} user classes created."
+
+QuestCategory.destroy_all
+puts "Deleted all quest categories."
 
 # Create quest categories
 categories = [
@@ -56,3 +56,41 @@ categories = [
   { name: 'Gratitude', category_xp: 6, class_type: 'Healer' },
   { name: 'Emotional Check-in', category_xp: 4, class_type: 'Healer' }
 ]
+
+categories.each do |category_data|
+  category = QuestCategory.create!(category_data)
+  puts "Created quest category: #{category.name} with XP: #{category.category_xp}"
+end
+puts "#{QuestCategory.all.count} quest categories created."
+
+Quest.destroy_all
+puts "Deleted all quests."
+
+# Create quests - with frequency set to 3 for demo purposes and xp set manually based on category and frequency
+QuestCategory.all.each do |quegory|
+  Quest.create!(
+    title: "#{quegory.name} Challenge",
+    description: "Complete a task in the #{quegory.name} category.",
+    xp_granted: quegory.category_xp * 3, # e.g., frequency 3 for demo
+    quest_category: quegory,
+    frequency: 3
+  )
+end
+
+puts "#{Quest.all.count} quests created."
+
+UserQuest.destroy_all
+puts "Deleted all user quests."
+
+# Assign quests to users
+15.times do
+ assigned_quest = UserQuest.create!(
+    user: User.all.sample, # Assign a random user for demo purposes
+    quest: Quest.all.sample, # Assign a random quest for demo purposes
+    completed: false,
+    completed_frequency: 0
+  )
+  puts "Assigned quest to user: #{assigned_quest.user.username}"
+end
+
+puts "#{UserQuest.all.count} user-quests created."
