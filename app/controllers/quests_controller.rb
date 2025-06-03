@@ -1,13 +1,6 @@
 class QuestsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_quest, only: [:show, :edit, :update, :destroy]
-
-  def index
-    @quests = Quest.all
-  end
-
-  def show
-  end
+  before_action :set_quest, only: [:edit, :update, :destroy]
 
   def new
     @quest = Quest.new
@@ -16,7 +9,7 @@ class QuestsController < ApplicationController
   def create
     @quest = Quest.new(quest_params)
     if @quest.save
-      redirect_to quests_path, notice: 'Quest was successfully created.'
+      redirect_to user_quests_path, notice: 'Quest was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -27,7 +20,7 @@ class QuestsController < ApplicationController
 
   def update
     if @quest.update(quest_params)
-      redirect_to quests_path, notice: 'Quest was successfully updated.'
+      redirect_to user_quests_path, notice: 'Quest was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
     end

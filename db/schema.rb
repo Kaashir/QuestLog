@@ -37,7 +37,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_03_142912) do
   create_table "user_classes", force: :cascade do |t|
     t.integer "xp"
     t.integer "level"
-    t.string "class_type"
+    t.string "type"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
