@@ -10,17 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_02_135551) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_03_101956) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "quests", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.integer "xp_granted"
+    t.integer "xp_granted", default: 0
     t.string "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "frequency"
   end
 
   create_table "user_classes", force: :cascade do |t|
