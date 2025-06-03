@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-  get 'user_quests/index'
-  get 'user_quests/show'
-  get 'user_quests/create'
-  get 'user_quests/update'
-  get 'user_quests/destroy'
   devise_for :users
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -15,7 +10,6 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  resources :quests, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
-    resources :user_quests, only: [:update]
-  end
+  resources :quests, only: [:new, :create, :edit, :update, :destroy]
+  resources :user_quests, only: [:index, :show, :create, :update, :destroy]
 end

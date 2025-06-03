@@ -1,2 +1,26 @@
-<h1>UserQuests#show</h1>
-<p>Find me in app/views/user_quests/show.html.erb</p>
+<%= link_to user_quests_path, class: "btn btn-secondary mb-3" do %>
+  <i class="fa-solid fa-circle-xmark"></i>
+<% end %>
+
+<h4><%= @user_quest.quest.title %></h4>
+<p><%= @user_quest.quest.description %></p>
+<p><%= @user_quest.completed_frequency %>/<%= @user_quest.quest.frequency %></p>
+
+<% if @user_quest.completed_frequency < @user_quest.quest.frequency %>
+  <%= link_to user_quest_path(@user_quest, completed_frequency: @user_quest.completed_frequency + 1),
+    data: { turbo_method: :patch },
+    class: "btn btn-success btn-sm rounded-pill aesthetic-btn text-white" do %>
+    <i class="fa-solid fa-check"></i>
+    <%= "Completed #{@user_quest.completed_frequency + 1} time".pluralize(@user_quest.completed_frequency + 1) %>
+  <% end %>
+<% elsif @user_quest.completed_frequency == @user_quest.quest.frequency %>
+  <span class="badge bg-success">Complete</span>
+<% else %>
+  <span class="badge bg-success">Completed</span>
+<% end %>
+
+<%= link_to user_quest_path(@user_quest),
+  data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+  class: "btn btn-danger btn-sm rounded-pill aesthetic-btn text-white" do %>
+  <i class="fa-regular fa-trash-can"></i>
+<% end %>
