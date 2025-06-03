@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'user_quests/index'
+  get 'user_quests/show'
+  get 'user_quests/create'
+  get 'user_quests/update'
+  get 'user_quests/destroy'
   devise_for :users
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
