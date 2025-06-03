@@ -1,0 +1,15 @@
+
+<div class="container">
+  <h4>Browse quests</h4>
+  <p>WIP: add preset quests</p>
+
+  <h4>Add custom quest</h4>
+  <%= simple_form_for(@quest) do |f| %>
+    <%= f.input :title, label: "Quest Name" %>
+    <%= f.input :description, label: "Quest Description" %>
+    <%= f.input :category, label: "Quest Category" %>
+    <%= f.input :frequency, label: "Frequency (per week)" %>
+    <%= link_to "Go back", quests_path %>
+    <%= f.submit "Add quest" %>
+  <% end %>
+</div>
