@@ -3,7 +3,7 @@ class CreateUserClasses < ActiveRecord::Migration[7.1]
     create_table :user_classes do |t|
       t.integer :xp
       t.integer :level
-      t.string :type
+      t.string :class_type
       t.references :user, null: false, foreign_key: true
 
       t.timestamps

@@ -10,24 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_03_101956) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_03_142912) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "quest_categories", force: :cascade do |t|
+    t.string "name"
+    t.integer "category_xp"
+    t.string "class_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "quests", force: :cascade do |t|
     t.string "title"
     t.text "description"
     t.integer "xp_granted", default: 0
-    t.string "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "frequency"
+    t.boolean "user_created", default: false
+    t.bigint "quest_category_id"
+    t.index ["quest_category_id"], name: "index_quests_on_quest_category_id"
   end
 
   create_table "user_classes", force: :cascade do |t|
     t.integer "xp"
     t.integer "level"
-    t.string "type"
+    t.string "class_type"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -40,6 +50,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_03_101956) do
     t.boolean "completed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "completed_frequency", default: 0
     t.index ["quest_id"], name: "index_user_quests_on_quest_id"
     t.index ["user_id"], name: "index_user_quests_on_user_id"
   end
@@ -61,6 +72,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_03_101956) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "quests", "quest_categories"
   add_foreign_key "user_classes", "users"
   add_foreign_key "user_quests", "quests"
   add_foreign_key "user_quests", "users"
