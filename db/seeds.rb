@@ -10,68 +10,49 @@
 
 # db/seeds.rb
 
-Quest.create!([
-  {
-    title: "5K Run",
-    description: "Run 5 kilometers without stopping.",
-    xp_granted: 30,
-    category: "Cardio",
-    frequency: 2
-  },
-  {
-    title: "Upper Body Blast",
-    description: "Complete a workout focused on chest, back, and arms.",
-    xp_granted: 35,
-    category: "Upper Body",
-    frequency: 2
-  },
-  {
-    title: "Leg Day Warrior",
-    description: "Do a lower body strength session (squats, lunges, deadlifts).",
-    xp_granted: 35,
-    category: "Lower Body",
-    frequency: 1
-  },
-  {
-    title: "Full Body Strength Circuit",
-    description: "Complete a workout combining compound lifts and core.",
-    xp_granted: 40,
-    category: "Full Body",
-    frequency: 1
-  },
-  {
-    title: "Cardio Sprint Intervals",
-    description: "Do 10 sets of 30s sprints with 1-min recovery.",
-    xp_granted: 25,
-    category: "Cardio",
-    frequency: 2
-  },
-  {
-    title: "Mobility Flow",
-    description: "Spend 20 minutes doing mobility and dynamic stretching.",
-    xp_granted: 15,
-    category: "Mobility",
-    frequency: 3
-  },
-  {
-    title: "Cold Shower Challenge",
-    description: "Take a 2-minute cold shower post-workout.",
-    xp_granted: 10,
-    category: "Challenge",
-    frequency: 2
-  },
-  {
-    title: "Burpee Burnout",
-    description: "Do 100 burpees throughout the day.",
-    xp_granted: 30,
-    category: "Challenge",
-    frequency: 1
-  },
-  {
-    title: "Stair Climb Power",
-    description: "Climb at least 30 floors this week.",
-    xp_granted: 20,
-    category: "Cardio",
-    frequency: 1
-  }
-])
+User.delete_all!
+puts "Deleted all users."
+
+users = [
+  { username: "kaashir", first_name: 'Mrinal', last_name: 'Verma', email: 'mrinalverma1993@gmail.com', password: '123123', address: 'The Hague', date_birth: "22/07/1993"},
+  { username: "fratboi12", first_name: 'Thomas', last_name: 'Bruins', email: 'thomas.bruins12@gmail.com', password: '123123', address: 'Amsterdam', date_birth: "16/06/2006"},
+  { username: "travelingdev", first_name: 'Carlijn', last_name: 'Driessen', email: 'carlijndriessen.dev@gmail.com', password: '123123', address: 'Limburg', date_birth: "7/11/1994"},
+  { username: "dawikir", first_name: 'Daniel', last_name: 'Suarez', email: 'ndanielmnv@gmail.com', password: '123123', address: 'Rotterdam', date_birth: "23/07/1990"}
+]
+
+users.each do |user_data|
+  User.create!(user_data)
+  puts "Created user: #{user_data[:first_name]}"
+end
+
+puts "#{User.all.count} users created."
+
+# Create user classes
+classes = [
+  { class_type: 'Warrior', xp: 0, level: 1 },
+  { class_type: 'Healer', xp: 0, level: 1 },
+  { class_type: 'Monk', xp: 0, level: 1 },
+  { class_type: 'Warrior', xp: 0, level: 1 }
+]
+
+classes.each do |class_data|
+  UserClass.create!(class_data)
+  UserClass.user = User.all.sample # Assign a random user to each class
+  puts "Created user class: #{class_data[:class_type]}"
+end
+
+puts "#{UserClass.all.count} user classes created."
+
+# Create quest categories
+categories = [
+  { name: 'Cardio', category_xp: 10, class_type: 'Warrior' },
+  { name: 'Upper Body', category_xp: 12, class_type: 'Warrior' },
+  { name: 'Lower Body', category_xp: 10, class_type: 'Warrior' },
+  { name: 'Full Body', category_xp: 15, class_type: 'Warrior' },
+  { name: 'Meditation', category_xp: 8, class_type: 'Monk' },
+  { name: 'Yoga', category_xp: 9, class_type: 'Monk' },
+  { name: 'Breathwork', category_xp: 7, class_type: 'Monk' },
+  { name: 'Journaling', category_xp: 5, class_type: 'Healer' },
+  { name: 'Gratitude', category_xp: 6, class_type: 'Healer' },
+  { name: 'Emotional Check-in', category_xp: 4, class_type: 'Healer' }
+]
