@@ -1,38 +1,37 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <div class="container-fluid">
-    <%= link_to "#", class: "navbar-brand" do %>
-      <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
-    <% end %>
+<% if user_signed_in? %>
+  <nav class="navbar">
+    <% user_class = current_user.user_classes.first %>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <div class="navbar-left">
+      <%= image_tag 'warrior-avatar.png', alt: 'Avatar', class: 'avatar' %>
+      <div class="character-info">
+        <div class="character-name"><%= current_user.username.capitalize %></div>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
-        <% if user_signed_in? %>
-          <li class="nav-item active">
-            <%= link_to "Home", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Messages", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item dropdown">
-          <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
-          </a>
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Action", "#", class: "dropdown-item" %>
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
-            </div>
-          </li>
-        <% else %>
-          <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-          </li>
-        <% end %>
+        <turbo-frame id="level_xp">
+          <div class="character-level">Lvl: <%= user_class.level %></div>
+          <div class="xp-bar-wrapper">
+            <div class="xp-bar" style="width: <%= user_class.xp %>%"></div>
+          </div>
+        </turbo-frame>
+      </div>
+    </div>
+
+    <div class="navbar-right dropdown ms-auto">
+      <button class="btn pixel-button dropdown-toggle" type="button" id="menuDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end pixel-dropdown" aria-labelledby="menuDropdown">
+        <li><%= link_to "Inventory", "#", class: "dropdown-item" %></li>
+        <li><%= link_to "Quests", "#", class: "dropdown-item" %></li>
+        <li><%= link_to "Settings", "#", class: "dropdown-item" %></li>
       </ul>
     </div>
-  </div>
-</div>
+  </nav>
+<% else %>
+  <li class="nav-item">
+    <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+  </li>
+<% end %>
+
+
+<%# ADD THIS TO UPDATE THE XP/LEVEL BAR IN JS. Turbo.visit("/level_xp", { frame: "level_xp" }) %>
