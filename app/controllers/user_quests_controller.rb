@@ -12,19 +12,17 @@ class UserQuestsController < ApplicationController
   end
 
   def new
+    @user_quest = UserQuest.new
     @current_user_class = current_user.user_classes.first
-    @quests = Quest.joins(:quest_category).where(quest_categories: { class_type: @current_user_class.class_type })
+    # @current_user_class = current_user.user_classes.find_by(id: session[:current_user_class_id]) || current_user.user_classes.first
+    @quests = Quest.quest_class(@current_user_class.class_type)
   end
 
   def create
     @user_quest = UserQuest.new(user_quest_params)
-    @user_quest.user_id = current_user.id
-
-    if @user_quest.save
-      redirect_to user_quests_path, notice: 'Quest was successfully created.'
-    else
-      render :new, status: :unprocessable_entity
-    end
+    @user_quest.user = current_user
+    @user_quest.save
+    redirect_to user_quests_path
   end
 
   def update
@@ -43,7 +41,7 @@ class UserQuestsController < ApplicationController
   private
 
   def user_quest_params
-    params.require(:user_quest).permit(:quest_id, :user_id, :completed)
+    params.require(:user_quest).permit(:quest_id, :user_id)
   end
 
   def set_user_quest

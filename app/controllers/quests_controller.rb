@@ -4,13 +4,18 @@ class QuestsController < ApplicationController
 
   def new
     @quest = Quest.new
-    @quests = Quest.all
+    @quest_categories = QuestCategory.where(class_type: current_user.user_classes.first.class_type)
   end
 
   def create
-    @quest = Quest.new(quest_params, user_created: true)
+    @quest = Quest.new(quest_params)
+    @quest.user_created = true
+    @current_user_class = current_user.user_classes.first
+    @quest_categories = QuestCategory.where(class_type: @current_user.user_classes.first.class_type)
     if @quest.save
-      redirect_to user_quests_path, notice: 'Quest was successfully created.'
+      # Create a UserQuest for the current user
+      UserQuest.create(user: current_user, quest: @quest, completed: false, completed_frequency: 0)
+      redirect_to user_quests_path
     else
       render :new, status: :unprocessable_entity
     end
@@ -39,6 +44,6 @@ class QuestsController < ApplicationController
   end
 
   def quest_params
-    params.require(:quest).permit(:title, :description, :frequency)
+    params.require(:quest).permit(:title, :description, :frequency, :quest_category_id)
   end
 end

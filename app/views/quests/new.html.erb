@@ -3,8 +3,8 @@
   <%= simple_form_for(@quest) do |f| %>
     <%= f.input :title, label: "Quest Name" %>
     <%= f.input :description, label: "Quest Description" %>
-    <%# <%= f.input :category, label: "Quest Category" %>
-    <%= f.input :frequency, label: "Frequency (per week)" %>
+    <%= f.input :quest_category_id, label: "Quest Category", collection: @quest_categories.collect { |c| [c.name, c.id] }, prompt: "Select a category" %>
+    <%= f.input :frequency, label: "Frequency" %>
     <%= link_to "Go back", new_user_quest_path %>
     <%= f.submit "Create quest" %>
   <% end %>

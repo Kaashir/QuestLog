@@ -15,7 +15,12 @@
       <p><%= quest.description %></p>
       <p>Category: <%= quest.quest_category.name %></p>
       <p>Frequency: <%= quest.frequency %></p>
-      <%= link_to "Add to my quests", user_quests_path(quest_id: quest.id), method: :post, class: "btn btn-primary" %>
+      <%= simple_form_for [@user_quest] do |f| %>
+        <%= f.hidden_field :quest_id, value: quest.id %>
+        <%= f.hidden_field :completed_frequency, value: 0 %>
+        <%= f.submit "Add to my quests", class: "btn btn-primary" %>
+      <% end %>
+      <%# <%= link_to "Add to my quests", user_quests_path(user_quest: { quest_id: quest.id }), method: :post, class: "btn btn-primary" %>
     </div>
   <% end %>
 </div>

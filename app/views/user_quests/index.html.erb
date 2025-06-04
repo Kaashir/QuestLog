@@ -4,10 +4,8 @@
 <p>Current class: <%= @current_user_class.class_type %></p>
 <% @current_user_quests.each do |user_quest| %>
   <div class="container">
-    <%# <% if current_user.user_class.class_type == user_quest.quest.quest_category.class_type %>
       <p><%= user_quest.quest.title %></p>
       <p><%= user_quest.quest.description %></p>
       <p><%= user_quest.completed_frequency %>/<%= user_quest.quest.frequency %></p>
-    <%# <% end %>
   </div>
 <% end %>
