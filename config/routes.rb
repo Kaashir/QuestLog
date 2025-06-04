@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   resources :quests, only: [:new, :create, :edit, :update, :destroy]
-  resources :user_quests, only: [:index, :show, :create, :update, :destroy]
+  resources :user_quests, only: [:index, :show, :new, :create, :update, :destroy]
 end

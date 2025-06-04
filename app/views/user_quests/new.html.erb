@@ -1,0 +1,26 @@
+<div class="container">
+  <%= link_to user_quests_path, class: "btn btn-secondary mb-3" do %>
+    <i class="fa-solid fa-circle-xmark"></i>
+  <% end %>
+
+  <div class="quest-item">
+    <%= link_to new_quest_path, class: "btn btn-primary" do %>
+    <%# this needs to link somewhere else where we add in the "Add cusotm quest" form %>
+      <i class="fa-solid fa-plus"></i>
+    <% end %>
+  </div>
+  <% @quests.each do |quest| %>
+    <div class="quest-item">
+      <h5><%= quest.title %></h5>
+      <p><%= quest.description %></p>
+      <p>Category: <%= quest.quest_category.name %></p>
+      <p>Frequency: <%= quest.frequency %></p>
+      <%= simple_form_for [@user_quest] do |f| %>
+        <%= f.hidden_field :quest_id, value: quest.id %>
+        <%= f.hidden_field :completed_frequency, value: 0 %>
+        <%= f.submit "Add to my quests", class: "btn btn-primary" %>
+      <% end %>
+      <%# <%= link_to "Add to my quests", user_quests_path(user_quest: { quest_id: quest.id }), method: :post, class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
