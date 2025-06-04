@@ -4,10 +4,11 @@ class QuestsController < ApplicationController
 
   def new
     @quest = Quest.new
+    @quests = Quest.all
   end
 
   def create
-    @quest = Quest.new(quest_params)
+    @quest = Quest.new(quest_params, user_created: true)
     if @quest.save
       redirect_to user_quests_path, notice: 'Quest was successfully created.'
     else
@@ -38,6 +39,6 @@ class QuestsController < ApplicationController
   end
 
   def quest_params
-    params.require(:quest).permit(:title, :description, :category, :frequency)
+    params.require(:quest).permit(:title, :description, :frequency)
   end
 end
