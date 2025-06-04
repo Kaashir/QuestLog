@@ -14,9 +14,6 @@ class UserQuestsController < ApplicationController
   def new
     @current_user_class = current_user.user_classes.first
     @quests = Quest.joins(:quest_category).where(quest_categories: { class_type: @current_user_class.class_type })
-    # quests only from the current user's class type
-    @quest_categories = QuestCategory.where(class_type: @current_user_class.class_type)
-    @user_quest = UserQuest.new
   end
 
   def create
