@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+  <div id="welcome-container" style="width: 1440px; height: 960px; background-image: url(<%= asset_path('welcome_background.png') %>); background-size: cover; background-position: center; border-radius: 12px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); overflow: hidden; position: relative;">
+    <h1 style="font-family: 'Pixelify Sans', sans-serif; font-size: 3.3rem; text-align: center; width: 100%; padding-top: 140px;">Questlog</h1>
+    <div style="position: absolute; bottom: 70px; left: 0; width: 100%; display: flex; justify-content: center;">
+      <button id="start-btn" type="button" class="btn btn-secondary" style="background-color: white; color: black; font-family: 'Pixelify Sans', sans-serif; font-size: 2.5rem; padding: 0.2rem 1.8rem;">Start</button>
+      <div id="session-form-container"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const current_user_present = <%= current_user.present? ? 'true' : 'false' %>;
+  console.log("Is user present?", current_user_present);
+
+  // Debug output for current_user details
+  <% if current_user.present? %>
+    console.log("Current user details:", {
+      id: <%= current_user.id %>,
+      email: "<%= current_user.email %>",
+      username: "<%= current_user.username %>",
+      attributes: <%= raw current_user.attributes.to_json %>
+    });
+  <% end %>
+
+  const current_username = "<%= current_user&.username&.html_safe || '' %>";
+  console.log("Username variable:", current_username);
+
+  document.addEventListener("DOMContentLoaded", function() {
+    const startBtn = document.getElementById("start-btn");
+    startBtn.addEventListener("click", function() {
+      if (current_user_present) {
+        console.log("Setting welcome message with username:", current_username);
+        startBtn.textContent = `Welcome ${current_username || 'User'}`;
+      } else {
+        startBtn.remove();
+        fetch("<%= new_user_session_path %>", { headers: { "Accept": "text/html" } })
+          .then(response => response.text())
+          .then(html => {
+            const container = document.getElementById("session-form-container");
+            const wrapper = document.createElement("div");
+            wrapper.classList.add("slide-up");
+            wrapper.innerHTML = html;
+            container.appendChild(wrapper);
+
+            requestAnimationFrame(() => {
+              wrapper.classList.add("show");
+            });
+          });
+      }
+    });
+  });
+</script>
