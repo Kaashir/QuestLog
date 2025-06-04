@@ -42,6 +42,4 @@ class UserQuestsController < ApplicationController
   def set_user_quest
     @user_quest = UserQuest.find(params[:id])
   end
-  
-  flash.now[:xp_updated] = true
 end
