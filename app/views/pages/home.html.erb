@@ -1,71 +1,17 @@
 <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-  <div id="welcome-container" style="width: 1440px; height: 960px; background-image: url(<%= asset_path('welcome_background.png') %>); background-size: cover; background-position: center; border-radius: 12px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); overflow: hidden; position: relative;">
+  <div id="welcome-container"
+       data-controller="welcome"
+       data-welcome-user-present-value="<%= current_user.present? %>"
+       data-welcome-username-value="<%= current_user&.username&.html_safe || '' %>"
+       style="width: 1440px; height: 960px; background-image: url(<%= asset_path('welcome_background.png') %>); background-size: cover; background-position: center; border-radius: 12px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); overflow: hidden; position: relative;">
     <h1 style="font-family: 'Pixelify Sans', sans-serif; font-size: 3.3rem; text-align: center; width: 100%; padding-top: 140px;">Questlog</h1>
     <div style="position: absolute; bottom: 70px; left: 0; width: 100%; display: flex; flex-direction: column; align-items: center;">
-      <button id="start-btn" type="button" class="btn btn-secondary" style="background-color: white; color: black; font-family: 'Pixelify Sans', sans-serif; font-size: 2.5rem; padding: 0.2rem 1.8rem;">Start</button>
-      <div id="session-form-container" style="margin-top: 20px;"></div>
+      <button data-welcome-target="start"
+              data-action="click->welcome#start"
+              type="button"
+              class="btn btn-secondary"
+              style="background-color: white; color: black; font-family: 'Pixelify Sans', sans-serif; font-size: 2.5rem; padding: 0.2rem 1.8rem;">Start</button>
+      <div data-welcome-target="sessionForm" style="margin-top: 20px;"></div>
     </div>
   </div>
 </div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const startBtn = document.getElementById("start-btn");
-    const isUserPresent = <%= current_user.present? ? 'true' : 'false' %>;
-    const username = "<%= current_user&.username&.html_safe || '' %>";
-
-    startBtn.addEventListener("click", function() {
-      if (isUserPresent) {
-        showWelcomeMessage(startBtn, username);
-
-      } else {
-        showLoginForm(startBtn);
-      }
-    });
-  });
-
-  function showWelcomeMessage(button, username) {
-    button.textContent = '';
-    const typewriter = document.createElement("span");
-    typewriter.classList.add("typewriter-text");
-    button.appendChild(typewriter);
-
-    const name = username || 'User';
-    const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
-    const message = `Welcome ${capitalizedName}`;
-    let charIndex = 0;
-
-    function typeChar() {
-      if (charIndex < message.length) {
-        typewriter.textContent += message.charAt(charIndex);
-        charIndex++;
-        setTimeout(typeChar, 100);
-      } else {
-        setTimeout(() => {
-          window.location.href = "/user_quests";
-        }, 3000);
-      }
-    }
-
-    typeChar();
-  }
-
-  function showLoginForm(button) {
-    button.remove();
-    fetch("<%= new_user_session_path %>", {
-      headers: { "Accept": "text/html" }
-    })
-    .then(response => response.text())
-    .then(html => {
-      const container = document.getElementById("session-form-container");
-      const wrapper = document.createElement("div");
-      wrapper.classList.add("slide-up");
-      wrapper.innerHTML = html;
-      container.appendChild(wrapper);
-
-      requestAnimationFrame(() => {
-        wrapper.classList.add("show");
-      });
-    });
-  }
-</script>
