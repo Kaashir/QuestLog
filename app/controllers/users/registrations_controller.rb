@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  include Wicked::Wizard
-
-  steps :choose_class, :finish_registration
 
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
@@ -11,16 +8,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/sign_up
 
   def new
-    redirect_to wizard_path(steps.first)
+    @user = User.new
+    @user_class = UserClass.new(class_type: params[:type])
+    @user.user_classes << @user_class
   end
 
-  def show
-    case step
-    when :choose_class
-      @classes = UserClass.all
-    when :finish_registration
-    end
-    render_wizard
+  def update
+    raise
   end
 
   # POST /resource
