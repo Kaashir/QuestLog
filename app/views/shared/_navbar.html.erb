@@ -10,7 +10,13 @@
         <div class="character-name"><%= current_user.username.capitalize %></div>
 
         <%= turbo_frame_tag "level_xp" do %>
-          <%= render "shared/level_xp", user_class: user_class %>
+          <% if user_class.present? %>
+            <%= render "shared/level_xp", user_class: user_class %>
+          <% else %>
+            <div class="character-level">
+              <%= link_to "Choose your class", choose_class_path, class: "btn btn-primary btn-sm" %>
+            </div>
+          <% end %>
         <% end %>
       </div>
     </div>
@@ -27,7 +33,13 @@
     </div>
   </nav>
 <% else %>
-  <li class="nav-item">
-    <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-  </li>
+  <nav class="navbar">
+    <div class="navbar-right ms-auto">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+        </li>
+      </ul>
+    </div>
+  </nav>
 <% end %>
