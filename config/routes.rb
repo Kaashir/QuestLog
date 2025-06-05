@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root to: "pages#home"
   resources :quests, only: [:new, :create, :edit, :update, :destroy]
-  resources :user_quests, only: [:index, :show, :new, :create, :update, :destroy]
+  resources :user_quests, only: [:index, :show, :new, :create, :edit, :update, :destroy]
 
   # Public routes that don't require authentication
   get 'choose_class', to: 'pages#choose_class'

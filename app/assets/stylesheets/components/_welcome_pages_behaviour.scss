@@ -1,0 +1,24 @@
+.slide-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.5s ease;
+}
+
+.slide-up.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.typewriter-text {
+  display: inline-block;
+  font-family: 'Pixelify Sans', sans-serif;
+  font-size: 2.5rem;
+  white-space: nowrap;
+  border-right: 2px solid black;
+  animation: blink-caret 0.7s step-end infinite;
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: black; }
+}

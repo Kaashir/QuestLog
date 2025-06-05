@@ -5,7 +5,6 @@
 
   <div class="quest-item">
     <%= link_to new_quest_path, class: "btn btn-primary" do %>
-    <%# this needs to link somewhere else where we add in the "Add cusotm quest" form %>
       <i class="fa-solid fa-plus"></i>
     <% end %>
   </div>
@@ -15,12 +14,13 @@
       <p><%= quest.description %></p>
       <p>Category: <%= quest.quest_category.name %></p>
       <p>Frequency: <%= quest.frequency %></p>
+      <p>XP to be gained: <%= quest.xp_granted %></p>
       <%= simple_form_for [@user_quest] do |f| %>
         <%= f.hidden_field :quest_id, value: quest.id %>
         <%= f.hidden_field :completed_frequency, value: 0 %>
+        <%= f.hidden_field :completed, value: false %>
         <%= f.submit "Add to my quests", class: "btn btn-primary" %>
       <% end %>
-      <%# <%= link_to "Add to my quests", user_quests_path(user_quest: { quest_id: quest.id }), method: :post, class: "btn btn-primary" %>
     </div>
   <% end %>
 </div>

@@ -1,21 +1,16 @@
 class UserQuestsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user_quest, only: [:show, :update, :destroy]
+  before_action :set_user_quest, only: [:edit, :update, :destroy]
 
   def index
-    @current_user_quests = current_user.user_quests
-    @current_user_class = current_user.user_classes.first
-    # @current_user_class = current_user.user_classes.find_by(id: session[:current_user_class_id]) || current_user.user_classes.first
-  end
-
-  def show
+    @current_user_quests = current_user.user_quests.where(completed: false).order(:id)
+    @current_user_class = current_user.user_classes.where(active: true)
   end
 
   def new
     @user_quest = UserQuest.new
-    @current_user_class = current_user.user_classes.first
-    # @current_user_class = current_user.user_classes.find_by(id: session[:current_user_class_id]) || current_user.user_classes.first
-    @quests = Quest.quest_class(@current_user_class.class_type)
+    @current_user_class = current_user.user_classes.where(active: true)
+    @quests = Quest.quest_class(@current_user_class.first.class_type).where(user_created: false)
   end
 
   def create
@@ -25,9 +20,15 @@ class UserQuestsController < ApplicationController
     redirect_to user_quests_path
   end
 
+  def edit
+  end
+
   def update
+    @current_user_class = current_user.user_classes.where(active: true)
     if @user_quest.update(user_quest_params)
-      redirect_to user_quests_path, notice: 'Quest was successfully updated.'
+      @current_user_class.first.increment!(:xp, @user_quest.quest.xp_granted) if @user_quest.completed
+      @current_user_class.first.save
+      redirect_to user_quests_path
     else
       render :edit, status: :unprocessable_entity
     end
@@ -41,7 +42,7 @@ class UserQuestsController < ApplicationController
   private
 
   def user_quest_params
-    params.require(:user_quest).permit(:quest_id, :user_id)
+    params.require(:user_quest).permit(:quest_id, :user_id, :completed, :completed_frequency)
   end
 
   def set_user_quest

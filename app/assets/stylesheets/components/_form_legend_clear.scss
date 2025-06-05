@@ -8,3 +8,20 @@
 legend ~ div.form-check:first-of-type {
   clear: left;
 }
+
+.login-container {
+    font-family: 'Pixelify Sans', sans-serif;
+}
+
+.login-container input[type="email"],
+.login-container input[type="password"],
+.login-container input[type="text"],
+.login-container input[type="checkbox"] {
+  border-radius: 10px;
+  background-color: #E3EAF2;
+  font-family: 'Pixelify Sans', sans-serif;
+}
+
+.login-container label {
+    font-family: 'Pixelify Sans', sans-serif;
+}
