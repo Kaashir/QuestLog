@@ -11,6 +11,10 @@ class UserClass < ApplicationRecord
     (xp.to_f / xp_needed_for_next_level * 100).round
   end
 
+  def active?
+    active
+  end
+
   private
 
   def check_and_level_up
