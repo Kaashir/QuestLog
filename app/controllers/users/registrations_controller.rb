@@ -9,12 +9,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def new
     @user = User.new
-    @user_class = UserClass.new(class_type: params[:type])
-    @user.user_classes << @user_class
+    session[:user_class_type] = params[:type]
   end
 
-  def update
-    raise
+  def create
+    @user = User.new(user_params)
+    @user.save!
+    @user_class = UserClass.new(class_type: params[:user_class_type])
+    @user.user_classes << @user_class
+    sign_in(@user)
+    redirect_to user_quests_path
   end
 
   # POST /resource
@@ -67,4 +71,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:username, :email, :password, :password_confirmation, :first_name, :last_name, :date_birth, :address)
+  end
 end
