@@ -3,5 +3,8 @@ class PagesController < ApplicationController
 
   def home
   end
-  
+
+  def choose_class
+  end
+
 end
