@@ -4,19 +4,28 @@
 
 <h4><%= @user_quest.quest.title %></h4>
 <p><%= @user_quest.quest.description %></p>
+<p><%= @user_quest.quest.quest_category.name %></p>
 <p><%= @user_quest.completed_frequency %>/<%= @user_quest.quest.frequency %></p>
 
-<% if @user_quest.completed_frequency < @user_quest.quest.frequency %>
-  <%= link_to user_quest_path(@user_quest, completed_frequency: @user_quest.completed_frequency + 1),
+<% if @user_quest.completed_frequency < (@user_quest.quest.frequency - 1) %>
+  <%= link_to user_quest_path(@user_quest, user_quest: { completed_frequency: @user_quest.completed_frequency + 1 }),
     data: { turbo_method: :patch },
     class: "btn btn-success btn-sm rounded-pill aesthetic-btn text-white" do %>
     <i class="fa-solid fa-check"></i>
-    <%= "Completed #{@user_quest.completed_frequency + 1} time".pluralize(@user_quest.completed_frequency + 1) %>
+    <p>Advance</p>
   <% end %>
-<% elsif @user_quest.completed_frequency == @user_quest.quest.frequency %>
-  <span class="badge bg-success">Complete</span>
-<% else %>
-  <span class="badge bg-success">Completed</span>
+<% elsif @user_quest.completed_frequency == (@user_quest.quest.frequency - 1) %>
+  <%= link_to user_quest_path(@user_quest, user_quest: { completed_frequency: @user_quest.completed_frequency + 1, completed: true }),
+    data: { turbo_method: :patch },
+    class: "btn btn-success btn-sm rounded-pill aesthetic-btn text-white" do %>
+    <i class="fa-solid fa-check"></i>
+    <p>Complete</p>
+  <% end %>
+<% end %>
+
+<%= link_to edit_user_quest_path(@user_quest), class: "btn btn-primary btn-sm rounded-pill aesthetic-btn text-white" do %>
+  <i class="fa-solid fa-pen-to-square"></i>
+  <p>Edit</p>
 <% end %>
 
 <%= link_to user_quest_path(@user_quest),

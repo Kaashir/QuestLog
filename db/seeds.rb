@@ -34,6 +34,7 @@ classes.each do |class_data|
   user_class = UserClass.new(class_data)
   user_class.user = User.find(user_id)
   user_id += 1
+  user_class.active = true
   user_class.save!
   puts "Created user class: #{class_data[:class_type]} for user #{user_class.user.username}"
 end
