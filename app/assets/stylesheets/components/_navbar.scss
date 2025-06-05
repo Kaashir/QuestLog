@@ -1,12 +1,104 @@
-.navbar-lewagon {
+.navbar {
+  background-color: $solar-flare;
+  color: $mountain-shadow;
+  padding: 0.75rem 1rem;
+  display: flex;
   justify-content: space-between;
-  background: white;
+  align-items: center;
+  font-family: $headers-font;
+  border-bottom: 3px solid $aurora-mist;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 2;
 }
 
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
+.navbar-left {
+  display: flex;
+  align-items: center;
 }
 
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
+.avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  margin-right: 0.75rem;
+  border: 2px solid $twilight-sky;
+}
+
+.character-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.character-name {
+  font-family: 'Pixelify Sans', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: $mountain-shadow;
+}
+
+.character-level {
+  font-family: 'Pixelify Sans', sans-serif;
+  font-size: 0.9rem;
+  color: $summit-stone;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+// dropdown (bootstrap)
+
+.pixel-button {
+  font-family: 'Pixelify Sans', sans-serif;
+  background-color: $twilight-sky;
+  border: 2px solid $summit-stone;
+  color: $cloud-whisper;
+  padding: 6px 12px;
+  border-radius: 4px;
+
+  &:hover {
+    background-color: $twilight-sky;
+    color: $solar-flare;
+  }
+}
+
+.pixel-dropdown {
+  font-family: 'Pixelify Sans', sans-serif;
+  background-color: $cloud-whisper;
+  border: 2px solid $summit-stone;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+
+  .dropdown-item {
+    color: $mountain-shadow;
+    font-weight: 600;
+    border-radius: 4px;
+
+    &:hover {
+      background-color: $solar-flare;
+      color: $crimson-cloak;
+    }
+  }
+}
+
+// xp bar
+
+.xp-bar-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background-color: $aurora-mist;
+  border-top: 1px solid darken($aurora-mist, 10%);
+  overflow: hidden;
+}
+
+.xp-bar {
+  height: 100%;
+  background-color: $twilight-sky;
+  transition: width 0.3s ease;
 }

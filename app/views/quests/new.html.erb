@@ -1,33 +1,11 @@
-
 <div class="container">
-
-  <%= link_to user_quests_path, class: "btn btn-secondary mb-3" do %>
-    <i class="fa-solid fa-circle-xmark"></i>
-  <% end %>
-
-  <div class="quest-item">
-    <%= link_to new_quest_path, class: "btn btn-primary" do %>
-    <%# this needs to link somewhere else where we add in the "Add cusotm quest" form %>
-      <i class="fa-solid fa-plus"></i>
-    <% end %>
-  </div>
-  <% @quests.each do |quest| %>
-    <div class="quest-item">
-      <h5><%= quest.title %></h5>
-      <p><%= quest.description %></p>
-      <p>Category: <%= quest.category %></p>
-      <p>Frequency: <%= quest.frequency %></p>
-      <%= link_to "Add to my quests", user_quests_path(quest_id: quest.id), method: :post, class: "btn btn-primary" %>
-    </div>
-  <% end %>
-
   <h4>Add custom quest</h4>
   <%= simple_form_for(@quest) do |f| %>
     <%= f.input :title, label: "Quest Name" %>
     <%= f.input :description, label: "Quest Description" %>
-    <%= f.input :category, label: "Quest Category" %>
-    <%= f.input :frequency, label: "Frequency (per week)" %>
-    <%= link_to "Go back", user_quests_path %>
+    <%= f.input :quest_category_id, label: "Quest Category", collection: @quest_categories.collect { |c| [c.name, c.id] }, prompt: "Select a category" %>
+    <%= f.input :frequency, label: "Frequency" %>
+    <%= link_to "Go back", new_user_quest_path %>
     <%= f.submit "Create quest" %>
   <% end %>
 </div>

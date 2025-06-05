@@ -11,8 +11,13 @@
   </head>
 
   <body><%= render "shared/navbar" %>
+  <% if flash[:xp_updated] %>
+    <script>
+      Turbo.visit("/level_xp", { frame: "level_xp" });
+    </script>
+  <% end %>
 <%= render "shared/flashes" %>
-
+  
     <%= yield %>
   </body>
 </html>
