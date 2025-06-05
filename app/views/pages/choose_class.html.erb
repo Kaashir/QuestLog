@@ -24,6 +24,7 @@
           <% end %>
 
           <!-- Carousel Item 2 -->
+          <%= link_to new_user_registration_path(type: "monk") do %>
           <div class="carousel-item">
             <div class="d-flex justify-content-center">
               <div class="card border-0" style="width: 260px; height: 590px; background-color: #FFD066; box-shadow: 0 4px 16px rgba(0,0,0,0.12); border-radius: 12px; position: relative;">
@@ -37,8 +38,10 @@
               </div>
             </div>
           </div>
+          <% end %>
 
           <!-- Carousel Item 3 -->
+          <%= link_to new_user_registration_path(type: "healer") do %>
           <div class="carousel-item">
             <div class="d-flex justify-content-center">
               <div class="card border-0" style="width: 260px; height: 590px; background-color: #FFD066; box-shadow: 0 4px 16px rgba(0,0,0,0.12); border-radius: 12px; position: relative;">
@@ -52,6 +55,8 @@
               </div>
             </div>
           </div>
+          <% end %>
+          
         </div>
 
         <!-- Carousel Controls -->
