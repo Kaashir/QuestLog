@@ -4,16 +4,15 @@ class QuestsController < ApplicationController
 
   def new
     @quest = Quest.new
-    @quest_categories = QuestCategory.where(class_type: current_user.user_classes.first.class_type)
+    @quest_categories = QuestCategory.where(class_type: current_user.user_classes.where(active: true).first.class_type)
   end
 
   def create
     @quest = Quest.new(quest_params)
     @quest.user_created = true
-    @current_user_class = current_user.user_classes.first
-    @quest_categories = QuestCategory.where(class_type: @current_user.user_classes.first.class_type)
+    @current_user_class = current_user.user_classes.where(active: true)
+    @quest_categories = QuestCategory.where(class_type: @current_user.user_classes.where(active: true).first.class_type)
     if @quest.save
-      # Create a UserQuest for the current user
       UserQuest.create(user: current_user, quest: @quest, completed: false, completed_frequency: 0)
       redirect_to user_quests_path
     else
@@ -26,7 +25,7 @@ class QuestsController < ApplicationController
 
   def update
     if @quest.update(quest_params)
-      redirect_to user_quests_path, notice: 'Quest was successfully updated.'
+      redirect_to user_quests_path
     else
       render :edit, status: :unprocessable_entity
     end
@@ -34,7 +33,7 @@ class QuestsController < ApplicationController
 
   def destroy
     @quest.destroy
-    redirect_to quests_path, notice: 'Quest was successfully destroyed.'
+    redirect_to quests_path
   end
 
   private
