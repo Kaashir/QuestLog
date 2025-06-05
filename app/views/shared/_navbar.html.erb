@@ -5,7 +5,9 @@
     <%= turbo_stream_from "user_#{current_user.id}_level_xp" %>
 
     <div class="navbar-left">
-      <%= image_tag 'warrior-avatar.png', alt: 'Avatar', class: 'avatar' %>
+      <%= link_to user_class_path(user_class) do %>
+        <%= image_tag 'warrior-avatar.png', alt: 'Avatar', class: 'avatar' %>
+      <% end %>
       <div class="character-info">
         <div class="character-name"><%= current_user.username.capitalize %></div>
 

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
   root to: "pages#home"
+  resources :user_classes, only: [:show, :edit, :update]
   resources :quests, only: [:new, :create, :edit, :update, :destroy]
   resources :user_quests, only: [:index, :show, :new, :create, :edit, :update, :destroy]
 
