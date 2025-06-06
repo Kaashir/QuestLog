@@ -3,8 +3,10 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
     sessions: 'users/sessions'
   }
+  
   root to: "pages#home"
-  resources :user_classes, only: [:show, :edit, :update]
+  resources :user_classes, only: [:show, :new, :create, :edit, :update]
+
   resources :quests, only: [:new, :create, :edit, :update, :destroy]
   resources :user_quests, only: [:index, :show, :new, :create, :edit, :update, :destroy]
 

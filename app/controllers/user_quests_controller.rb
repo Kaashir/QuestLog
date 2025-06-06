@@ -10,7 +10,7 @@ class UserQuestsController < ApplicationController
   def new
     @user_quest = UserQuest.new
     @current_user_class = current_user.user_classes.where(active: true)
-    @quests = Quest.quest_class(@current_user_class.first.class_type).where(user_created: false)
+    @quests = Quest.where(quest_category: @current_user_class.first.hero_class.quest_categories).where(user_created: false)
   end
 
   def create

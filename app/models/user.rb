@@ -9,8 +9,10 @@ class User < ApplicationRecord
   has_many :user_classes, dependent: :destroy
   has_many :user_quests, dependent: :destroy
   has_many :quests, through: :user_quests
+  has_many :hero_classes, through: :user_classes
 
   def current_class
     user_classes.find_by(active: true)
   end
+
 end

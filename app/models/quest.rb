@@ -9,6 +9,7 @@ class Quest < ApplicationRecord
   has_many :users, through: :user_quests
   has_many :user_classes, through: :users
   belongs_to :quest_category
+  has_one :hero_class, through: :quest_category
 
   validates :title, presence: true, length: { maximum: 100 }
   validates :description, presence: true, length: { maximum: 500 }
@@ -16,10 +17,7 @@ class Quest < ApplicationRecord
   validates :frequency, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 10 }
   # TODO: Uncomment when current_user is set in controller
   # validates :category_must_match_user_class
-  delegate :class_type, to: :quest_category
-  scope :quest_class, lambda { |class_type|
-    joins(:quest_category).where(quest_categories: { class_type: class_type })
-  }
+
 
   private
 
