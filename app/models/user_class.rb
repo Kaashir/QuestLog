@@ -25,10 +25,11 @@ class UserClass < ApplicationRecord
   end
 
   def broadcast_level_and_xp
+    puts "update broadcast for #{user.id}"
     broadcast_replace_to(
       "user_#{user_id}_level_xp",
-      partial: "shared/level_xp",
       target: "level_xp",
+      partial: "shared/level_xp",
       locals: { user_class: self }
     )
   end
