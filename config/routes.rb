@@ -3,7 +3,9 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
     sessions: 'users/sessions'
   }
+  
   root to: "pages#home"
+  get 'add_xp', to: 'user_classes#add_xp'
   resources :user_classes, only: [:show, :edit, :update]
   resources :quests, only: [:new, :create, :edit, :update, :destroy]
   resources :user_quests, only: [:index, :show, :new, :create, :edit, :update, :destroy]
