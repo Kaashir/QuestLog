@@ -1,5 +1,6 @@
 class UserClass < ApplicationRecord
   belongs_to :user
+  belongs_to :hero_class
   before_save :check_and_level_up
   after_update_commit :broadcast_level_and_xp
 
