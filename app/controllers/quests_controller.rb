@@ -4,7 +4,7 @@ class QuestsController < ApplicationController
 
   def new
     @quest = Quest.new
-    @quest_categories = QuestCategory.where(class_type: current_user.user_classes.where(active: true).first.class_type)
+    @quest_categories = QuestCategory.where(hero_class: current_user.user_classes.where(active: true).first.class_type)
   end
 
   def create
