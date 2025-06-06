@@ -10,4 +10,5 @@ Rails.application.routes.draw do
 
   # Public routes that don't require authentication
   get 'choose_class', to: 'pages#choose_class'
+  get 'user_profile', to: 'pages#user_profile'
 end

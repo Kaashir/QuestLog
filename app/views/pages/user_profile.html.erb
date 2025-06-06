@@ -1,0 +1,56 @@
+
+  <!-- ====== MAIN PROFILE CONTENT ====== -->
+
+    <!-- Big character illustration -->
+  <div class="container mx-auto text-center">
+    <div class="character-illustration position-relative mt-5">
+      <%# replace text in image tag with current_user.user_classes.first.img %>
+      <%= image_tag "warrior-no-background.png", alt: "Big Character", class: "img-fluid", style: "width: 300px;" %>
+      <div class="shadow-ground"></div>
+    </div>
+
+    <!-- Character name / active class card -->
+    <div class="character-card mt-4">
+      <h2 class="display-name"><%= current_user.username.capitalize %></h2>
+      <div class="active-class-section">
+        <div class="label strong">Active Class:</div>
+        <div class="active-class"><%= current_user.current_class.class_type.capitalize %></div>
+      </div>
+    </div>
+
+
+    <!-- Stats: Current Level, On-going quests, Completed Quests -->
+    <section class="stats-section mt-3">
+      <div class="stat-card">
+        <div class="stat-label">Current Level</div>
+        <div class="stat-value"><%= current_user.current_class.level %></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">On-going Quests</div>
+        <div class="stat-value"><%= current_user.user_quests.where(completed: false).count %></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Completed Quests</div>
+        <div class="stat-value"><%= current_user.user_quests.where(completed: true).count  %></div>
+      </div>
+    </section>
+
+    <!-- Classes section -->
+    <section class="classes-section">
+      <h3 class="section-title">Classes</h3>
+      <div class="class-list">
+        <div class="class-item add-class">
+          <img src="img/icon_add.png" alt="Add Class" />
+          <span>Add Class</span>
+        </div>
+        <% current_user.user_classes.each do |user_class| %>
+          <% if !user_class.active %>
+            <div class="class-item">
+              <%= image_tag "warrior-avatar.png" %>
+              <span><%= user_class.class_type.capitalize %></span>
+            </div>
+          <% end %>
+        <% end %>
+
+
+   

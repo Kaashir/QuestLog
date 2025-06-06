@@ -9,4 +9,8 @@ class PagesController < ApplicationController
 
   def choose_class
   end
+
+  def user_profile
+  end
+
 end
