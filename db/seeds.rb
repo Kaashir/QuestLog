@@ -1,5 +1,3 @@
-
-
 User.destroy_all
 puts "Deleted all users."
 
@@ -21,6 +19,9 @@ puts "#{User.all.count} users created."
 UserClass.destroy_all
 puts "Deleted all user classes."
 
+HeroClass.destroy_all
+puts "Deleted all hero classes."
+
 # Create hero classes
 hero_classes = [
   { name: 'Warrior', description: 'A strong and brave fighter, skilled in combat.' },
@@ -28,8 +29,8 @@ hero_classes = [
   { name: 'Monk', description: 'A wise and disciplined practitioner, focused on inner peace and balance.' }
 ]
 
-hero_classes.each do |class_data|
-  hero_class = HeroClass.create!(class_data)
+hero_classes.each do |klass_data|
+  hero_class = HeroClass.create!(klass_data)
   puts "Created hero class: #{hero_class.name}"
 end
 
@@ -62,12 +63,12 @@ categories = [
   { name: 'Upper Body', category_xp: 12, hero_class_id: 1 },
   { name: 'Lower Body', category_xp: 10, hero_class_id: 1 },
   { name: 'Full Body', category_xp: 15, hero_class_id: 1 },
-  { name: 'Meditation', category_xp: 8, hero_class_id: 2 },
-  { name: 'Yoga', category_xp: 9, hero_class_id: 2 },
-  { name: 'Breathwork', category_xp: 7, hero_class_id: 2 },
-  { name: 'Journaling', category_xp: 5, hero_class_id: 3 },
-  { name: 'Gratitude', category_xp: 6, hero_class_id: 3 },
-  { name: 'Emotional Check-in', category_xp: 4, hero_class_id: 3 }
+  { name: 'Meditation', category_xp: 8, hero_class_id: 3 },
+  { name: 'Yoga', category_xp: 9, hero_class_id: 3 },
+  { name: 'Breathwork', category_xp: 7, hero_class_id: 3 },
+  { name: 'Journaling', category_xp: 5, hero_class_id: 2 },
+  { name: 'Gratitude', category_xp: 6, hero_class_id: 2 },
+  { name: 'Emotional Check-in', category_xp: 4, hero_class_id: 2 }
 ]
 
 categories.each do |category_data|
@@ -96,14 +97,53 @@ UserQuest.destroy_all
 puts "Deleted all user quests."
 
 # Assign quests to users
-15.times do
- assigned_quest = UserQuest.create!(
-    user: User.all.sample, # Assign a random user for demo purposes
-    quest: Quest.all.sample, # Assign a random quest for demo purposes
-    completed: false,
-    completed_frequency: 0
-  )
-  puts "Assigned quest to user: #{assigned_quest.user.username}"
+# 15.times do
+#  assigned_quest = UserQuest.create!(
+#     user: User.all.sample,
+#     quest: Quest.all.sample, # Assign a random quest for demo purposes
+#     completed: false,
+#     completed_frequency: 0
+#   )
+#   puts "Assigned quest to User: #{assigned_quest.user.first_name} - Class: #{assigned_quest.quest.hero_class.name} - Quest: #{assigned_quest.quest.title}"
+# end
+
+# Assign Warrior quests to Warrior user classes
+UserClass.where(hero_class: HeroClass.find_by(name: 'Warrior')).each do |user_class|
+  5.times do
+    assigned_quest = UserQuest.create!(
+      user: user_class.user,
+      quest: Quest.where(quest_category: QuestCategory.where(hero_class: user_class.hero_class)).sample,
+      completed: false,
+      completed_frequency: 0
+    )
+    puts "Assigned Warrior quest to User: #{assigned_quest.user.first_name} - Quest: #{assigned_quest.quest.title}"
+  end
+end
+
+# Assign Healer quests to Healer user classes
+UserClass.where(hero_class: HeroClass.find_by(name: 'Healer')).each do |user_class|
+  5.times do
+    assigned_quest = UserQuest.create!(
+      user: user_class.user,
+      quest: Quest.where(quest_category: QuestCategory.where(hero_class: user_class.hero_class)).sample,
+      completed: false,
+      completed_frequency: 0
+    )
+    puts "Assigned Healer quest to User: #{assigned_quest.user.first_name} - Quest: #{assigned_quest.quest.title}"
+  end
+end
+
+# Assign Monk quests to Monk user classes
+UserClass.where(hero_class: HeroClass.find_by(name: 'Monk')).each do |user_class|
+  5.times do
+    assigned_quest = UserQuest.create!(
+      user: user_class.user,
+      quest: Quest.where(quest_category: QuestCategory.where(hero_class: user_class.hero_class)).sample,
+      completed: false,
+      completed_frequency: 0
+    )
+    puts "Assigned Monk quest to User: #{assigned_quest.user.first_name} - Quest: #{assigned_quest.quest.title}"
+  end
 end
 
 puts "#{UserQuest.all.count} user-quests created."
