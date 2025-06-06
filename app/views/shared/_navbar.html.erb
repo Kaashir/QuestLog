@@ -20,6 +20,7 @@
             </div>
           <% end %>
         <% end %>
+        
       </div>
     </div>
 
@@ -31,7 +32,7 @@
         <li><%= link_to "Inventory", "#", class: "dropdown-item" %></li>
         <li><%= link_to "Quests", "#", class: "dropdown-item" %></li>
         <li><%= link_to "Settings", "#", class: "dropdown-item" %></li>
-        <li><%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %></li>
+        <li><%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item" %></li>
       </ul>
     </div>
   </nav>

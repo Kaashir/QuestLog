@@ -7,6 +7,12 @@ class UserClassesController < ApplicationController
     render partial: "shared/level_xp", locals: { user_class: @user_class }
   end
 
+  def add_xp
+    @user_class = current_user.user_classes.first
+    @user_class.add_xp_to_user_class
+    redirect_to user_quests_path
+  end
+
   def show
     @user_classes = current_user.user_classes
     @current_user_class = current_user.user_classes.find_by(active: true)
@@ -28,3 +34,4 @@ class UserClassesController < ApplicationController
     params.require(:user_class).permit(:xp, :level, :class_type, :active)
   end
 end
+
