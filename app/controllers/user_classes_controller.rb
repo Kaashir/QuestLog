@@ -14,12 +14,16 @@ class UserClassesController < ApplicationController
   end
 
   def show
-    @all_class_types = HeroClass.all
-    @user_class_types = HeroClass.where(id: current_user.user_classes.pluck(:hero_class_id))
-    @available_class_types = @all_class_types - @user_class_types
+    # the below is all handled by the user model now.
+    # @all_class_types = HeroClass.all
+    # @user_class_types = HeroClass.where(id: current_user.user_classes.pluck(:hero_class_id))
+    # @available_class_types = @all_class_types - @user_class_types
 
-    @current_user_classes = current_user.user_classes
-    @current_user_active_class = current_user.user_classes.find_by(active: true)
+    # removed this line since I added the all_classes method to the user model which gives us all classes
+    # @current_user_classes = current_user.user_classes
+    # Removed this line since I added the current_class method to the user model which gives us the current active class
+    # @current_user_active_class = current_user.user_classes.find_by(active: true)
+
     @user_class = UserClass.new
     @user_class.user = current_user
   end
@@ -46,12 +50,12 @@ class UserClassesController < ApplicationController
   end
 
   private
+
   def set_user_class
     @user_class = UserClass.find_by(user: current_user, active: true)
   end
 
   def user_class_params
-    params.require(:user_class).permit(:xp, :level, :active)
+    params.require(:user_class).permit(:xp, :level, :active, :hero_class_id)
   end
 end
-

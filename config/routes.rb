@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
     sessions: 'users/sessions'
   }
-  
+
   root to: "pages#home"
   resources :user_classes, only: [:show, :new, :create, :edit, :update]
 
@@ -12,5 +12,5 @@ Rails.application.routes.draw do
 
   # Public routes that don't require authentication
   get 'choose_class', to: 'pages#choose_class'
-  get 'user_profile', to: 'pages#user_profile'
+
 end

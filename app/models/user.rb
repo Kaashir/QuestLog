@@ -12,7 +12,18 @@ class User < ApplicationRecord
   has_many :hero_classes, through: :user_classes
 
   def current_class
-    user_classes.find_by(active: true)
+    user_classes.where(active: true).first.hero_class
   end
 
+  def all_classes
+    user_classes
+  end
+
+  def inactive_classes
+    user_classes.where(active: false)
+  end
+
+  def available_hero_classes
+    HeroClass.where.not(id: hero_classes.pluck(:id))
+  end
 end
