@@ -1,10 +1,15 @@
+<div class="container" style="min-height: 100vh; background-image: url(<%= asset_path("forest_background.png") %>); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
+  <p>Current class: <%= @current_user_class.first.class_type %></p>
+  <p>To be moved somewhere else, just for testing!!! Total XP: <%= @current_user_class.first.xp %></p>
+
 <%= link_to "Add a quest", new_user_quest_path %>
 
 <h1>Quests</h1>
+
 <p>Current class: <%= @current_user_class.first.hero_class.name %></p>
 <p>To be moved somewhere else, just for testing!!! Total XP: <%= @current_user_class.first.xp %></p>
 <% @current_user_quests.each do |user_quest| %>
-  <div class="container mb-3 border"
+  <div class="container mb-3 border"  
        style="cursor:pointer"
        data-bs-toggle="modal"
        data-bs-target="#modal-<%= user_quest.id %>">
@@ -14,5 +19,40 @@
 
       <%= render "show_modal", user_quest: user_quest %>
 
+
+  <div class="quests-grid">
+    <%
+      grid_positions = (1..12).to_a.shuffle
+      quest_positions = {}
+      @current_user_quests.each_with_index do |quest, index|
+        quest_positions[grid_positions[index]] = quest if index < 12
+      end
+      12.times do |i|
+        position = i + 1
+        row = ((position - 1) / 3) + 1
+        col = ((position - 1) % 3) + 1
+    %>
+      <div class="quest-cell" style="grid-row: <%= row %>; grid-column: <%= col %>;">
+        <% if quest_positions[position] %>
+          <div class="quest-card"
+               data-bs-toggle="modal"
+               data-bs-target="#modal-<%= quest_positions[position].id %>">
+            <h3 style="font-size: 1em; margin-bottom: 8px; color: #2A3B6E;"><%= quest_positions[position].quest.title %></h3>
+            <div style="background: #f0f0f0; padding: 4px 8px; border-radius: 999px; display: inline-block;">
+              <p style="margin: 0; font-size: 0.8em; color: #2A3B6E;">
+                Progress: <%= quest_positions[position].completed_frequency %>/<%= quest_positions[position].quest.frequency %>
+              </p>
+            </div>
+            <%= render "show_modal", user_quest: quest_positions[position] %>
+          </div>
+        <% end %>
       </div>
-<% end %>
+    <% end %>
+  </div>
+
+  <div style="display: flex; justify-content: center; align-items: center; width: 100%; margin-top: 32px; font-family: 'Pixelify Sans', cursive;">
+    <div style="border: 6px solid rgba(166, 199, 230, 0.2); border-radius: 999px; padding: 1px; display: inline-block;">
+      <%= link_to "Add a quest", new_user_quest_path, style: "background-color: #2A3B6E; color: #fff; border-radius: 999px; width: 180px; height: 48px; border: none; font-size: 1.2rem; text-decoration: none; display: flex; justify-content: center; align-items: center;" %>
+    </div>
+  </div>
+</div>
