@@ -47,6 +47,13 @@ class UserClassesController < ApplicationController
   end
 
   def update
+    current_user.user_classes.update_all(active: false)
+    @user_class = current_user.user_classes.find(params[:id])
+    if @user_class.update(user_class_params)
+      redirect_to user_class_path(@user_class)
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   private

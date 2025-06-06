@@ -4,7 +4,7 @@
     <!-- Big character illustration -->
   <div class="container mx-auto text-center">
     <div class="character-illustration position-relative mt-5">
-      <%# replace text in image tag with current_user.user_classes.first.img %>
+      <%# TODO:replace text in image tag with current_user.user_classes.first.img %>
       <%= image_tag "warrior-no-background.png", alt: "Big Character", class: "img-fluid", style: "width: 300px;" %>
       <div class="shadow-ground"></div>
     </div>
@@ -14,7 +14,7 @@
       <h2 class="display-name"><%= current_user.username.capitalize %></h2>
       <div class="active-class-section">
         <div class="label strong">Active Class:</div>
-        <div class="active-class"><%= current_user.current_class.class_type.capitalize %></div>
+        <div class="active-class"><%= current_user.current_class.hero_class.name %></div>
       </div>
     </div>
 
@@ -45,12 +45,9 @@
         </div>
         <% current_user.user_classes.each do |user_class| %>
           <% if !user_class.active %>
-            <div class="class-item">
+            <%= link_to user_class_path(user_class, user_class: { active: true }), data: { turbo_method: :patch }, class: "class-item" do %>
               <%= image_tag "warrior-avatar.png" %>
-              <span><%= user_class.class_type.capitalize %></span>
-            </div>
+              <span><%= user_class.hero_class.name.capitalize %></span>
+            <% end %>
           <% end %>
         <% end %>
-
-
-   

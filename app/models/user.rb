@@ -12,11 +12,7 @@ class User < ApplicationRecord
   has_many :hero_classes, through: :user_classes
 
   def current_class
-    user_classes.where(active: true).first.hero_class
-  end
-
-  def all_classes
-    user_classes
+    user_classes.where(active: true).first
   end
 
   def inactive_classes
