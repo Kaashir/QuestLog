@@ -15,6 +15,11 @@ class UserClass < ApplicationRecord
     active
   end
 
+  def add_xp_to_user_class
+    self.xp += 50
+    save!
+  end
+
   private
 
   def check_and_level_up
@@ -28,7 +33,7 @@ class UserClass < ApplicationRecord
     puts "update broadcast for #{user.id}"
     broadcast_replace_to(
       "user_#{user_id}_level_xp",
-      target: "level_xp",
+      target: "level-xp",
       partial: "shared/level_xp",
       locals: { user_class: self }
     )

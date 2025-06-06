@@ -1,11 +1,11 @@
 <% if user_class.present? %>
-  <div class="character-level">Lvl: <%= user_class.level %></div>
+  <div id="level-xp" class="character-level">Lvl: <%= user_class.level %></div>
 
   <div class="xp-bar-wrapper">
     <div class="xp-bar" style="width: <%= user_class.xp_progress_percentage %>%"></div>
   </div>
 <% else %>
-  <div class="character-level">No class selected</div>
+  <div id="level-xp" class="character-level">No class selected</div>
   <div class="xp-bar-wrapper">
     <div class="xp-bar" style="width: 0%"></div>
   </div>
