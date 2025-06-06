@@ -1,5 +1,3 @@
-
-
 User.destroy_all
 puts "Deleted all users."
 
@@ -21,22 +19,37 @@ puts "#{User.all.count} users created."
 UserClass.destroy_all
 puts "Deleted all user classes."
 
+HeroClass.destroy_all
+puts "Deleted all hero classes."
+
+# Create hero classes
+hero_classes = [
+  { name: 'Warrior', description: 'A strong and brave fighter, skilled in combat.' },
+  { name: 'Healer', description: 'A compassionate individual, adept at healing and support.' },
+  { name: 'Monk', description: 'A wise and disciplined practitioner, focused on inner peace and balance.' }
+]
+
+hero_classes.each do |klass_data|
+  hero_class = HeroClass.create!(klass_data)
+  puts "Created hero class: #{hero_class.name}"
+end
+
 # Create user classes
-classes = [
-  { class_type: 'Warrior', xp: 0, level: 1 },
-  { class_type: 'Healer', xp: 0, level: 1 },
-  { class_type: 'Monk', xp: 0, level: 1 },
-  { class_type: 'Warrior', xp: 0, level: 1 }
+user_classes = [
+  { hero_class_id: 1, xp: 0, level: 1 },
+  { hero_class_id: 2, xp: 0, level: 1 },
+  { hero_class_id: 1, xp: 0, level: 1 },
+  { hero_class_id: 3, xp: 0, level: 1 }
 ]
 
 user_id = User.first.id # Start from the first user ID
-classes.each do |class_data|
+user_classes.each do |class_data|
   user_class = UserClass.new(class_data)
   user_class.user = User.find(user_id)
   user_id += 1
   user_class.active = true
   user_class.save!
-  puts "Created user class: #{class_data[:class_type]} for user #{user_class.user.username}"
+  puts "Created user class: #{class_data[:hero_class_id.name]} for user #{user_class.user.username}"
 end
 
 puts "#{UserClass.all.count} user classes created."
@@ -46,16 +59,16 @@ puts "Deleted all quest categories."
 
 # Create quest categories
 categories = [
-  { name: 'Cardio', category_xp: 10, class_type: 'Warrior' },
-  { name: 'Upper Body', category_xp: 12, class_type: 'Warrior' },
-  { name: 'Lower Body', category_xp: 10, class_type: 'Warrior' },
-  { name: 'Full Body', category_xp: 15, class_type: 'Warrior' },
-  { name: 'Meditation', category_xp: 8, class_type: 'Monk' },
-  { name: 'Yoga', category_xp: 9, class_type: 'Monk' },
-  { name: 'Breathwork', category_xp: 7, class_type: 'Monk' },
-  { name: 'Journaling', category_xp: 5, class_type: 'Healer' },
-  { name: 'Gratitude', category_xp: 6, class_type: 'Healer' },
-  { name: 'Emotional Check-in', category_xp: 4, class_type: 'Healer' }
+  { name: 'Cardio', category_xp: 10, hero_class_id: 1 },
+  { name: 'Upper Body', category_xp: 12, hero_class_id: 1 },
+  { name: 'Lower Body', category_xp: 10, hero_class_id: 1 },
+  { name: 'Full Body', category_xp: 15, hero_class_id: 1 },
+  { name: 'Meditation', category_xp: 8, hero_class_id: 3 },
+  { name: 'Yoga', category_xp: 9, hero_class_id: 3 },
+  { name: 'Breathwork', category_xp: 7, hero_class_id: 3 },
+  { name: 'Journaling', category_xp: 5, hero_class_id: 2 },
+  { name: 'Gratitude', category_xp: 6, hero_class_id: 2 },
+  { name: 'Emotional Check-in', category_xp: 4, hero_class_id: 2 }
 ]
 
 categories.each do |category_data|
@@ -84,14 +97,53 @@ UserQuest.destroy_all
 puts "Deleted all user quests."
 
 # Assign quests to users
-15.times do
- assigned_quest = UserQuest.create!(
-    user: User.all.sample, # Assign a random user for demo purposes
-    quest: Quest.all.sample, # Assign a random quest for demo purposes
-    completed: false,
-    completed_frequency: 0
-  )
-  puts "Assigned quest to user: #{assigned_quest.user.username}"
+# 15.times do
+#  assigned_quest = UserQuest.create!(
+#     user: User.all.sample,
+#     quest: Quest.all.sample, # Assign a random quest for demo purposes
+#     completed: false,
+#     completed_frequency: 0
+#   )
+#   puts "Assigned quest to User: #{assigned_quest.user.first_name} - Class: #{assigned_quest.quest.hero_class.name} - Quest: #{assigned_quest.quest.title}"
+# end
+
+# Assign Warrior quests to Warrior user classes
+UserClass.where(hero_class: HeroClass.find_by(name: 'Warrior')).each do |user_class|
+  5.times do
+    assigned_quest = UserQuest.create!(
+      user: user_class.user,
+      quest: Quest.where(quest_category: QuestCategory.where(hero_class: user_class.hero_class)).sample,
+      completed: false,
+      completed_frequency: 0
+    )
+    puts "Assigned Warrior quest to User: #{assigned_quest.user.first_name} - Quest: #{assigned_quest.quest.title}"
+  end
+end
+
+# Assign Healer quests to Healer user classes
+UserClass.where(hero_class: HeroClass.find_by(name: 'Healer')).each do |user_class|
+  5.times do
+    assigned_quest = UserQuest.create!(
+      user: user_class.user,
+      quest: Quest.where(quest_category: QuestCategory.where(hero_class: user_class.hero_class)).sample,
+      completed: false,
+      completed_frequency: 0
+    )
+    puts "Assigned Healer quest to User: #{assigned_quest.user.first_name} - Quest: #{assigned_quest.quest.title}"
+  end
+end
+
+# Assign Monk quests to Monk user classes
+UserClass.where(hero_class: HeroClass.find_by(name: 'Monk')).each do |user_class|
+  5.times do
+    assigned_quest = UserQuest.create!(
+      user: user_class.user,
+      quest: Quest.where(quest_category: QuestCategory.where(hero_class: user_class.hero_class)).sample,
+      completed: false,
+      completed_frequency: 0
+    )
+    puts "Assigned Monk quest to User: #{assigned_quest.user.first_name} - Quest: #{assigned_quest.quest.title}"
+  end
 end
 
 puts "#{UserQuest.all.count} user-quests created."
