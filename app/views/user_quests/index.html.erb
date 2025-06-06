@@ -1,7 +1,4 @@
 <div class="quest-page-container" style="background-image: url(<%= asset_path("forest_background.png") %>);">
-  <p>Current class: <%= @current_user_class.first.class_type %></p>
-  <p>To be moved somewhere else, just for testing!!! Total XP: <%= @current_user_class.first.xp %></p>
-
   <div class="quest-grid">
     <%
       positions = (1..12).to_a.shuffle
