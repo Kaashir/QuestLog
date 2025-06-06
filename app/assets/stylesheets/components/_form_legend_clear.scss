@@ -5,23 +5,29 @@
 // input and has no visual effect. Here we try to fix matters by
 // applying the clear to the div wrapping the first following radio button
 // or checkbox.
+// Fix for Bootstrap 5 legend float issue with radio/checkbox groups
 legend ~ div.form-check:first-of-type {
   clear: left;
 }
 
-.login-container {
-    font-family: 'Pixelify Sans', sans-serif;
-}
-
-.login-container input[type="email"],
-.login-container input[type="password"],
-.login-container input[type="text"],
-.login-container input[type="checkbox"] {
-  border-radius: 10px;
-  background-color: #E3EAF2;
+// Login container styles
+.login-container,
+.signup-container {
   font-family: 'Pixelify Sans', sans-serif;
-}
 
-.login-container label {
+  label,
+  input[type="email"],
+  input[type="password"],
+  input[type="text"],
+  input[type="checkbox"] {
     font-family: 'Pixelify Sans', sans-serif;
+  }
+
+  input[type="email"],
+  input[type="password"],
+  input[type="text"],
+  input[type="checkbox"] {
+    border-radius: 10px;
+    background-color: #E3EAF2;
+  }
 }
