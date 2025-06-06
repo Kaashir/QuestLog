@@ -1,31 +1,5 @@
-<<<<<<< HEAD
 <div class="quest-page-container" style="background-image: url(<%= asset_path("forest_background.png") %>);">
   <div class="quest-grid">
-=======
-<div class="container" style="min-height: 100vh; background-image: url(<%= asset_path("forest_background.png") %>); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
-  <p>Current class: <%= @current_user_class.first.class_type %></p>
-  <p>To be moved somewhere else, just for testing!!! Total XP: <%= @current_user_class.first.xp %></p>
-
-<%= link_to "Add a quest", new_user_quest_path %>
-
-<h1>Quests</h1>
-<p>Current class: <%= @current_user_class.first.class_type %></p>
-<%= link_to "Add XP", add_xp_path %>
-<p>To be moved somewhere else, just for testing!!! Total XP: <%= @current_user_class.first.xp %></p>
-<% @current_user_quests.each do |user_quest| %>
-  <div class="container mb-3 border"  
-       style="cursor:pointer"
-       data-bs-toggle="modal"
-       data-bs-target="#modal-<%= user_quest.id %>">
-      <p><%= user_quest.quest.title %></p>
-      <p><%= user_quest.quest.description %></p>
-      <p><%= user_quest.completed_frequency %>/<%= user_quest.quest.frequency %></p>
-
-      <%= render "show_modal", user_quest: user_quest %>
-
-
-  <div class="quests-grid">
->>>>>>> 38349989f0041cb462f972e359b629ef7bf3ee9c
     <%
       positions = (1..12).to_a.shuffle
       quest_positions = {}
