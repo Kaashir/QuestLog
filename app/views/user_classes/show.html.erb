@@ -1,13 +1,1 @@
-<p>Current user class: <%= @current_user_active_class.hero_class.name %></p>
-
-<p>My other classes:</p>
-<% (@current_user_classes - [@current_user_active_class]).each do |user_class| %>
-  <p><%= user_class.hero_class.name %></p>
-<% end %>
-<p>Add another class:</p>
-<% HeroClass.where.not(name: @current_user_active_class.hero_class.name).each do |other_class| %>
-  <p>
-    <%# Below doesn't work yet %>
-    <%= link_to other_class.name, user_classes_path(other_class.id), method: :post %>
-  </p>
-<% end %>
+<%= render "user_profile" %>
