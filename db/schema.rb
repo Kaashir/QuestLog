@@ -61,6 +61,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_06_124921) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "completed_frequency", default: 0
+    t.integer "position"
     t.index ["quest_id"], name: "index_user_quests_on_quest_id"
     t.index ["user_id"], name: "index_user_quests_on_user_id"
   end
