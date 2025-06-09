@@ -1,0 +1,28 @@
+.carousel {
+  // Carousel indicators
+  .carousel-indicators {
+    button {
+      background-color: $twilight-sky;
+      opacity: 0.5;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin: 0 4px;
+
+      &.active {
+        opacity: 1;
+      }
+    }
+  }
+
+  // Carousel control arrows
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 5%;
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      filter: invert(19%) sepia(19%) saturate(2305%) hue-rotate(195deg) brightness(94%) contrast(87%);
+    }
+  }
+}

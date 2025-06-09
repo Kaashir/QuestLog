@@ -8,7 +8,7 @@
 
 .quests-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 10px;
   padding: 10px;
   width: 100%;
@@ -95,21 +95,70 @@
   }
 }
 
-@media (max-width: 320px) {
+// Smartphone view (up to 767px)
+@media (max-width: 767px) {
   .quests-grid {
-    gap: 6px;
-    padding: 6px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    padding: 8px;
   }
 
   .quest-card {
     padding: 6px;
 
     .quest-title h3 {
-      font-size: 0.8rem;
+      font-size: 0.7rem;
     }
 
     .quest-progress p {
-      font-size: 0.7rem;
+      font-size: 0.6rem;
     }
+  }
+}
+
+// Tablet and larger screens
+@media (min-width: 768px) {
+  .quests-grid {
+    grid-template-columns: repeat(6, 1fr);
+    max-width: 900px;
+    margin: 0 auto;
+    gap: 15px;
+    padding: 20px;
+  }
+
+  .quest-card {
+    .quest-title h3 {
+      font-size: 1.1rem;
+    }
+
+    .quest-progress p {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .quests-grid {
+    max-width: 1100px;
+    gap: 20px;
+    padding: 30px;
+  }
+
+  .quest-card {
+    .quest-title h3 {
+      font-size: 1.2rem;
+    }
+
+    .quest-progress p {
+      font-size: 1rem;
+    }
+  }
+}
+
+@media (min-width: 1440px) {
+  .quests-grid {
+    max-width: 1300px;
+    gap: 25px;
+    padding: 40px;
   }
 }
