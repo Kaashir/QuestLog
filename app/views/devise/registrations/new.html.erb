@@ -28,10 +28,14 @@
       <div class="form-inputs" style="margin-bottom: 0.5rem;">
         <%= f.input :username,
                     required: true,
+                    unique: true,
+                    format: { with: /\A[a-zA-Z0-9_]+\z/, message: "can only contain letters, numbers, and underscores" },
                     autofocus: true,
                     input_html: { style: "height: 36px; padding: 0px 10px;" } %>
         <%= f.input :email,
                     required: true,
+                    unique: true,
+                    format: :email,
                     input_html: { autocomplete: "email", style: "height: 36px; padding: 0px 10px;" } %>
         <div class="row" style="display: flex; gap: 0%;">
           <div class="col" style="flex: 1;">
@@ -60,9 +64,11 @@
         </div>
         <%= f.input :date_birth,
                     required: true,
-                    input_html: { autocomplete: "date-birth", style: "height: 36px; padding: 0px 10px;" } %>
+                    as: :string,
+                    input_html: { data: { controller: "datepicker" } } %>
         <%= f.input :address,
                     required: true,
+                    format: { with: /\A[a-zA-Z0-9\s,.-]+\z/, message: "can only contain letters, numbers, spaces, commas, periods, and hyphens" },
                     input_html: { autocomplete: "address", style: "height: 36px; padding: 0px 10px;" } %>
       </div>
 
