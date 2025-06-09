@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   resources :quests, only: [:new, :create, :edit, :update, :destroy]
   resources :user_quests, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  resources :questions, only: [:index, :create]
 
   # Public routes that don't require authentication
   get 'choose_class', to: 'pages#choose_class'

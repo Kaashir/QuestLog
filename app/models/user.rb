@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :user_quests, dependent: :destroy
   has_many :quests, through: :user_quests
   has_many :hero_classes, through: :user_classes
+  has_many :questions
 
   def current_class
     user_classes.where(active: true).first
