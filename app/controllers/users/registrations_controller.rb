@@ -15,7 +15,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     @user = User.new(user_params)
     @user.save!
-    @user_class = UserClass.new(class_type: params[:user_class_type])
+    @user_class = UserClass.new
+    @hero_class = HeroClass.where(name: params[:user_class_type].capitalize).first
+    @user_class.hero_class = @hero_class
     @user.user_classes << @user_class
     sign_in(@user)
     redirect_to user_quests_path

@@ -1,19 +1,50 @@
-<%= link_to "Add a quest", new_user_quest_path %>
+<div class="container" style="min-height: 100vh; background-image: url(<%= asset_path("forest_background.png") %>); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
+  <p>To be moved somewhere else, just for testing!!! Total XP: <%= @current_user_class.first.xp %></p>
 
-<h1>Quests</h1>
-<p>Current class: <%= @current_user_class.first.class_type %></p>
-<%= link_to "Add XP", add_xp_path %>
-<p>To be moved somewhere else, just for testing!!! Total XP: <%= @current_user_class.first.xp %></p>
-<% @current_user_quests.each do |user_quest| %>
-  <div class="container mb-3 border"  
-       style="cursor:pointer"
-       data-bs-toggle="modal"
-       data-bs-target="#modal-<%= user_quest.id %>">
-      <p><%= user_quest.quest.title %></p>
-      <p><%= user_quest.quest.description %></p>
-      <p><%= user_quest.completed_frequency %>/<%= user_quest.quest.frequency %></p>
+  <div class="quests-grid">
+    <%
+      # Create a hash mapping positions to quests
+      quest_positions = @current_user_quests.index_by(&:position)
 
-      <%= render "show_modal", user_quest: user_quest %>
-
+      # Iterate through all possible positions
+      12.times do |i|
+        position = i + 1
+    %>
+      <div class="quest-grid-cell">
+        <% if quest = quest_positions[position] %>
+          <div class="quest-card" data-bs-toggle="modal" data-bs-target="#modal-<%= quest.id %>">
+            <div class="quest-title">
+              <h3><%= quest.quest.title %></h3>
+            </div>
+            <div class="quest-progress">
+              <p><%= quest.completed_frequency %>/<%= quest.quest.frequency %></p>
+            </div>
+          </div>
+          <%= render "show_modal", user_quest: quest %>
+        <% end %>
       </div>
-<% end %>
+    <% end %>
+  </div>
+
+  <div style="display: flex; justify-content: center; margin-bottom: 0.75rem;">
+    <div style="display: inline-block; border: 6px solid rgba(166, 199, 230, 0.2); border-radius: 999px; padding: 2px;">
+      <%= link_to "Add quest", new_user_quest_path, class: "add-quest-button", style: "background-color: #2A3B6E; color: #fff; border-radius: 999px; width: 160px; height: 48px; border: none; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; text-decoration: none; font-family: 'Pixelify Sans', sans-serif;" %>
+    </div>
+  </div>
+  <div style="position: fixed; bottom: 24px; left: 24px; z-index: 10;">
+    <% hero_class_name = @current_user_class.first.hero_class.name.downcase %>
+    <% image_name =
+      case hero_class_name
+      when "warrior"
+        "warrior-no-background.png"
+      when "monk"
+        "monk-no-background.png"
+      when "healer"
+        "healer-no-background.png"
+      end
+    %>
+    <% if image_name %>
+      <%= image_tag image_name, style: "max-width: 100px;" %>
+    <% end %>
+  </div>
+</div>
