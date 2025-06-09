@@ -11,6 +11,9 @@
       <div class="quest-info">
         <h5 class="quest-title"><%= user_quest.quest.title.upcase %></h5>
         <p class="quest-description"><%= user_quest.quest.description %></p>
+        <% if user_quest.completed_frequency < (user_quest.quest.frequency - 1) %>
+          <span class="xp-gain">+<%= user_quest.quest.xp_granted %> XP</span>
+        <% end %>
       </div>
 
       <div class="quest-action">
@@ -18,8 +21,7 @@
           <%= link_to user_quest_path(user_quest, user_quest: { completed_frequency: user_quest.completed_frequency + 1 }),
             data: { turbo_method: :patch },
             class: "quest-slide-button" do %>
-            ADVANCE
-            <span class="xp-gain">+<%= user_quest.quest.xp_granted %> XP</span>
+            ADVANCE <span class="xp-gain">( <%= user_quest.completed_frequency %> / 3 )</span>
           <% end %>
         <% elsif user_quest.completed_frequency == (user_quest.quest.frequency - 1) %>
           <%= link_to user_quest_path(user_quest, user_quest: { completed_frequency: user_quest.completed_frequency + 1, completed: true }),
