@@ -1,0 +1,109 @@
+.quest-modal {
+  .modal-dialog {
+    max-width: 350px;
+    margin: auto;
+  }
+
+  .quest-modal-content {
+    background-color: $solar-flare;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    position: relative;
+    text-align: center;
+    font-family: 'Pixelify Sans', sans-serif;
+  }
+
+  .close-button {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: $mountain-shadow;
+    color: $cloud-whisper;
+    font-family: 'Pixelify Sans', monospace;
+    font-size: 1.4rem;
+    line-height: 36px;
+    text-align: center;
+    padding: 0;
+    border: none;
+    z-index: 10;
+  }
+
+  .quest-icon-wrapper {
+    margin: 1rem auto;
+    background: $cloud-whisper;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    display: inline-block;
+  }
+
+  .quest-icon {
+    max-width: 100px;
+    height: auto;
+  }
+
+  .quest-info {
+    margin-top: 1rem;
+
+    .quest-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: $mountain-shadow;
+    }
+
+    .quest-description {
+      font-size: 0.9rem;
+      color: $summit-stone;
+      margin-top: 0.3rem;
+    }
+  }
+
+  .quest-action {
+    margin-top: 1.2rem;
+
+    .quest-slide-button {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: $twilight-sky;
+      border-radius: 2rem;
+      padding: 0.6rem 1rem;
+      color: $cloud-whisper;
+      font-weight: bold;
+      text-decoration: none;
+      font-family: 'Pixelify Sans', sans-serif;
+      width: 100%;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+      .xp-gain {
+        color: $stormbolt;
+        margin-left: auto;
+      }
+
+      &:hover {
+        background: darken($twilight-sky, 5%);
+      }
+
+      &:active {
+        animation: questButtonFlash 0.4s ease;
+      }
+    }
+  }
+
+  @keyframes questButtonFlash {
+    0% {
+      transform: scale(1);
+      box-shadow: 0 0 0px transparent;
+    }
+    40% {
+      transform: scale(1.05);
+      box-shadow: 0 0 8px $stormbolt;
+    }
+    100% {
+      transform: scale(1);
+      box-shadow: 0 0 0px transparent;
+    }
+  }
+}
