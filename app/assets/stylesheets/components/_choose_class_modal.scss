@@ -1,0 +1,100 @@
+.choose-class-modal {
+  overflow: visible;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+
+  .carousel,
+  .carousel-inner {
+    overflow: visible !important;
+    min-height: 600px;
+  }
+
+  .carousel {
+    padding: 20px 0 30px 0;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+
+    &-item {
+      padding: 10px 0;
+      height: 100%;
+      overflow: visible;
+    }
+
+    &-control-prev,
+    &-control-next {
+      width: 40px;
+      height: 40px;
+      background-color: $twilight-sky;
+      border-radius: 50%;
+      top: 50%;
+      opacity: 0.8;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  .close-button {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: $mountain-shadow;
+    color: $cloud-whisper;
+    font-family: 'Pixelify Sans', monospace;
+    font-size: 1.4rem;
+    line-height: 36px;
+    text-align: center;
+    padding: 0;
+    border: none;
+    z-index: 10;
+  }
+
+  .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 10px 0 30px 0;
+    position: relative;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    h3 {
+      color: #2C3E50;
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    p {
+      color: #34495E;
+      line-height: 1.5;
+    }
+  }
+
+  // Custom carousel indicators
+  .carousel-indicators {
+    bottom: 0;
+
+    button {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #FFD066;
+      opacity: 0.5;
+      margin: 0 5px;
+      border: none;
+      transition: opacity 0.3s ease;
+
+      &.active {
+        opacity: 1;
+        background-color: #FFB800;
+      }
+    }
+  }
+}
