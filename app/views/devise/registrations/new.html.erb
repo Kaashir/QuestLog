@@ -5,70 +5,65 @@
     <div class="d-flex justify-content-center mb-4">
       <div class="card border-0" style="width: 208px; height: 472px; background-color: #FFD066; box-shadow: 0 4px 16px rgba(0,0,0,0.12); border-radius: 12px; position: relative;">
       <div style="position: absolute; bottom: 16px; left: 16px; right: 16px; text-align: center;">
-        <h3 style="margin-bottom: 8px; font-family: 'Pixelify Sans', sans-serif"><%= character_type.capitalize %></h3>
+        <% if character_type %>
+          <h3 style="margin-bottom: 8px; font-family: 'Pixelify Sans', sans-serif"><%= character_type.capitalize%></h3>
+        <% else %>
+          <h3 style="margin-bottom: 8px; font-family: 'Pixelify Sans', sans-serif"><%= @hero_class.name.capitalize%></h3>
+        <% end %>
         <p style="font-size: 11px; font-family: 'Pixelify Sans', sans-serif">
-        <% case character_type
-           when 'warrior' %>
-          Forged through fire and discipline. Warriors thrive on strength, resilience, and relentless momentum. Every quest is a battlefield — and they never back down.
-        <% when 'monk' %>
-          Seekers of stillness and self-mastery. They walk the path of discipline, clarity, and inner balance. Their strength lies not in force, but in unwavering focus.
-        <% when 'healer' %>
-          Guardians of restoration and care. Healers channel kindness, compassion, and emotional clarity. They mend not just the body, but the spirit.
+        <% case @hero_class.name.downcase
+            when 'warrior' %>
+            Forged through fire and discipline. Warriors thrive on strength, resilience, and relentless momentum. Every quest is a battlefield — and they never back down.
+          <% when 'monk' %>
+            Seekers of stillness and self-mastery. They walk the path of discipline, clarity, and inner balance. Their strength lies not in force, but in unwavering focus.
+          <% when 'healer' %>
+            Guardians of restoration and care. Healers channel kindness, compassion, and emotional clarity. They mend not just the body, but the spirit.
         <% end %>
         </p>
       </div>
-      <div style="width: 192px; height: 280px; background-color: #FFF8E1; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-radius: 10px; position: absolute; left: 50%; top: 8px; transform: translateX(-50%); background-image: url('<%= asset_path("#{character_type}.png") %>'); background-size: cover; background-position: center;">
+      <% if character_type %>
+        <div style="width: 192px; height: 280px; background-color: #FFF8E1; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-radius: 10px; position: absolute; left: 50%; top: 8px; transform: translateX(-50%); background-image: url('<%= asset_path("#{character_type}.png") %>'); background-size: cover; background-position: center;">
+      <% else %>
+        <div style="width: 192px; height: 280px; background-color: #FFF8E1; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-radius: 10px; position: absolute; left: 50%; top: 8px; transform: translateX(-50%); background-image: url('<%= asset_path("#{@hero_class.name.downcase}.png") %>'); background-size: cover; background-position: center;">
+      <% end %>
       </div>
       </div>
     </div>
 
     <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= f.error_notification %>
+
 
       <div class="form-inputs" style="margin-bottom: 0.5rem;">
         <%= f.input :username,
-                    required: true,
-                    unique: true,
-                    format: { with: /\A[a-zA-Z0-9_]+\z/, message: "can only contain letters, numbers, and underscores" },
                     autofocus: true,
                     input_html: { style: "height: 36px; padding: 0px 10px;" } %>
         <%= f.input :email,
-                    required: true,
-                    unique: true,
-                    format: :email,
                     input_html: { autocomplete: "email", style: "height: 36px; padding: 0px 10px;" } %>
         <div class="row" style="display: flex; gap: 0%;">
           <div class="col" style="flex: 1;">
             <%= f.input :password,
-                required: true,
                 hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
                 input_html: { autocomplete: "new-password", style: "height: 36px; padding: 0px 10px;" } %>
           </div>
           <div class="col" style="flex: 1;">
             <%= f.input :password_confirmation,
-                required: true,
                 input_html: { autocomplete: "new-password", style: "height: 36px; padding: 0px 10px;" } %>
           </div>
         </div>
         <div class="row" style="display: flex; gap: 4%; margin-top: 1rem;">
           <div class="col" style="flex: 1;">
             <%= f.input :first_name,
-                required: true,
                 input_html: { autocomplete: "first-name", style: "height: 36px; padding: 0px 10px;" } %>
           </div>
           <div class="col" style="flex: 1;">
             <%= f.input :last_name,
-                required: true,
                 input_html: { autocomplete: "last-name", style: "height: 36px; padding: 0px 10px;" } %>
           </div>
         </div>
         <%= f.input :date_birth,
-                    required: true,
                     as: :string,
                     input_html: { data: { controller: "datepicker" } } %>
-        <%= f.input :address,
-                    required: true,
-                    format: { with: /\A[a-zA-Z0-9\s,.-]+\z/, message: "can only contain letters, numbers, spaces, commas, periods, and hyphens" },
+          <%= f.input :address,
                     input_html: { autocomplete: "address", style: "height: 36px; padding: 0px 10px;" } %>
       </div>
 
