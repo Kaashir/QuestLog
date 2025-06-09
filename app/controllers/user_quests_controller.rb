@@ -9,8 +9,11 @@ class UserQuestsController < ApplicationController
 
   def new
     @user_quest = UserQuest.new
-    @current_user_class = current_user.user_classes.where(active: true)
-    @quests = Quest.where(quest_category: @current_user_class.first.hero_class.quest_categories).where(user_created: false)
+    @current_user_class = current_user.current_class
+    existing_quest_ids = current_user.user_quests.pluck(:quest_id)
+    @quests = Quest.where(quest_category: @current_user_class.hero_class.quest_categories)
+                   .where(user_created: false)
+                   .where.not(id: existing_quest_ids)
   end
 
   def create

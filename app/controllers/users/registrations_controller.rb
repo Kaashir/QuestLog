@@ -2,6 +2,7 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
 
+
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -10,17 +11,21 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def new
     @user = User.new
     session[:user_class_type] = params[:type]
+    @hero_class = HeroClass.where(name: session[:user_class_type].capitalize).first
   end
 
   def create
     @user = User.new(user_params)
-    @user.save!
     @user_class = UserClass.new
-    @hero_class = HeroClass.where(name: params[:user_class_type].capitalize).first
+    @hero_class = HeroClass.where(name: session[:user_class_type].capitalize).first
     @user_class.hero_class = @hero_class
     @user.user_classes << @user_class
-    sign_in(@user)
-    redirect_to user_quests_path
+    if @user.save
+      sign_in(@user)
+      redirect_to user_quests_path
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   # POST /resource
