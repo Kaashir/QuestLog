@@ -1,0 +1,78 @@
+.custom-quest-page {
+  font-family: 'Pixelify Sans', sans-serif;
+  padding: 2rem 1rem;
+
+.pixel-back-btn {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Pixelify Sans', sans-serif;
+  font-size: 1.2rem;
+  color: $mountain-shadow;
+  text-decoration: none;
+
+  i {
+    margin-right: 0.4rem;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+
+  h4 {
+    color: $cloud-whisper;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  form {
+    background-color: $solar-flare;
+    border: 1px solid $summit-stone;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    max-width: 400px;
+    margin: auto;
+
+    .form-inputs {
+      margin-bottom: 1rem;
+
+      input,
+      textarea,
+      select {
+        font-family: 'Pixelify Sans', sans-serif;
+        border-radius: 0.5rem;
+      }
+
+      label {
+        font-weight: bold;
+        color: $mountain-shadow;
+        margin-bottom: 0.2rem;
+        display: block;
+      }
+    }
+
+    .form-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+
+      .btn {
+        background-color: $twilight-sky;
+        color: $cloud-whisper;
+        font-weight: bold;
+        border-radius: 2rem;
+        padding: 0.6rem 1rem;
+        border: none;
+        font-family: 'Pixelify Sans', sans-serif;
+        text-align: center;
+
+        &:hover {
+          background: darken($twilight-sky, 5%);
+        }
+      }
+    }
+  }
+}

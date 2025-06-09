@@ -1,26 +1,52 @@
-<div class="container">
-  <%= link_to user_quests_path, class: "btn btn-secondary mb-3" do %>
-    <i class="fa-solid fa-circle-xmark"></i>
-  <% end %>
-
-  <div class="quest-item">
-    <%= link_to new_quest_path, class: "btn btn-primary" do %>
-      <i class="fa-solid fa-plus"></i>
+<div class="container new-quest-page">
+  <div class="header-row">
+    <%= link_to user_quests_path, class: "pixel-back-btn text-white" do %>
+      <i class="fa-solid fa-arrow-left"></i> <span>Back</span>
     <% end %>
   </div>
-  <% @quests.each do |quest| %>
-    <div class="quest-item">
-      <h5><%= quest.title %></h5>
-      <p><%= quest.description %></p>
-      <p>Category: <%= quest.quest_category.name %></p>
-      <p>Frequency: <%= quest.frequency %></p>
-      <p>XP to be gained: <%= quest.xp_granted %></p>
-      <%= simple_form_for [@user_quest] do |f| %>
-        <%= f.hidden_field :quest_id, value: quest.id %>
-        <%= f.hidden_field :completed_frequency, value: 0 %>
-        <%= f.hidden_field :completed, value: false %>
-        <%= f.submit "Add to my quests", class: "btn btn-primary" %>
-      <% end %>
-    </div>
-  <% end %>
+
+  <div class="preset-quests-grid">
+    <% @quests.each_with_index do |quest, index| %>
+      <div class="preset-quest-card" data-bs-toggle="modal" data-bs-target="#presetModal-<%= index %>">
+        <div class="quest-icon-wrapper">
+          <%= image_tag "warrior.png", alt: "Quest Icon", class: "quest-icon" %>
+        </div>
+        <div class="preset-quest-info">
+          <h5><%= quest.title %></h5>
+          <p><%= quest.description %></p>
+        </div>
+      </div>
+
+      <div class="modal fade" id="presetModal-<%= index %>" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content quest-modal-content">
+            <button type="button" class="close-button" data-bs-dismiss="modal" aria-label="Close">✕</button>
+            <div class="quest-icon-wrapper">
+              <%= image_tag "warrior.png", alt: "Quest Icon", class: "quest-icon" %>
+            </div>
+            <div class="quest-info">
+              <h5 class="quest-title"><%= quest.title.upcase %></h5>
+              <p class="quest-description"><%= quest.description %></p>
+              <p class="xp-gain">+<%= quest.xp_granted %> XP</p>
+            </div>
+            <div class="quest-action">
+              <%= simple_form_for UserQuest.new, url: user_quests_path do |f| %>
+                <%= f.hidden_field :quest_id, value: quest.id %>
+                <%= f.hidden_field :completed_frequency, value: 0 %>
+                <%= f.hidden_field :completed, value: false %>
+                <%= f.submit "Add Quest", class: "quest-slide-button" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <%= link_to new_quest_path, class: "preset-quest-card custom-quest-block" do %>
+      <div class="preset-quest-info">
+        <div class="plus-sign">+</div>
+        <p>Custom Quest</p>
+      </div>
+    <% end %>
+  </div>
 </div>
