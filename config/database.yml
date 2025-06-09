@@ -77,8 +77,3 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
-production:
-  <<: *default
-  database: quest_log_production
-  username: quest_log
-  password: <%= ENV["QUEST_LOG_DATABASE_PASSWORD"] %>

@@ -1,40 +1,38 @@
-<!-- Modal "Show" -->
-  <div class="modal fade" id="modal-<%= user_quest.id %>" tabindex="-1" aria-labelledby="modalLabel-<%= user_quest.id %>" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalLabel-<%= user_quest.id %>"><%= user_quest.quest.title %></h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <p><%= user_quest.quest.description %></p>
-            <p><%= user_quest.quest.quest_category.name %></p>
-            <p>XP to be gained: <%= user_quest.quest.xp_granted %></p>
-            <p><%= user_quest.completed_frequency %>/<%= user_quest.quest.frequency %></p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn-close-custom" data-bs-dismiss="modal">Close</button>
-            <% if user_quest.completed_frequency < (user_quest.quest.frequency - 1) %>
-              <%= link_to user_quest_path(user_quest, user_quest: { completed_frequency: user_quest.completed_frequency + 1 }),
-                data: { turbo_method: :patch },
-                class: "btn btn-success btn-sm rounded-pill aesthetic-btn text-white" do %>
-                <i class="fa-solid fa-check"></i>
-                <p>Advance</p>
-              <% end %>
-            <% elsif user_quest.completed_frequency == (user_quest.quest.frequency - 1) %>
-              <%= link_to user_quest_path(user_quest, user_quest: { completed_frequency: user_quest.completed_frequency + 1, completed: true }),
-                data: { turbo_method: :patch },
-                class: "btn btn-success btn-sm rounded-pill aesthetic-btn text-white" do %>
-                <i class="fa-solid fa-check"></i>
-                <p>Complete</p>
-              <% end %>
-            <% end %>
-            <%= link_to user_quest_path(user_quest),
-              data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
-              class: "btn btn-danger btn-sm rounded-pill aesthetic-btn text-white" do %>
-              <i class="fa-regular fa-trash-can"></i>
-            <% end %>
-          </div>
+<div class="modal fade quest-modal" id="modal-<%= user_quest.id %>" tabindex="-1" aria-labelledby="modalLabel-<%= user_quest.id %>" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content quest-modal-content">
+
+      <button type="button" class="close-button" data-bs-dismiss="modal" aria-label="Close">✕</button>
+
+      <div class="quest-icon-wrapper">
+        <%= image_tag "warrior.png", alt: "Quest Icon", class: "quest-icon" %>
       </div>
+
+      <div class="quest-info">
+        <h5 class="quest-title"><%= user_quest.quest.title.upcase %></h5>
+        <p class="quest-description"><%= user_quest.quest.description %></p>
+        <% if user_quest.completed_frequency < (user_quest.quest.frequency - 1) %>
+          <span class="xp-gain">+<%= user_quest.quest.xp_granted %> XP</span>
+        <% end %>
+      </div>
+
+      <div class="quest-action">
+        <% if user_quest.completed_frequency < (user_quest.quest.frequency - 1) %>
+          <%= link_to user_quest_path(user_quest, user_quest: { completed_frequency: user_quest.completed_frequency + 1 }),
+            data: { turbo_method: :patch },
+            class: "quest-slide-button" do %>
+            ADVANCE <span class="xp-gain">( <%= user_quest.completed_frequency %> / 3 )</span>
+          <% end %>
+        <% elsif user_quest.completed_frequency == (user_quest.quest.frequency - 1) %>
+          <%= link_to user_quest_path(user_quest, user_quest: { completed_frequency: user_quest.completed_frequency + 1, completed: true }),
+            data: { turbo_method: :patch },
+            class: "quest-slide-button" do %>
+            COMPLETE
+            <span class="xp-gain">+<%= user_quest.quest.xp_granted %> XP</span>
+          <% end %>
+        <% end %>
+      </div>
+
     </div>
   </div>
+</div>
