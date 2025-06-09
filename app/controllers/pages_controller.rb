@@ -9,4 +9,5 @@ class PagesController < ApplicationController
 
   def choose_class
   end
+
 end
