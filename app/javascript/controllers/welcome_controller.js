@@ -49,7 +49,7 @@ export default class extends Controller {
       } else {
         setTimeout(() => {
           window.location.href = "/user_quests"
-        }, 1700)
+        }, 500)
       }
     }
 

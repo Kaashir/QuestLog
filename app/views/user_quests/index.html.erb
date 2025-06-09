@@ -1,5 +1,5 @@
 <div class="container" style="min-height: 100vh; background-image: url(<%= asset_path("forest_background.png") %>); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
-  
+
 
   <div class="quests-grid">
     <%
@@ -7,7 +7,7 @@
       quest_positions = @current_user_quests.index_by(&:position)
 
       # Iterate through all possible positions
-      12.times do |i|
+      20.times do |i|
         position = i + 1
     %>
       <div class="quest-grid-cell">
@@ -26,11 +26,6 @@
     <% end %>
   </div>
 
-  <div style="display: flex; justify-content: center; margin-bottom: 0.75rem;">
-    <div style="display: inline-block; border: 6px solid rgba(166, 199, 230, 0.2); border-radius: 999px; padding: 2px;">
-      <%= link_to "Add quest", new_user_quest_path, class: "add-quest-button", style: "background-color: #2A3B6E; color: #fff; border-radius: 999px; width: 160px; height: 48px; border: none; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; text-decoration: none; font-family: 'Pixelify Sans', sans-serif;" %>
-    </div>
-  </div>
   <div style="position: fixed; bottom: 24px; left: 24px; z-index: 10;">
     <% hero_class_name = @current_user_class.first.hero_class.name.downcase %>
     <% image_name =
@@ -46,5 +41,8 @@
     <% if image_name %>
       <%= image_tag image_name, style: "max-width: 100px;" %>
     <% end %>
+    <div style="display: inline-block; border: 6px solid rgba(166, 199, 230, 0.2); border-radius: 999px; padding: 2px;">
+      <%= link_to "Add quest", new_user_quest_path, class: "add-quest-button", style: "background-color: #2A3B6E; color: #fff; border-radius: 999px; width: 160px; height: 48px; border: none; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; text-decoration: none; font-family: 'GNF', sans-serif;" %>
+    </div>
   </div>
 </div>

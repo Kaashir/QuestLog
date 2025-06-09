@@ -1,11 +1,11 @@
 <div class="d-flex justify-content-center align-items-center min-vh-100" style="background-color: #FEF4DF;">
   <div class="text-center">
-    <h1 style="font-family: 'Pixelify Sans', sans-serif">Welcome to Questlog</h1>
-    <p class="mb-4" style="font-family: 'Pixelify Sans', sans-serif">choose your character</p>
+    <h1 style="font-family: 'GNF', sans-serif">Welcome to Questlog</h1>
+    <p class="mb-4" style="font-family: 'GNF', sans-serif">choose your character</p>
 
     <div class="mx-auto" style="width: 400px; height: 620px;">
-      <div id="cardCarousel" class="carousel slide h-100 d-flex flex-column justify-content-end pb-4" data-bs-ride="false">
-        <div class="carousel-inner">
+      <div id="cardCarousel" class="carousel slide h-100" data-bs-ride="false">
+        <div class="carousel-inner mb-3">
 
 <%# Below needs to be an each do %>
 
@@ -15,8 +15,8 @@
             <div class="d-flex justify-content-center">
               <div class="card border-0" style="width: 260px; height: 590px; background-color: #FFD066; box-shadow: 0 4px 16px rgba(0,0,0,0.12); border-radius: 12px; position: relative;">
                 <div style="position: absolute; bottom: 20px; left: 20px; right: 20px; text-align: center;">
-                    <h3 style="margin-bottom: 10px; font-family: 'Pixelify Sans', sans-serif">Warrior</h3>
-                    <p style="font-size: 14px; font-family: 'Pixelify Sans', sans-serif">Forged through fire and discipline. Warriors thrive on strength, resilience, and relentless momentum. Every quest is a battlefield — and they never back down.</p>
+                    <h3 style="margin-bottom: 10px; font-family: 'GNF', sans-serif">Warrior</h3>
+                    <p style="font-size: 14px; font-family: 'GNF', sans-serif">Forged through fire and discipline. Warriors thrive on strength, resilience, and relentless momentum. Every quest is a battlefield — and they never back down.</p>
                   </div>
                 <div style="width: 240px; height: 350px; background-color: #FFF8E1; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-radius: 10px; position: absolute; left: 50%; top: 10px; transform: translateX(-50%); background-image: url('<%= asset_path("warrior.png") %>'); background-size: cover; background-position: center;">
                 </div>
@@ -31,8 +31,8 @@
             <div class="d-flex justify-content-center">
               <div class="card border-0" style="width: 260px; height: 590px; background-color: #FFD066; box-shadow: 0 4px 16px rgba(0,0,0,0.12); border-radius: 12px; position: relative;">
                 <div style="position: absolute; bottom: 20px; left: 20px; right: 20px; text-align: center;">
-                    <h3 style="margin-bottom: 10px; font-family: 'Pixelify Sans', sans-serif">Monk</h3>
-                    <p style="font-size: 14px; font-family: 'Pixelify Sans', sans-serif">Seekers of stillness and self-mastery. They walk the path of discipline, clarity, and inner balance. Their strength lies not in force, but in unwavering focus.</p>
+                    <h3 style="margin-bottom: 10px; font-family: 'GNF', sans-serif">Monk</h3>
+                    <p style="font-size: 14px; font-family: 'GNF', sans-serif">Seekers of stillness and self-mastery. They walk the path of discipline, clarity, and inner balance. Their strength lies not in force, but in unwavering focus.</p>
                   </div>
                 <div style="width: 240px; height: 350px; background-color: #FFF8E1; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-radius: 10px; position: absolute; left: 50%; top: 10px; transform: translateX(-50%); background-image: url('<%= asset_path("monk.png") %>'); background-size: cover; background-position: center;">
                   <!-- Optional content inside -->
@@ -48,8 +48,8 @@
             <div class="d-flex justify-content-center">
               <div class="card border-0" style="width: 260px; height: 590px; background-color: #FFD066; box-shadow: 0 4px 16px rgba(0,0,0,0.12); border-radius: 12px; position: relative;">
                 <div style="position: absolute; bottom: 20px; left: 20px; right: 20px; text-align: center;">
-                    <h3 style="margin-bottom: 10px; font-family: 'Pixelify Sans', sans-serif">Healer</h3>
-                    <p style="font-size: 14px; font-family: 'Pixelify Sans', sans-serif">Guardians of restoration and care. Healers channel kindness, compassion, and emotional clarity. They mend not just the body, but the spirit.</p>
+                    <h3 style="margin-bottom: 10px; font-family: 'GNF', sans-serif">Healer</h3>
+                    <p style="font-size: 14px; font-family: 'GNF', sans-serif">Guardians of restoration and care. Healers channel kindness, compassion, and emotional clarity. They mend not just the body, but the spirit.</p>
                   </div>
                 <div style="width: 240px; height: 350px; background-color: #FFF8E1; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-radius: 10px; position: absolute; left: 50%; top: 10px; transform: translateX(-50%); background-image: url('<%= asset_path("healer.png") %>'); background-size: cover; background-position: center;">
                   <!-- Optional content inside -->
@@ -62,14 +62,21 @@
         </div>
 
         <!-- Carousel Controls -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#cardCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <button class="carousel-control-prev" type="button" data-bs-target="#cardCarousel" data-bs-slide="prev" style="bottom: 40px;">
+          <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: invert(19%) sepia(32%) saturate(1162%) hue-rotate(194deg) brightness(93%) contrast(91%);"></span>
           <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#cardCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <button class="carousel-control-next" type="button" data-bs-target="#cardCarousel" data-bs-slide="next" style="bottom: 40px;">
+          <span class="carousel-control-next-icon" aria-hidden="true" style="filter: invert(19%) sepia(32%) saturate(1162%) hue-rotate(194deg) brightness(93%) contrast(91%);"></span>
           <span class="visually-hidden">Next</span>
         </button>
+
+        <!-- Carousel Indicators -->
+        <div class="carousel-indicators position-relative" style="margin-bottom: 0;">
+          <button type="button" data-bs-target="#cardCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" style="background-color: #2A3B6E;"></button>
+          <button type="button" data-bs-target="#cardCarousel" data-bs-slide-to="1" aria-label="Slide 2" style="background-color: #2A3B6E;"></button>
+          <button type="button" data-bs-target="#cardCarousel" data-bs-slide-to="2" aria-label="Slide 3" style="background-color: #2A3B6E;"></button>
+        </div>
       </div>
     </div>
   </div>

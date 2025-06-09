@@ -7,13 +7,13 @@ class UserQuest < ApplicationRecord
 
   def assign_random_position
     taken_positions = user.user_quests.pluck(:position).compact
-    available_positions = (1..12).to_a - taken_positions
+    available_positions = (1..20).to_a - taken_positions
 
     if available_positions.any?
       self.position = available_positions.sample
     else
-      # If all positions are taken, assign a random position from 1-12
-      self.position = rand(1..12)
+      # If all positions are taken, assign a random position from 1-20
+      self.position = rand(1..20)
     end
   end
 end
