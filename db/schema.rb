@@ -37,6 +37,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_10_125625) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "hero_class_id", null: false
+    t.string "icon"
     t.index ["hero_class_id"], name: "index_quest_categories_on_hero_class_id"
   end
 

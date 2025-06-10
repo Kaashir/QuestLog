@@ -3,17 +3,18 @@ class UserQuestsController < ApplicationController
   before_action :set_user_quest, only: [:edit, :update, :destroy]
 
   def index
-    @current_user_quests = current_user.user_quests.where(completed: false).order(:id)
+    @current_user_quests = UserQuest.quest_by_class(current_user.current_class.hero_class.name, current_user).order(completed: :desc, position: :asc)
     @current_user_class = current_user.user_classes.where(active: true)
   end
 
   def new
     @user_quest = UserQuest.new
     @current_user_class = current_user.current_class
-    existing_quest_ids = current_user.user_quests.pluck(:quest_id)
+    # Get IDs of quests that are currently active for the user
+    active_quest_ids = current_user.user_quests.where(completed: false).pluck(:quest_id)
     @quests = Quest.where(quest_category: @current_user_class.hero_class.quest_categories)
                    .where(user_created: false)
-                   .where.not(id: existing_quest_ids)
+                   .where.not(id: active_quest_ids)
   end
 
   def create

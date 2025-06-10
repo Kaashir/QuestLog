@@ -1,18 +1,29 @@
 <div class="container" style="min-height: 100vh; background-image: url(<%= asset_path("forest_background.png") %>); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
-
-
-  <div class="quests-grid">
+  <div class="quest-path">
     <%
-      # Create a hash mapping positions to quests
-      quest_positions = @current_user_quests.index_by(&:position)
+      # Get quests ordered with completed ones at the bottom
 
-      # Iterate through all possible positions
-      20.times do |i|
-        position = i + 1
+      # Create a hash mapping positions to quests
+      quest_positions = {}
+      position = 1
+      @current_user_quests.each do |quest|
+        quest_positions[position] = quest
+        position += 1
+      end
+
+      # Function to determine column position (1-4) based on quest position
+      def get_column(position)
+        sequence = [4,3,2,1,2,3,4,3,2,1].cycle
+        sequence.take(position).last
+      end
+
+      # Iterate through quests in order
+      quest_positions.each do |position, quest|
+        column = get_column(position)
     %>
-      <div class="quest-grid-cell">
-        <% if quest = quest_positions[position] %>
-          <div class="quest-card" data-bs-toggle="modal" data-bs-target="#modal-<%= quest.id %>">
+      <div class="quest-row">
+        <div class="quest-node" style="margin-left: <%= (column - 1) * 25 %>%;">
+          <div class="quest-card <%= quest.completed_frequency == quest.quest.frequency ? 'completed' : '' %>" data-bs-toggle="modal" data-bs-target="#modal-<%= quest.id %>">
             <div class="quest-title">
               <h3><%= quest.quest.title %></h3>
             </div>
@@ -21,7 +32,7 @@
             </div>
           </div>
           <%= render "show_modal", user_quest: quest %>
-        <% end %>
+        </div>
       </div>
     <% end %>
   </div>

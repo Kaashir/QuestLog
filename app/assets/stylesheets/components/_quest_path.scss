@@ -1,0 +1,159 @@
+.quest-path {
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 2rem;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .quest-row {
+    display: block;
+    width: 100%;
+    min-height: 120px;
+    position: relative;
+  }
+
+  .quest-node {
+    width: 200px;
+    aspect-ratio: 1;
+    position: relative;
+    transition: margin-left 0.3s ease;
+
+    .quest-card {
+      background: url('blue-stone-quest-button.png');
+      background-size: cover;
+      background-position: center;
+      border-radius: 8px;
+      padding: 8px;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      transition: transform 0.1s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+
+      &.completed {
+        background: url('gold-stone-quest-button.png');
+        background-size: cover;
+        background-position: center;
+      }
+
+      &:hover {
+        transform: translateY(-2px);
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+
+      .quest-title {
+        h3 {
+          font-size: 0.9rem;
+          margin: 0 0 4px 0;
+          color: black;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          line-clamp: 2;
+          -webkit-box-orient: vertical;
+          width: 100%;
+        }
+      }
+
+      .quest-progress {
+        text-align: center;
+        width: 100%;
+        p {
+          margin: 0;
+          font-size: 0.8rem;
+          font-weight: bold;
+          color: black;
+        }
+      }
+    }
+  }
+}
+
+// Smartphone view (up to 767px)
+@media (max-width: 767px) {
+  .quest-path {
+    padding: 1rem;
+    gap: 1rem;
+
+    .quest-row {
+      min-height: 100px;
+    }
+
+    .quest-node {
+      width: 100px;
+
+      .quest-card {
+        padding: 6px;
+
+        .quest-title h3 {
+          font-size: 0.7rem;
+        }
+
+        .quest-progress p {
+          font-size: 0.6rem;
+        }
+      }
+    }
+  }
+}
+
+// Tablet and larger screens
+@media (min-width: 768px) {
+  .quest-path {
+    padding: 1.5rem;
+    gap: 1.2rem;
+
+    .quest-row {
+      min-height: 150px;
+    }
+
+    .quest-node {
+      width: 150px;
+
+      .quest-card {
+        .quest-title h3 {
+          font-size: 1.1rem;
+        }
+
+        .quest-progress p {
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .quest-path {
+    padding: 2rem;
+    gap: 1.5rem;
+
+    .quest-row {
+      min-height: 200px;
+    }
+
+    .quest-node {
+      width: 200px;
+
+      .quest-card {
+        .quest-title h3 {
+          font-size: 1.2rem;
+        }
+
+        .quest-progress p {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}
