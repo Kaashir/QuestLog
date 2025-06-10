@@ -3,7 +3,7 @@
        data-controller="welcome"
        data-welcome-user-present-value="<%= current_user.present? %>"
        data-welcome-username-value="<%= current_user&.username&.html_safe || '' %>"
-       style="width: 1440px; height: 960px; background-image: url(<%= asset_path('welcome_background.png') %>); background-size: cover; background-position: center; border-radius: 12px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); overflow: hidden; position: relative;">
+       style="width: 1440px; height: 960px; background-image: url(<%= asset_path('welcome_background.png') %>); background-size: cover; background-position: center; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); overflow: hidden; position: relative;">
     <h1 style="font-family: 'Pixelify Sans', sans-serif; font-size: 3.3rem; text-align: center; width: 100%; padding-top: 140px;">Questlog</h1>
     <div style="position: absolute; bottom: 70px; left: 0; width: 100%; display: flex; flex-direction: column; align-items: center;">
       <button data-welcome-target="start"
