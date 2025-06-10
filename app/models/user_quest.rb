@@ -12,7 +12,7 @@ class UserQuest < ApplicationRecord
   end
 
   # Scope to get quests for a specific hero class and completion status
-  scope :for_hero_class, ->(hero_class) {
+  scope :for_hero_class, lambda { |hero_class|
     joins(:quest)
       .where(quests: { quest_category: hero_class.quest_categories })
   }
