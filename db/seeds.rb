@@ -2,10 +2,10 @@ User.destroy_all
 puts "Deleted all users."
 
 users = [
-  { username: "kaashir", first_name: 'Mrinal', last_name: 'Verma', email: 'mrinalverma1993@gmail.com', password: '123123', address: 'The Hague', date_birth: "22/07/1993"},
-  { username: "fratboi12", first_name: 'Thomas', last_name: 'Bruins', email: 'thomas.bruins12@gmail.com', password: '123123', address: 'Amsterdam', date_birth: "16/06/2006"},
-  { username: "travelingdev", first_name: 'Carlijn', last_name: 'Driessen', email: 'carlijndriessen.dev@gmail.com', password: '123123', address: 'Limburg', date_birth: "7/11/1994"},
-  { username: "dawikir", first_name: 'Daniel', last_name: 'Suarez', email: 'ndanielmnv@gmail.com', password: '123123', address: 'Rotterdam', date_birth: "23/07/1990"}
+  { username: "kaashir", first_name: 'Mrinal', last_name: 'Verma', email: 'mrinalverma1993@gmail.com', password: '123123', password_confirmation: '123123', address: '123 Peace Palace Street, The Hague, Netherlands', date_birth: "22/07/1993"},
+  { username: "fratboi12", first_name: 'Thomas', last_name: 'Bruins', email: 'thomas.bruins12@gmail.com', password: '123123', password_confirmation: '123123', address: '456 Dam Square, Amsterdam, Netherlands', date_birth: "16/06/2006"},
+  { username: "travelingdev", first_name: 'Carlijn', last_name: 'Driessen', email: 'carlijndriessen.dev@gmail.com', password: '123123', password_confirmation: '123123', address: '789 Maastricht Central, Limburg, Netherlands', date_birth: "7/11/1994"},
+  { username: "dawikir", first_name: 'Daniel', last_name: 'Suarez', email: 'ndanielmnv@gmail.com', password: '123123', password_confirmation: '123123', address: '321 Erasmus Bridge Road, Rotterdam, Netherlands', date_birth: "23/07/1990"}
 ]
 
 # Create users
@@ -34,12 +34,17 @@ hero_classes.each do |klass_data|
   puts "Created hero class: #{hero_class.name}"
 end
 
+# Store hero classes for reference
+warrior = HeroClass.find_by(name: 'Warrior')
+healer = HeroClass.find_by(name: 'Healer')
+monk = HeroClass.find_by(name: 'Monk')
+
 # Create user classes
 user_classes = [
-  { hero_class_id: 1, xp: 0, level: 1 },
-  { hero_class_id: 2, xp: 0, level: 1 },
-  { hero_class_id: 1, xp: 0, level: 1 },
-  { hero_class_id: 3, xp: 0, level: 1 }
+  { hero_class: warrior, xp: 0, level: 1 },
+  { hero_class: healer, xp: 0, level: 1 },
+  { hero_class: warrior, xp: 0, level: 1 },
+  { hero_class: monk, xp: 0, level: 1 }
 ]
 
 user_id = User.first.id # Start from the first user ID
@@ -49,7 +54,7 @@ user_classes.each do |class_data|
   user_id += 1
   user_class.active = true
   user_class.save!
-  puts "Created user class: #{class_data[:hero_class_id.name]} for user #{user_class.user.username}"
+  puts "Created user class: #{user_class.hero_class.name} for user #{user_class.user.username}"
 end
 
 puts "#{UserClass.all.count} user classes created."
@@ -59,16 +64,16 @@ puts "Deleted all quest categories."
 
 # Create quest categories
 categories = [
-  { name: 'Cardio', category_xp: 10, hero_class_id: 1 },
-  { name: 'Upper Body', category_xp: 12, hero_class_id: 1 },
-  { name: 'Lower Body', category_xp: 10, hero_class_id: 1 },
-  { name: 'Full Body', category_xp: 15, hero_class_id: 1 },
-  { name: 'Meditation', category_xp: 8, hero_class_id: 3 },
-  { name: 'Yoga', category_xp: 9, hero_class_id: 3 },
-  { name: 'Breathwork', category_xp: 7, hero_class_id: 3 },
-  { name: 'Journaling', category_xp: 5, hero_class_id: 2 },
-  { name: 'Gratitude', category_xp: 6, hero_class_id: 2 },
-  { name: 'Emotional Check-in', category_xp: 4, hero_class_id: 2 }
+  { name: 'Cardio', category_xp: 10, hero_class: warrior },
+  { name: 'Upper Body', category_xp: 12, hero_class: warrior },
+  { name: 'Lower Body', category_xp: 10, hero_class: warrior },
+  { name: 'Full Body', category_xp: 15, hero_class: warrior },
+  { name: 'Meditation', category_xp: 8, hero_class: monk },
+  { name: 'Yoga', category_xp: 9, hero_class: monk },
+  { name: 'Breathwork', category_xp: 7, hero_class: monk },
+  { name: 'Journaling', category_xp: 5, hero_class: healer },
+  { name: 'Gratitude', category_xp: 6, hero_class: healer },
+  { name: 'Emotional Check-in', category_xp: 4, hero_class: healer }
 ]
 
 categories.each do |category_data|
