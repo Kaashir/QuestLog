@@ -11,7 +11,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="<%= user_signed_in? ? 'has-navbar' : '' %>">
     <%= render "shared/navbar" %>
     <%= render "shared/flashes" %>
     <%= yield %>
