@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_09_071359) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_10_105825) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -27,6 +27,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_09_071359) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "hero_class_id", null: false
+    t.string "icon"
     t.index ["hero_class_id"], name: "index_quest_categories_on_hero_class_id"
   end
 
