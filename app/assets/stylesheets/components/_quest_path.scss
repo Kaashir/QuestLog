@@ -21,9 +21,6 @@
     transition: margin-left 0.3s ease;
 
     .quest-card {
-      background: url('blue-stone-quest-button.png');
-      background-size: cover;
-      background-position: center;
       border-radius: 8px;
       padding: 23px 8px 8px 8px;
       width: 100%;
@@ -35,12 +32,6 @@
       justify-content: flex-start;
       align-items: center;
       text-align: center;
-
-      &.completed {
-        background: url('gold-stone-quest-button.png');
-        background-size: cover;
-        background-position: center;
-      }
 
       &:hover {
         transform: translateY(-2px);
@@ -91,6 +82,32 @@
           -webkit-box-orient: vertical;
           width: 100%;
         }
+      }
+
+      /* Default state - blue */
+      background-image: url(asset-path('blue-stone-quest-button.png'));
+      background-size: cover;
+      background-position: center;
+
+      &.progress-blue {
+        background-image: url(asset-path('blue-stone-quest-button.png'));
+      }
+
+      &.progress-25 {
+        background-image: url(asset-path('25-stone-quest-button.png'));
+      }
+
+      &.progress-50 {
+        background-image: url(asset-path('50-stone-quest-button.png'));
+      }
+
+      &.progress-75 {
+        background-image: url(asset-path('75-stone-quest-button.png'));
+      }
+
+      &.progress-gold,
+      &.completed {
+        background-image: url(asset-path('gold-stone-quest-button.png'));
       }
     }
   }
