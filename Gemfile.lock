@@ -377,8 +377,8 @@ DEPENDENCIES
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 7.1.5, >= 7.1.5.1)
-  ruby-openai
   redis (>= 4.0.1)
+  ruby-openai
   sassc-rails
   selenium-webdriver
   simple_form!

@@ -31,13 +31,24 @@ class ChatbotJob < ApplicationJob
     # SYSTEM INSTRUCTION FOR OPENAI
     system_text = "You are an assistant in a gamified self-improvement app. " \
                   "Users can complete quests to improve themselves. " \
-                  "Always refer to the quest by name. If you're unsure about the answer, say 'I'm not sure about that.' " \
-                  "If there are no relevant quests, say 'We don't have a quest for that right now.' " \
+                  "Users may refer to quests also when they mean user quests. " \
+                  "Don't answer with referring to ids, only use names and descriptions. " \
+                  "Don't distiniguish between quests and user quests when you talk to the user. " \
+                  "Users may ask you questions about quests, classes (either their own classes, i.e. user classes or all classes available, i.e. hero classes), or how the app works. " \
                   "Here are the quests you can refer to: "
 
     # Include relevant quests
     nearest_quests.each do |quest|
-      system_text += "** QUEST #{quest.id}: name: #{quest.name}, description: #{quest.description} ** "
+      system_text += "** Quest: #{quest.title}. Description: #{quest.description}. xp granted: #{quest.xp_granted}. " \
+               "Category: #{quest.quest_category.name} ** "
+    end
+
+    system_text += "Here are the user quests you can refer to: "
+
+    nearest_user_quests.each do |userquest|
+      system_text += "** Quest: #{userquest.quest.title}. Description: #{userquest.quest.description}. xp granted: #{userquest.quest.xp_granted}" \
+               "Hero class: #{userquest.quest.quest_category.hero_class.name}. " \
+               "User class: #{userquest.user.user_class.name}. **"
     end
 
     results << { role: "system", content: system_text }
@@ -74,6 +85,21 @@ class ChatbotJob < ApplicationJob
     Quest.nearest_neighbors(
       :embedding, question_embedding,
       distance: "euclidean"
-    ).first(2) # adjust number of suggestions as needed
+    ).first(5) # adjust number of suggestions as needed
+  end
+
+  def nearest_user_quests
+    response = client.embeddings(
+      parameters: {
+        model: 'text-embedding-3-small',
+        input: @question.user_question
+      }
+    )
+    question_embedding = response['data'][0]['embedding']
+
+    UserQuest.nearest_neighbors(
+      :embedding, question_embedding,
+      distance: "euclidean"
+    ).first(5) # adjust number of suggestions as needed
   end
 end

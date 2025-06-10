@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_09_150343) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_10_125625) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "vector"
@@ -38,6 +38,14 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_09_150343) do
     t.datetime "updated_at", null: false
     t.bigint "hero_class_id", null: false
     t.index ["hero_class_id"], name: "index_quest_categories_on_hero_class_id"
+  end
+
+  create_table "quest_embeddings", force: :cascade do |t|
+    t.bigint "user_quest_id", null: false
+    t.vector "embedding", limit: 1536
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_quest_id"], name: "index_quest_embeddings_on_user_quest_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -223,6 +231,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_09_150343) do
     t.datetime "updated_at", null: false
     t.integer "completed_frequency", default: 0
     t.integer "position"
+    t.vector "embedding", limit: 1536
     t.index ["quest_id"], name: "index_user_quests_on_quest_id"
     t.index ["user_id"], name: "index_user_quests_on_user_id"
   end
@@ -246,6 +255,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_09_150343) do
 
   add_foreign_key "chat_messages", "users"
   add_foreign_key "quest_categories", "hero_classes"
+  add_foreign_key "quest_embeddings", "user_quests"
   add_foreign_key "questions", "users"
   add_foreign_key "quests", "quest_categories"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

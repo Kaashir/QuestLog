@@ -33,7 +33,8 @@ class Quest < ApplicationRecord
     response = client.embeddings(
       parameters: {
         model: 'text-embedding-3-small',
-        input: "Quest: #{title}. Description: #{description}"
+        input: "Quest: #{title}. Description: #{description}. xp granted: #{xp_granted}. " \
+               "Category: #{quest_category.name}" \
       }
     )
     embedding = response['data'][0]['embedding']
