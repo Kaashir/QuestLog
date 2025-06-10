@@ -2,20 +2,16 @@ class UserQuest < ApplicationRecord
   belongs_to :quest
   belongs_to :user
   has_one :hero_class, through: :quest, source: :hero_class # helps associate a hero_class with user_quests
-  before_create :assign_random_position
+  before_create :assign_next_position
 
   private
 
-  def assign_random_position
-    taken_positions = user.user_quests.pluck(:position).compact
-    available_positions = (1..20).to_a - taken_positions
+  def assign_next_position
+    # Get the highest position currently used
+    highest_position = user.user_quests.maximum(:position) || 0
 
-    if available_positions.any?
-      self.position = available_positions.sample
-    else
-      # If all positions are taken, assign a random position from 1-20
-      self.position = rand(1..20)
-    end
+    # Assign the next position
+    self.position = highest_position + 1
   end
 
   # This method should return all quests for a specific class for a specific user using the hero_class association
