@@ -164,13 +164,15 @@ puts "#{Quest.all.count} quests created."
 UserQuest.destroy_all
 puts "Deleted all user quests."
 
-
 # Assign Warrior quests to Warrior user classes
 UserClass.where(hero_class: HeroClass.find_by(name: 'Warrior')).each do |user_class|
-  5.times do
+  # Get all available warrior quests
+  available_quests = Quest.where(quest_category: QuestCategory.where(hero_class: user_class.hero_class))
+  # Take 5 random unique quests
+  available_quests.sample(5).each do |quest|
     assigned_quest = UserQuest.create!(
       user: user_class.user,
-      quest: Quest.where(quest_category: QuestCategory.where(hero_class: user_class.hero_class)).sample,
+      quest: quest,
       completed: false,
       completed_frequency: 0
     )
@@ -180,10 +182,13 @@ end
 
 # Assign Healer quests to Healer user classes
 UserClass.where(hero_class: HeroClass.find_by(name: 'Healer')).each do |user_class|
-  5.times do
+  # Get all available healer quests
+  available_quests = Quest.where(quest_category: QuestCategory.where(hero_class: user_class.hero_class))
+  # Take 5 random unique quests
+  available_quests.sample(5).each do |quest|
     assigned_quest = UserQuest.create!(
       user: user_class.user,
-      quest: Quest.where(quest_category: QuestCategory.where(hero_class: user_class.hero_class)).sample,
+      quest: quest,
       completed: false,
       completed_frequency: 0
     )
@@ -193,10 +198,13 @@ end
 
 # Assign Monk quests to Monk user classes
 UserClass.where(hero_class: HeroClass.find_by(name: 'Monk')).each do |user_class|
-  5.times do
+  # Get all available monk quests
+  available_quests = Quest.where(quest_category: QuestCategory.where(hero_class: user_class.hero_class))
+  # Take 5 random unique quests
+  available_quests.sample(5).each do |quest|
     assigned_quest = UserQuest.create!(
       user: user_class.user,
-      quest: Quest.where(quest_category: QuestCategory.where(hero_class: user_class.hero_class)).sample,
+      quest: quest,
       completed: false,
       completed_frequency: 0
     )

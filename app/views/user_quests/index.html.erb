@@ -2,7 +2,6 @@
   <div class="quest-path">
     <%
       # Get quests ordered with completed ones at the bottom
-      @current_user_quests = @current_user_quests.order(completed: :desc, position: :asc)
 
       # Create a hash mapping positions to quests
       quest_positions = {}

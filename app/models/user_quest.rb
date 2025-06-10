@@ -4,6 +4,13 @@ class UserQuest < ApplicationRecord
   has_one :hero_class, through: :quest, source: :hero_class # helps associate a hero_class with user_quests
   before_create :assign_next_position
 
+  # This method should return all quests for a specific class for a specific user using the hero_class association
+  def self.quest_by_class(class_name, user)
+    joins(:hero_class)
+      .where(hero_class: { name: class_name })
+      .where(user: user)
+  end
+
   private
 
   def assign_next_position
@@ -12,10 +19,5 @@ class UserQuest < ApplicationRecord
 
     # Assign the next position
     self.position = highest_position + 1
-  end
-
-  # This method should return all quests for a specific class for a specific user using the hero_class association
-  def quest_by_class(class_name)
-    where(user: user).where(hero_class: { name: class_name })
   end
 end
