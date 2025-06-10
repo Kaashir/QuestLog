@@ -1,13 +1,13 @@
 <% if user_signed_in? %>
   <nav class="navbar">
-    <% user_class = current_user.user_classes.first %>
+    <% user_class = current_user.current_class %>
 
     <%= turbo_stream_from "user_#{current_user.id}_level_xp" %>
 
     <div class="navbar-left">
       <%= link_to user_class_path(user_class) do %>
       <%# Below needs to be cloudinary and linked to hero classes %>
-        <%= image_tag 'warrior-avatar.png', alt: 'Avatar', class: 'avatar' %>
+        <%= image_tag "class_avatars/#{user_class.hero_class.name.downcase}-avatar.png", alt: 'Avatar', class: 'avatar' %>
       <% end %>
       <div class="character-info">
         <div class="character-name"><%= current_user.username.capitalize %></div>
