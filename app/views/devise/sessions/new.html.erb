@@ -1,25 +1,37 @@
-<div class="login-container" style="background-color: rgba(255, 255, 255, 0.95); border-radius: 10px; padding: 1rem; max-width: 500px; margin: 1rem auto; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-  <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div class="form-inputs" style="margin-bottom: 0.5rem;">
-      <%= f.input :email,
-                  required: false,
-                  autofocus: true,
-                  input_html: { autocomplete: "email", style: "height: 36px; padding: 0px 10px;" } %>
-      <%= f.input :password,
-                  required: false,
-                  input_html: { autocomplete: "current-password", style: "height: 36px; padding: 0px 10px;" } %>
-      <%= f.input :remember_me, as: :boolean, wrapper_html: { style: "margin-bottom: 0.5rem;" } if devise_mapping.rememberable? %>
-    </div>
+<div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+  <div style="width: 1440px; height: 960px; background-image: url(<%= asset_path('welcome_background.png') %>); background-size: cover; background-position: center; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); overflow: hidden; position: relative;">
+    <h1 style="font-family: 'Pixelify Sans', sans-serif; font-size: 3.3rem; text-align: center; width: 100%; padding-top: 140px;">Questlog</h1>
+    <div style="position: absolute; bottom: 70px; left: 0; width: 100%; display: flex; flex-direction: column; align-items: center;">
+      <div class="login-container" style="background-color: rgba(255, 255, 255, 0.95); padding: 1rem; max-width: 500px; margin: 1rem auto; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); border-radius: 12px;">
+        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="form-inputs" style="margin-bottom: 0.5rem;">
+            <%= f.input :email,
+                        required: false,
+                        autofocus: true,
+                        label: false,
+                        placeholder: "Email",
+                        input_html: { autocomplete: "email", style: "height: 36px; padding: 0px 10px;" } %>
+            <%= f.input :password,
+                        required: false,
+                        label: false,
+                        placeholder: "Password",
+                        input_html: { autocomplete: "current-password", style: "height: 36px; padding: 0px 10px;" } %>
+            <%= f.input :remember_me, as: :boolean, wrapper_html: { style: "margin-bottom: 0.5rem;" } if devise_mapping.rememberable? %>
+          </div>
 
-    <div class="form-actions">
-      <div style="display: flex; justify-content: center; margin-bottom: 0.75rem;">
-        <div style="display: inline-block; border: 6px solid rgba(166, 199, 230, 0.2); border-radius: 999px; padding: 1px;">
-          <%= f.button :submit, "Login", style: "background-color: #2A3B6E; color: #fff; border-radius: 999px; width: 110px; height: 32px; border: none; font-size: 0.9rem;" %>
+          <div class="form-actions">
+            <div style="display: flex; justify-content: center; margin-bottom: 0.75rem;">
+              <div style="display: inline-block; border: 6px solid rgba(166, 199, 230, 0.2); border-radius: 999px; padding: 1px;">
+                <%= f.button :submit, "Login", style: "background-color: #2A3B6E; color: #fff; border-radius: 999px; width: 110px; height: 32px; border: none; font-size: 0.9rem;" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <div style="text-align: center; margin-top: 0rem;">
+          <p style="margin: 0; font-size: 0.9rem;">Don't have an account?</p>
+          <%= link_to "Sign up", choose_class_path, style: "font-weight: bold; color: #000; text-decoration: none; font-size: 1rem;" %>
         </div>
       </div>
     </div>
-  <% end %>
-  <div style="text-align: center; margin-top: 0rem;">
-    <p style="margin: 0; font-size: 0.9rem;">Don't have an account?</p>
-    <%= link_to "Sign up", choose_class_path, style: "font-weight: bold; color: #000; text-decoration: none; font-size: 1rem;" %>
   </div>
+</div>
