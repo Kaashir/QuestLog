@@ -13,21 +13,25 @@ legend ~ div.form-check:first-of-type {
 // Login container styles
 .login-container,
 .signup-container {
-  font-family: 'Pixelify Sans', sans-serif;
+  font-family: 'GNF', sans-serif;
 
   label,
   input[type="email"],
   input[type="password"],
   input[type="text"],
   input[type="checkbox"] {
-    font-family: 'Pixelify Sans', sans-serif;
+    font-family: 'GNF', sans-serif;
   }
 
   input[type="email"],
   input[type="password"],
-  input[type="text"],
-  input[type="checkbox"] {
+  input[type="text"] {
     border-radius: 10px;
     background-color: #E3EAF2;
+  }
+
+  input[type="checkbox"] {
+    border-radius: 10px;
+    background-color: #2A3B6E;
   }
 }

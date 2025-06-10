@@ -1,0 +1,48 @@
+<div class="modal fade" id="add-class-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content choose-class-modal">
+
+      <div class="d-flex justify-content-center align-items-center min-vh-100 choose-class-modal" style="background-color: #FEF4DF;">
+        <div class="text-center">
+
+          <div class="mx-auto" style="width: 400px; height: 620px;">
+            <div id="addCardCarousel" class="carousel slide h-100 d-flex flex-column justify-content-end pb-4" data-bs-ride="false">
+              <div class="carousel-inner">
+
+
+                <% current_user.available_hero_classes.each_with_index do |hero_class, index| %>
+                  <%= link_to user_classes_path(user_class: { hero_class_id: hero_class.id, active: true }), data: { turbo_method: :post } do %>
+                    <div class="carousel-item <%= index == 0 ? 'active' : '' %>">
+                      <div class="d-flex justify-content-center">
+                        <div class="card border-0" style="width: 260px; height: 590px; background-color: #FFD066; box-shadow: 0 4px 16px rgba(0,0,0,0.12); border-radius: 12px; position: relative;">
+                          <div style="position: absolute; bottom: 80px; left: 20px; right: 20px; text-align: center;">
+                              <h3 style="margin-bottom: 10px; font-family: 'Pixelify Sans', sans-serif"><%= hero_class.name.capitalize %></h3>
+                              <p style="font-size: 14px; font-family: 'Pixelify Sans', sans-serif"><%= hero_class.description %></p>
+                            </div>
+                          <div style="width: 240px; height: 350px; background-color: #FFF8E1; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-radius: 10px; position: absolute; left: 50%; top: 10px; transform: translateX(-50%); background-image: url('<%= asset_path("#{hero_class.name.downcase}.png") %>'); background-size: cover; background-position: center;">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+
+              <!-- Carousel Controls -->
+              <button class="carousel-control-prev" type="button" data-bs-target="#addCardCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#addCardCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

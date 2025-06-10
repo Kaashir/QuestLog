@@ -21,7 +21,7 @@
           <%= link_to user_quest_path(user_quest, user_quest: { completed_frequency: user_quest.completed_frequency + 1 }),
             data: { turbo_method: :patch },
             class: "quest-slide-button" do %>
-            ADVANCE <span class="xp-gain">( <%= user_quest.completed_frequency %> / 3 )</span>
+            ADVANCE <span class="xp-gain">( <%= user_quest.completed_frequency %> / <%= user_quest.quest.frequency %> )</span>
           <% end %>
         <% elsif user_quest.completed_frequency == (user_quest.quest.frequency - 1) %>
           <%= link_to user_quest_path(user_quest, user_quest: { completed_frequency: user_quest.completed_frequency + 1, completed: true }),

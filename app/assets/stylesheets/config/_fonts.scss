@@ -6,6 +6,16 @@
 $body-font: "Work Sans", "Helvetica", "sans-serif";
 $headers-font: "Nunito", "Helvetica", "sans-serif";
 
+// GNF Font import
+@font-face {
+  font-family: "GNF";
+  src: font-url('GNF.eot');
+  src: font-url('GNF.eot?#iefix') format('embedded-opentype'),
+       font-url('GNF.woff') format('woff'),
+       font-url('GNF.ttf') format('truetype')
+}
+$gnf-font: "GNF";
+
 // To use a font file (.woff) uncomment following lines
 // @font-face {
 //   font-family: "Font Name";

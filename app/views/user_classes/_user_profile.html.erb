@@ -5,7 +5,7 @@
   <div class="container mx-auto text-center">
     <div class="character-illustration position-relative mt-5">
       <%# TODO:replace text in image tag with current_user.user_classes.first.img %>
-      <%= image_tag "warrior-no-background.png", alt: "Big Character", class: "img-fluid", style: "width: 300px;" %>
+      <%= image_tag asset_path("#{current_user.current_class.hero_class.name.downcase}-no-background.png"), alt: "Big Character", class: "img-fluid", style: "width: 300px;" %>
       <div class="shadow-ground"></div>
     </div>
 
@@ -39,14 +39,17 @@
     <section class="classes-section">
       <h3 class="section-title">Classes</h3>
       <div class="class-list">
-        <div class="class-item add-class">
-          <img src="img/icon_add.png" alt="Add Class" />
-          <span>Add Class</span>
-        </div>
+        <% if current_user.available_hero_classes.count > 0 %>
+          <div class="class-item add-class" data-bs-toggle="modal" data-bs-target="#add-class-modal">
+            <%= image_tag "Add-quest-icon.png", class: "add-class-icon" %>
+            <span>Add Class</span>
+          </div>
+          <%= render "add_class_modal" %>
+        <% end %>
         <% current_user.user_classes.each do |user_class| %>
           <% if !user_class.active %>
             <%= link_to user_class_path(user_class, user_class: { active: true }), data: { turbo_method: :patch }, class: "class-item" do %>
-              <%= image_tag "warrior-avatar.png" %>
+              <%= image_tag "#{user_class.hero_class.name.downcase}-icon.png" , class: "class-item-icon" %>
               <span><%= user_class.hero_class.name.capitalize %></span>
             <% end %>
           <% end %>
