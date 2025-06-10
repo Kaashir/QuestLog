@@ -3,7 +3,7 @@ class UserQuestsController < ApplicationController
   before_action :set_user_quest, only: [:edit, :update, :destroy]
 
   def index
-    @current_user_quests = current_user.user_quests.where(completed: false).order(:id)
+    @current_user_quests = current_user.user_quests.order(completed: :desc, position: :asc)
     @current_user_class = current_user.user_classes.where(active: true)
   end
 
