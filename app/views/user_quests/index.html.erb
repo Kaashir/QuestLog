@@ -24,11 +24,14 @@
       <div class="quest-row">
         <div class="quest-node" style="margin-left: <%= (column - 1) * 25 %>%;">
           <div class="quest-card <%= quest.completed_frequency == quest.quest.frequency ? 'completed' : '' %>" data-bs-toggle="modal" data-bs-target="#modal-<%= quest.id %>">
-            <div class="quest-title">
-              <h3><%= quest.quest.title %></h3>
+            <div class="quest-icon">
+              <%= image_tag quest.quest.quest_category.icon, alt: "Quest Icon", class: "quest-icon-img" %>
             </div>
             <div class="quest-progress">
               <p><%= quest.completed_frequency %>/<%= quest.quest.frequency %></p>
+            </div>
+            <div class="quest-title">
+              <h3><%= quest.quest.title %></h3>
             </div>
           </div>
           <%= render "show_modal", user_quest: quest %>

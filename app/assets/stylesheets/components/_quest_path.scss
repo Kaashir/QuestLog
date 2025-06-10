@@ -25,14 +25,14 @@
       background-size: cover;
       background-position: center;
       border-radius: 8px;
-      padding: 8px;
+      padding: 23px 8px 8px 8px;
       width: 100%;
       height: 100%;
       cursor: pointer;
       transition: transform 0.1s ease;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       text-align: center;
 
@@ -50,11 +50,39 @@
         transform: scale(0.95);
       }
 
+      .quest-icon {
+        width: 56px;
+        height: 56px;
+        margin-bottom: 0px;
+
+        .quest-icon-img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+
+      .quest-progress {
+        text-align: center;
+        width: 100%;
+        margin-bottom: 10px;
+        p {
+          margin: 0;
+          font-size: 1rem;
+          font-weight: bold;
+          color: rgb(0, 0, 0);
+          text-shadow: 0 0 8px rgba(255, 255, 255, 0.8),
+                       0 0 12px rgba(255, 255, 255, 0.6);
+        }
+      }
+
       .quest-title {
         h3 {
-          font-size: 0.9rem;
-          margin: 0 0 4px 0;
-          color: black;
+          font-size: 2rem;
+          margin: 8px 0 0 0;
+          color: rgb(0, 0, 0);
+          text-shadow: 0 0 8px rgba(255, 255, 255, 0.8),
+                       0 0 12px rgba(255, 255, 255, 0.6);
           overflow: hidden;
           text-overflow: ellipsis;
           display: -webkit-box;
@@ -62,17 +90,6 @@
           line-clamp: 2;
           -webkit-box-orient: vertical;
           width: 100%;
-        }
-      }
-
-      .quest-progress {
-        text-align: center;
-        width: 100%;
-        p {
-          margin: 0;
-          font-size: 0.8rem;
-          font-weight: bold;
-          color: black;
         }
       }
     }
@@ -95,12 +112,22 @@
       .quest-card {
         padding: 6px;
 
-        .quest-title h3 {
-          font-size: 0.7rem;
+        .quest-icon {
+          width: 50px;
+          height: 50px;
+          margin-bottom: 2px;
         }
 
-        .quest-progress p {
-          font-size: 0.6rem;
+        .quest-progress {
+          margin-bottom: 10px;
+          p {
+            font-size: 0.8rem;
+          }
+        }
+
+        .quest-title h3 {
+          font-size: 0.9rem;
+          margin: 12px 0 0 0;
         }
       }
     }
@@ -121,12 +148,22 @@
       width: 150px;
 
       .quest-card {
-        .quest-title h3 {
-          font-size: 1.1rem;
+        .quest-icon {
+          width: 56px;
+          height: 56px;
+          margin-bottom: 10px;
         }
 
-        .quest-progress p {
+        .quest-progress {
+          margin-bottom: 10px;
+          p {
+            font-size: 1.4rem;
+          }
+        }
+
+        .quest-title h3 {
           font-size: 0.9rem;
+          margin: 10px 0 0 0;
         }
       }
     }
@@ -146,12 +183,22 @@
       width: 200px;
 
       .quest-card {
-        .quest-title h3 {
-          font-size: 1.2rem;
+        .quest-icon {
+          width: 60px;
+          height: 60px;
+          margin-bottom: 12px;
         }
 
-        .quest-progress p {
+        .quest-progress {
+          margin-bottom: 12px;
+          p {
+            font-size: 1.6rem;
+          }
+        }
+
+        .quest-title h3 {
           font-size: 1rem;
+          margin: 12px 0 0 0;
         }
       }
     }
