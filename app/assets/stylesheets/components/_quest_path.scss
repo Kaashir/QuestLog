@@ -21,7 +21,7 @@
     transition: margin-left 0.3s ease;
 
     .quest-card {
-      background: url('green-stone-quest-button.png');
+      background: url('blue-stone-quest-button.png');
       background-size: cover;
       background-position: center;
       border-radius: 8px;
@@ -35,6 +35,12 @@
       justify-content: center;
       align-items: center;
       text-align: center;
+
+      &.completed {
+        background: url('gold-stone-quest-button.png');
+        background-size: cover;
+        background-position: center;
+      }
 
       &:hover {
         transform: translateY(-2px);
