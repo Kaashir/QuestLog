@@ -13,7 +13,7 @@
           <%= f.input :title, label: "Quest Name" %>
           <%= f.input :description, label: "Quest Description" %>
           <%= f.input :quest_category_id, label: "Quest Category", collection: @quest_categories.collect { |c| [c.name, c.id] }, prompt: "Select a category" %>
-          <%= f.input :frequency, label: "Frequency" %>
+          <%= f.input :frequency, label: "Frequency", placeholder: "Quest interval" %>
           <div class="form-actions">
             <%= f.submit "Create Quest", class: "btn" %>
           </div>

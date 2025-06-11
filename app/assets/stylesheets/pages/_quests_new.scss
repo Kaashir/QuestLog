@@ -14,22 +14,22 @@
   font-family: 'Pixelify Sans', sans-serif;
   padding: 2rem 1rem;
 
-.pixel-back-btn {
-  display: inline-flex;
-  align-items: center;
-  font-family: 'Pixelify Sans', sans-serif;
-  font-size: 1.2rem;
-  color: $mountain-shadow;
-  text-decoration: none;
+  .pixel-back-btn {
+    display: inline-flex;
+    align-items: center;
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 1.2rem;
+    color: $mountain-shadow;
+    text-decoration: none;
 
-  i {
-    margin-right: 0.4rem;
-  }
+    i {
+      margin-right: 0.4rem;
+    }
 
-  &:hover {
-    text-decoration: underline;
+    &:hover {
+      text-decoration: underline;
+    }
   }
-}
 
 
   h4 {
