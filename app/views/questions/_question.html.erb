@@ -1,6 +1,12 @@
 <div id="<%= dom_id(question) %>" class="question">
   <%= turbo_stream_from dom_id(question) %>
 
-  <p class="user-question"><%= question.user_question %></p>
-  <p class="ai-answer"><%= question.ai_answer || "..." %></p>
+  <p class="user-question" style="display: flex; align-items: flex-start; gap: 8px;">
+    <span style="font-size: 1.2em; line-height: 1; font-weight: bold;">-</span>
+    <span style="font-weight: bold;"><%= question.user_question %></span>
+  </p>
+  <p class="ai-answer" style="display: flex; align-items: flex-start; gap: 8px;">
+    <span style="font-size: 1.2em; line-height: 1;">-</span>
+    <span><%= question.ai_answer || "..." %></span>
+  </p>
 </div>
