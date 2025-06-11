@@ -219,6 +219,7 @@ GEM
       racc (~> 1.4)
     orm_adapter (0.5.0)
     pg (1.5.9)
+    pgvector (0.3.2)
     popper_js (2.11.8)
     pp (0.6.2)
       prettyprint
@@ -375,6 +376,7 @@ DEPENDENCIES
   jbuilder
   neighbor
   pg (~> 1.1)
+  pgvector
   puma (>= 5.0)
   rails (~> 7.1.5, >= 7.1.5.1)
   redis (>= 4.0.1)
