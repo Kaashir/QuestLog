@@ -10,7 +10,7 @@ class UserQuest < ApplicationRecord
       .where(hero_class: { name: class_name })
       .where(user: user)
   end
-  
+
   has_neighbors :embedding
   after_create :set_embedding
 
