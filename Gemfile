@@ -84,4 +84,4 @@ group :test do
 end
 
 gem 'neighbor'
-gem "pgvector"
+gem 'pgvector'
