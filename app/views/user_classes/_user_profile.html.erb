@@ -27,11 +27,11 @@
       </div>
       <div class="stat-card">
         <div class="stat-label">On-going Quests</div>
-        <div class="stat-value"><%= current_user.user_quests.where(completed: false).count %></div>
+        <div class="stat-value"><%= current_user.user_quests.for_hero_class(current_user.current_class.hero_class).where(completed: false).count %></div>
       </div>
       <div class="stat-card">
         <div class="stat-label">Completed Quests</div>
-        <div class="stat-value"><%= current_user.user_quests.where(completed: true).count  %></div>
+        <div class="stat-value"><%= current_user.user_quests.for_hero_class(current_user.current_class.hero_class).where(completed: true).count %></div>
       </div>
     </section>
 

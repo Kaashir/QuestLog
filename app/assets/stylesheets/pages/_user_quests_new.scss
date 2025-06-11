@@ -1,162 +1,64 @@
-body {
-  
-}
-.new-quest-page {
-  padding: 2rem 1rem;
-
-.pixel-back-btn {
-  display: inline-flex;
-  align-items: center;
+.quest-slide-button {
+  background: $twilight-sky;
+  color: $cloud-whisper;
+  padding: 0.6rem 1rem;
+  border-radius: 2rem;
+  font-weight: bold;
   font-family: 'Pixelify Sans', sans-serif;
-  font-size: 1.2rem;
-  color: $mountain-shadow;
-  text-decoration: none;
-
-  i {
-    margin-right: 0.4rem;
-  }
-
+  border: none;
   &:hover {
-    text-decoration: underline;
+    background: darken($twilight-sky, 5%);
   }
 }
 
-
-  .preset-quests-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
-  }
-
-  .preset-quest-card {
-    background-color: $solar-flare;
-    border: 1px solid $summit-stone;
-    border-radius: 1rem;
-    padding: 1rem;
-    width: 150px;
-    text-align: center;
-    cursor: pointer;
-    font-family: 'Pixelify Sans', sans-serif;
-    transition: transform 0.2s ease-in-out;
-
-    &:hover {
-      transform: scale(1.05);
-    }
-
-    .quest-icon-wrapper {
-      background: $solar-flare;
-      padding: 0.5rem;
-      border-radius: 0.5rem;
-      margin-bottom: 0.5rem;
-
-      .quest-icon {
-        width: 60px;
-        height: auto;
-      }
-    }
-
-    .preset-quest-info {
-      h5 {
-        font-size: 0.9rem;
-        color: $mountain-shadow;
-        margin-bottom: 0.3rem;
-      }
-
-      p {
-        font-size: 0.75rem;
-        color: $summit-stone;
-      }
-
-      .plus-sign {
-        font-size: 2rem;
-        font-weight: bold;
-        color: $twilight-sky;
-        margin-bottom: 0.3rem;
-      }
-    }
-  }
-
-.custom-quest-block {
-  text-decoration: none;
-  color: inherit;
+.scroll-wrapper {
+  width: 90vw;
+  max-width: 320px;
+  height: 600px;
+  background-image: image-url('scroll_frame.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 200px 40px 200px 40px;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
+}
+
+.scroll-content,
+.custom-scroll-content {
+  text-align: center;
+  font-family: 'Pixelify Sans', sans-serif;
+  h3 {
+    font-size: 1.1rem;
+    color: $mountain-shadow;
+    margin-bottom: 0.4rem;
+  }
+
+  p {
+    font-size: 0.85rem;
+    color: $summit-stone;
+    margin-bottom: 0.3rem;
+  }
+}
+
+.quest-img {
+  width: 100%;
+  height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  img.quest-icon-img {
+    max-height: 100%;
+    max-width: 80%;
+    object-fit: contain;
+  }
 }
 
 
-  .quest-modal-content {
-    background-color: $solar-flare;
-    border-radius: 1rem;
-    padding: 1.5rem;
-    text-align: center;
-    position: relative;
-    font-family: 'Pixelify Sans', sans-serif;
-    margin: 10px;
-
-    .quest-icon-wrapper {
-      margin: 1rem auto;
-
-      .quest-icon {
-        width: 120px;
-        height: auto;
-      }
-    }
-  }
-
-  .close-button {
-    position: absolute;
-    top: -14px;
-    right: -14px;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background-color: $mountain-shadow;
-    color: $cloud-whisper;
-    font-family: 'Pixelify Sans', monospace;
-    font-size: 1.4rem;
-    line-height: 36px;
-    text-align: center;
-    padding: 0;
-    border: none;
-    z-index: 10;
-  }
-
-  .quest-info {
-    margin-top: 1rem;
-
-    .quest-title {
-      font-weight: 700;
-      font-size: 1.1rem;
-      color: $mountain-shadow;
-    }
-
-    .quest-description {
-      font-size: 0.9rem;
-      color: $summit-stone;
-      margin-top: 0.3rem;
-    }
-
-    .xp-gain {
-      color: $summit-stone;
-      margin-top: 0.3rem;
-    }
-  }
-
-  .quest-slide-button {
-    background: $twilight-sky;
-    color: $cloud-whisper;
-    padding: 0.6rem 1rem;
-    border-radius: 2rem;
-    font-weight: bold;
-    text-decoration: none;
-    display: inline-block;
-    width: 100%;
-    font-family: 'Pixelify Sans', sans-serif;
-
-    &:hover {
-      background: darken($twilight-sky, 5%);
-    }
-  }
+.header-row {
+  position: relative;
+  z-index: 10;
 }

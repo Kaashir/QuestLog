@@ -1,21 +1,24 @@
-<div class="container custom-quest-page">
-  <div class="header-row">
-    <%= link_to new_user_quest_path, class: "pixel-back-btn text-white" do %>
-      <i class="fa-solid fa-arrow-left"></i> <span>Back</span>
+<div class="container" style="min-height: 100vh; background-image: url(<%= asset_path("forest_background.png") %>); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
+  <div class="container custom-quest-page">
+    <div class="header-row">
+      <%= link_to new_user_quest_path, class: "pixel-back-btn text-white" do %>
+        <i class="fa-solid fa-arrow-left"></i> <span>Back</span>
+      <% end %>
+    </div>
+    <div class="mt-5">
+      <%= simple_form_for(@quest) do |f| %>
+        <div class="form-inputs">
+          <h4>Add Custom Quest</h4>
+          <hr>
+          <%= f.input :title, label: "Quest Name" %>
+          <%= f.input :description, label: "Quest Description" %>
+          <%= f.input :quest_category_id, label: "Quest Category", collection: @quest_categories.collect { |c| [c.name, c.id] }, prompt: "Select a category" %>
+          <%= f.input :frequency, label: "Frequency" %>
+          <div class="form-actions">
+            <%= f.submit "Create Quest", class: "btn" %>
+          </div>
+        </div>
+      </div>
     <% end %>
   </div>
-
-  <%= simple_form_for(@quest) do |f| %>
-    <div class="form-inputs">
-      <h4>Add Custom Quest</h4>
-      <hr>
-      <%= f.input :title, label: "Quest Name" %>
-      <%= f.input :description, label: "Quest Description" %>
-      <%= f.input :quest_category_id, label: "Quest Category", collection: @quest_categories.collect { |c| [c.name, c.id] }, prompt: "Select a category" %>
-      <%= f.input :frequency, label: "Frequency" %>
-    </div>
-    <div class="form-actions">
-      <%= f.submit "Create Quest", class: "btn" %>
-    </div>
-  <% end %>
 </div>

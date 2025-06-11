@@ -1,4 +1,4 @@
-<div class="container" style="min-height: 100vh; background-image: url(<%= asset_path("forest_background.png") %>); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
+<div class="container" style="min-height: 100vh; height: 100%; background-image: url(<%= asset_path("forest_background.png") %>); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; padding-bottom: 120px;">
   <div class="quest-path">
     <%
       # Get quests ordered with completed ones at the bottom
@@ -13,8 +13,11 @@
 
       # Function to determine column position (1-4) based on quest position
       def get_column(position)
-        sequence = [4,3,2,1,2,3,4,3,2,1].cycle
-        sequence.take(position).last
+        # Create a repeating pattern that goes: 4->3->2->1->2->3->4->3->2->1
+        # This creates a zigzag pattern from right to left and back
+        base_sequence = [4,3,2,1,2,3,4,3,2,1]
+        position_in_sequence = (position - 1) % base_sequence.length
+        base_sequence[position_in_sequence]
       end
 
       # Iterate through quests in order
@@ -23,12 +26,31 @@
     %>
       <div class="quest-row">
         <div class="quest-node" style="margin-left: <%= (column - 1) * 25 %>%;">
-          <div class="quest-card <%= quest.completed_frequency == quest.quest.frequency ? 'completed' : '' %>" data-bs-toggle="modal" data-bs-target="#modal-<%= quest.id %>">
-            <div class="quest-title">
-              <h3><%= quest.quest.title %></h3>
+          <div class="quest-card <%= quest.completed_frequency == quest.quest.frequency ? 'completed' : '' %>
+            <%=
+              completion_percentage = (quest.completed_frequency.to_f / quest.quest.frequency.to_f) * 100
+              case completion_percentage
+              when 0..15
+                'progress-blue'
+              when 16..34
+                'progress-25'
+              when 35..64
+                'progress-50'
+              when 65..99
+                'progress-75'
+              when 100
+                'progress-gold'
+              end
+            %>"
+            data-bs-toggle="modal" data-bs-target="#modal-<%= quest.id %>">
+            <div class="quest-icon">
+              <%= image_tag quest.quest.quest_category.icon, alt: "Quest Icon", class: "quest-icon-img" %>
             </div>
             <div class="quest-progress">
               <p><%= quest.completed_frequency %>/<%= quest.quest.frequency %></p>
+            </div>
+            <div class="quest-title">
+              <h3><%= quest.quest.title %></h3>
             </div>
           </div>
           <%= render "show_modal", user_quest: quest %>
@@ -37,7 +59,7 @@
     <% end %>
   </div>
 
-  <div style="position: fixed; bottom: 24px; left: 24px; z-index: 10;">
+  <div style="position: fixed; bottom: 24px; left: 24px; z-index: 10; display: flex; align-items: flex-end;">
     <% hero_class_name = @current_user_class.first.hero_class.name.downcase %>
     <% image_name =
       case hero_class_name
@@ -50,10 +72,12 @@
       end
     %>
     <% if image_name %>
-      <%= image_tag image_name, style: "max-width: 100px;" %>
+      <div style="position: relative; display: inline-block;">
+        <%= image_tag image_name, style: "max-width: 100px; display: block;" %>
+        <div style="position: absolute; top: 50%; right: 0; transform: translateY(-50%) translateX(50%); border: 6px solid rgba(166, 199, 230, 0.2); border-radius: 999px; padding: 2px; background: transparent;">
+          <%= link_to "+", new_user_quest_path, class: "add-quest-button" %>
+        </div>
+      </div>
     <% end %>
-    <div style="display: inline-block; border: 6px solid rgba(166, 199, 230, 0.2); border-radius: 999px; padding: 2px;">
-      <%= link_to "Add quest", new_user_quest_path, class: "add-quest-button", style: "background-color: #2A3B6E; color: #fff; border-radius: 999px; width: 160px; height: 48px; border: none; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; text-decoration: none; font-family: 'GNF', sans-serif;" %>
-    </div>
   </div>
 </div>
