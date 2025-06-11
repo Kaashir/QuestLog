@@ -80,4 +80,33 @@
       </div>
     <% end %>
   </div>
+
+  <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10;">
+    <div style="position: relative; display: inline-block;">
+      <%= image_tag "fairy-icon.png", style: "max-width: 60px; display: block; cursor: pointer;", class: "fairy-icon", data: { bs_toggle: "modal", bs_target: "#fairy-modal" } %>
+      <div class="sparkle-effect"></div>
+    </div>
+  </div>
+
+  <!-- Fairy Modal -->
+  <div class="modal fade" id="fairy-modal" tabindex="-1" aria-labelledby="fairyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="width: 400px;">
+      <div class="modal-content" style="background-color: #FFD066; border-radius: 12px; border: none; box-shadow: 0 4px 16px rgba(0,0,0,0.12); height: 400px;">
+        <div class="modal-header border-0">
+          <h5 class="modal-title" id="fairyModalLabel" style="font-family: 'GNF', sans-serif;">Questions</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" style="background-color: #FFF8E1; margin: 0 8px 8px 8px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); height: calc(100% - 60px); overflow-y: auto;">
+          <div class="container chatbot">
+            <div id="questions" style="font-family: 'GNF', sans-serif;">
+              <% @questions.where("created_at > ?", session[:chat_started_at]).each do |question| %>
+                <%= render question %>
+              <% end %>
+            </div>
+            <%= render "questions/form", question: @question %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
