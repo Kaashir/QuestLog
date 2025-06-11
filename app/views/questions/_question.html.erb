@@ -1,0 +1,6 @@
+<div id="<%= dom_id(question) %>" class="question">
+  <%= turbo_stream_from dom_id(question) %>
+
+  <p class="user-question"><%= question.user_question %></p>
+  <p class="ai-answer"><%= question.ai_answer || "..." %></p>
+</div>

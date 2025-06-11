@@ -2,6 +2,9 @@ class Quest < ApplicationRecord
   #TODO: set current_user in correct controller
   attr_accessor :current_user
 
+  has_neighbors :embedding
+  after_create :set_embedding
+
   before_create :set_xp
   before_update :set_xp
 
@@ -23,6 +26,19 @@ class Quest < ApplicationRecord
 
   def set_xp
     self.xp_granted = quest_category.category_xp * frequency
+  end
+
+  def set_embedding
+    client = OpenAI::Client.new
+    response = client.embeddings(
+      parameters: {
+        model: 'text-embedding-3-small',
+        input: "Quest: #{title}. Description: #{description}. xp granted: #{xp_granted}. " \
+               "Category: #{quest_category.name}" \
+      }
+    )
+    embedding = response['data'][0]['embedding']
+    update(embedding: embedding)
   end
 
   # Uncomment this method when current_user is set in the controller

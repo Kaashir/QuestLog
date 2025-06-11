@@ -1,0 +1,9 @@
+<div class="container chatbot">
+  <div id="questions">
+    <% @questions.where("created_at > ?", session[:chat_started_at]).each do |question| %>
+      <%= render question %>
+    <% end %>
+  </div>
+
+  <%= render "form", question: @question %>
+</div>
