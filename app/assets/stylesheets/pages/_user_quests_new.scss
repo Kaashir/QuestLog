@@ -43,11 +43,22 @@
 }
 
 .quest-img {
-  width: 80%;
-  height: 160px;
-  background-color: #FFF8E1;
-  border-radius: 10px;
-  background-size: cover;
-  background-position: center;
+  width: 100%;
+  height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 1rem;
+
+  img.quest-icon-img {
+    max-height: 100%;
+    max-width: 80%;
+    object-fit: contain;
+  }
+}
+
+
+.header-row {
+  position: relative;
+  z-index: 10;
 }

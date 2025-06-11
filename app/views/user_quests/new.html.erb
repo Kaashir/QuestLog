@@ -14,7 +14,7 @@
           <%= link_to new_quest_path, class: "text-decoration-none" do %>
             <div class="scroll-wrapper">
               <div class="custom-scroll-content text-center d-flex flex-column justify-content-center align-items-center">
-                <div class="plus-sign mb-3" style="font-size: 16px">+</div>
+                <div class="quest-img" style="font-size: 16px"><%= image_tag 'custom_quest.png', alt: "Custom Quest Icon", class: "quest-icon-img" %></div>
                 <h3>Custom Quest</h3>
                 <p>Create your own adventure tailored to your goals.</p>
               </div>
@@ -27,7 +27,7 @@
             <div class="d-flex flex-column align-items-center">
               <div class="scroll-wrapper">
                 <div class="scroll-content text-center d-flex flex-column justify-content-center align-items-center">
-                  <div class="quest-img" style="background-image: url('<%= asset_path("warrior.png") %>');"></div>
+                  <div class="quest-img"><%= image_tag quest.quest_category.icon, alt: "Quest Icon", class: "quest-icon-img" %></div>
                   <h3><%= quest.title %></h3>
                   <p><%= quest.description %></p>
                   <p class="xp-gain">+<%= quest.xp_granted %> XP</p>
