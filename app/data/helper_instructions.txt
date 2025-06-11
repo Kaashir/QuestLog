@@ -1,0 +1,13 @@
+On the main screen, you’ll see all the quests you’ve committed to. Each quest shows how many sessions (frequency) you aim to complete, and how many remain. As you complete sessions, the coin gradually fills with gold. Once all tasks in a quest are completed, the coin turns fully gold and XP is awarded.
+
+In the bottom-left corner, tap the + icon next to your character to add a new quest. You can choose from preset quests (with a title, description, frequency, and XP reward) or create a custom quest.
+
+For custom quests, you’ll define the name, description, category, and frequency. XP is automatically calculated based on category × frequency.
+
+The top navbar shows your username, current level, and XP progress bar. The bar represents 100 XP. When it fills up, you level up and the bar resets.
+
+Tap the top-left avatar to view your active class. You’ll see stats like current level, active quests, and completed quests. You can also switch classes or add a new one.
+
+Tap the top-right menu to return to your quests or log out.
+
+The fairy in the bottom-right corner opens the AI chatbot. You can ask it anything about how quests, classes, or the app works.

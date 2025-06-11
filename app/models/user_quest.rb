@@ -31,7 +31,7 @@ class UserQuest < ApplicationRecord
         model: 'text-embedding-3-small',
         input: "Quest: #{quest.title}. Description: #{quest.description}. xp granted: #{quest.xp_granted}" \
                "Hero class: #{quest.quest_category.hero_class.name}. " \
-               "User class: #{user.user_class.name}. " \
+               "User class: #{user.current_class.hero_class.name}. " \
       }
     )
     embedding = response['data'][0]['embedding']
