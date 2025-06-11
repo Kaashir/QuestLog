@@ -1,4 +1,8 @@
 <div class="d-flex justify-content-center align-items-center min-vh-100" style="background-color: #FEF4DF;">
+  <%= link_to root_path, style: "position: absolute; top: 20px; left: 20px; z-index: 1000;" do %>
+    <%= image_tag "blue_arrow.png", class: "back-button-icon", style: "width: 40px; height: 40px;" %>
+  <% end %>
+
   <div class="text-center">
     <h1 style="font-family: 'GNF', sans-serif">Welcome to Questlog</h1>
     <p class="mb-4" style="font-family: 'GNF', sans-serif">choose your character</p>
@@ -7,7 +11,6 @@
       <div id="cardCarousel" class="carousel slide h-100" data-bs-ride="false">
         <div class="carousel-inner mb-3">
 
-<%# Below needs to be an each do %>
 
           <!-- Carousel Item 1 -->
           <%= link_to new_user_registration_path(type: "warrior") do %>
