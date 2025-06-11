@@ -6,10 +6,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: $headers-font;
-  // border-bottom: 3px solid $aurora-mist;
+  font-family: 'GNF', sans-serif;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   z-index: 2;
 }
 
@@ -33,14 +35,14 @@
 }
 
 .character-name {
-  font-family: 'Pixelify Sans', sans-serif;
+  font-family: 'GNF', sans-serif;
   font-size: 1.1rem;
   font-weight: 600;
   color: $mountain-shadow;
 }
 
 .character-level {
-  font-family: 'Pixelify Sans', sans-serif;
+  font-family: 'GNF', sans-serif;
   font-size: 0.9rem;
   color: $summit-stone;
 }
@@ -53,7 +55,7 @@
 // dropdown (bootstrap)
 
 .pixel-button {
-  font-family: 'Pixelify Sans', sans-serif;
+  font-family: 'GNF', sans-serif;
   background-color: $twilight-sky;
   border: 2px solid $summit-stone;
   color: $cloud-whisper;
@@ -67,7 +69,7 @@
 }
 
 .pixel-dropdown {
-  font-family: 'Pixelify Sans', sans-serif;
+  font-family: 'GNF', sans-serif;
   background-color: $cloud-whisper;
   border: 2px solid $summit-stone;
   padding: 0.5rem;

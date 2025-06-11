@@ -49,7 +49,7 @@ export default class extends Controller {
       } else {
         setTimeout(() => {
           window.location.href = "/user_quests"
-        }, 1700)
+        }, 500)
       }
     }
 
@@ -63,13 +63,22 @@ export default class extends Controller {
     })
     const html = await response.text()
 
-    const wrapper = document.createElement("div")
-    wrapper.classList.add("slide-up")
-    wrapper.innerHTML = html
-    this.sessionFormTarget.appendChild(wrapper)
+    // Create a temporary div to parse the HTML
+    const tempDiv = document.createElement('div')
+    tempDiv.innerHTML = html
 
-    requestAnimationFrame(() => {
-      wrapper.classList.add("show")
-    })
+    // Find the login-container div
+    const loginContainer = tempDiv.querySelector('.login-container')
+
+    if (loginContainer) {
+      const wrapper = document.createElement("div")
+      wrapper.classList.add("slide-up")
+      wrapper.appendChild(loginContainer)
+      this.sessionFormTarget.appendChild(wrapper)
+
+      requestAnimationFrame(() => {
+        wrapper.classList.add("show")
+      })
+    }
   }
 }
