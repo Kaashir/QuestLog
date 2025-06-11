@@ -3,9 +3,13 @@
        data-controller="welcome"
        data-welcome-user-present-value="<%= current_user.present? %>"
        data-welcome-username-value="<%= current_user&.username&.html_safe || '' %>"
-       style="width: 1440px; height: 960px; background-image: url(<%= asset_path('welcome_background.png') %>); background-size: cover; background-position: center; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); overflow: hidden; position: relative;">
-    <h1 style="font-family: 'Pixelify Sans', sans-serif; font-size: 3.3rem; text-align: center; width: 100%; padding-top: 140px;">Questlog</h1>
-    <div style="position: absolute; bottom: 70px; left: 0; width: 100%; display: flex; flex-direction: column; align-items: center;">
+       style="width: 1440px; height: 960px; position: relative; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); overflow: hidden;">
+    <video autoplay muted loop playsinline
+           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
+      <source src="videos/mainpage_loop.mp4" type="video/mp4">
+    </video>
+    <h1 style="font-family: 'Pixelify Sans', sans-serif; font-size: 3.3rem; text-align: center; width: 100%; padding-top: 140px; position: relative; z-index: 1;">Questlog</h1>
+    <div style="position: absolute; bottom: 70px; left: 0; width: 100%; display: flex; flex-direction: column; align-items: center; z-index: 1;">
       <button data-welcome-target="start"
               data-action="click->welcome#start"
               type="button"
