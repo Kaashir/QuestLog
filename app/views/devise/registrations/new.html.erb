@@ -3,7 +3,7 @@
 
     <% character_type = params[:type]&.downcase %>
     <div class="d-flex justify-content-center mb-4">
-      <div class="card border-0" style="width: 240px; height: 472px; background-color: #FFD066; box-shadow: 0 4px 16px rgba(0,0,0,0.12); border-radius: 12px; position: relative;">
+      <div class="card border-0" style="width: 260px; height: 500px; background-color: #FFD066; box-shadow: 0 4px 16px rgba(0,0,0,0.12); border-radius: 12px; position: relative;">
       <div style="position: absolute; bottom: 16px; left: 16px; right: 16px; text-align: center;">
         <% if character_type %>
           <h3 style="margin-bottom: 8px; font-family: 'GNF', sans-serif"><%= character_type.capitalize%></h3>
@@ -22,9 +22,9 @@
         </p>
       </div>
       <% if character_type %>
-        <div style="width: 224px; height: 280px; background-color: #FFF8E1; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-radius: 10px; position: absolute; left: 50%; top: 8px; transform: translateX(-50%); background-image: url('<%= asset_path("#{character_type}.png") %>'); background-size: cover; background-position: center;">
+        <div style="width: 240px; height: 350px; background-color: #FFF8E1; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-radius: 10px; position: absolute; left: 50%; top: 8px; transform: translateX(-50%); background-image: url('<%= asset_path("#{character_type}-gif.gif") %>'); background-size: contain; background-position: center; animation: none; -webkit-animation: none;">
       <% else %>
-        <div style="width: 224px; height: 280px; background-color: #FFF8E1; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-radius: 10px; position: absolute; left: 50%; top: 8px; transform: translateX(-50%); background-image: url('<%= asset_path("#{@hero_class.name.downcase}.png") %>'); background-size: cover; background-position: center;">
+        <div style="width: 240px; height: 350px; background-color: #FFF8E1; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-radius: 10px; position: absolute; left: 50%; top: 8px; transform: translateX(-50%); background-image: url('<%= asset_path("#{@hero_class.name.downcase}-gif.gif") %>'); background-size: contain; background-position: center; animation: none; -webkit-animation: none;">
       <% end %>
       </div>
       </div>
