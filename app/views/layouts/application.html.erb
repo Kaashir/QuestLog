@@ -9,11 +9,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= favicon_link_tag asset_path('favicon.png') %>
   </head>
 
   <body class="<%= user_signed_in? ? 'has-navbar' : '' %>">
     <%= render "shared/navbar" %>
-    <%= render "shared/flashes" %>
     <%= yield %>
   </body>
 </html>

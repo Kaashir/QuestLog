@@ -221,3 +221,36 @@
     }
   }
 }
+
+@keyframes pulseButton {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(42, 59, 110, 0.7);
+  }
+
+  70% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 10px rgba(42, 59, 110, 0);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(42, 59, 110, 0);
+  }
+}
+
+.add-quest-button {
+  background-color: #2A3B6E;
+  color: #fff;
+  border-radius: 999px;
+  width: 30px;
+  height: 30px;
+  border: none;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-family: 'GNF', sans-serif;
+  animation: pulseButton 2s infinite;
+}
