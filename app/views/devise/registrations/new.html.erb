@@ -1,5 +1,9 @@
 <div class=" d-flex justify-content-center align-items-center min-vh-100" style="background-color: #FEF4DF;">
-  <div class="signup-container" style="background-color: #FEF4DF; border-radius: 10px; padding: 0.9rem; max-width: 450px; margin: 1rem auto; font-family: 'GNF', sans-serif;">
+  <div class="signup-container" class="mt-0", style="background-color: #FEF4DF; border-radius: 10px; padding: 0.9rem; max-width: 450px; margin: 1rem auto; font-family: 'GNF', sans-serif;">
+
+  <%= link_to root_path, style: "position: absolute; top: 20px; left: 20px; z-index: 1000;" do %>
+    <%= image_tag "blue_arrow.png", class: "back-button-icon", style: "width: 40px; height: 40px;" %>
+  <% end %>
 
     <% character_type = params[:type]&.downcase %>
     <div class="d-flex justify-content-center mb-4">

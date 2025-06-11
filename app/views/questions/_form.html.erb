@@ -1,11 +1,20 @@
 <%= simple_form_for question,
   html: { data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset" }} do |f|
 %>
-  <div class="input-group mb-3 w-100">
-    <div class="form-floating">
-      <%= f.input :user_question, label: false, wrapper: false %>
-      <%= f.label :user_question, "Your question" %>
+  <div class="form-inputs" style="margin-bottom: 0.5rem; padding: 0 1rem;">
+    <%= f.input :user_question,
+                label: false,
+                placeholder: "Ask your question...",
+                input_html: {
+                  style: "height: 36px; padding: 0px 10px; border-radius: 8px; border: 1px solid #ced4da;"
+                } %>
+  </div>
+
+  <div class="form-actions">
+    <div style="display: flex; justify-content: center; margin-bottom: 0.75rem;">
+      <div style="display: inline-block; border: 6px solid rgba(166, 199, 230, 0.2); border-radius: 999px; padding: 2px;">
+        <%= f.button :submit, "Ask", style: "background-color: #2A3B6E; color: #fff; border-radius: 999px; width: 120px; height: 36px; border: none; font-size: 1.1rem; font-family: 'GNF', sans-serif;" %>
+      </div>
     </div>
-    <%= f.submit "Ask", id: "new-question-button", class: "btn btn-primary" %>
   </div>
 <% end %>
