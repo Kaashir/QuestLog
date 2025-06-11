@@ -1,54 +1,56 @@
 <div class="container" style="min-height: 100vh; background-image: url(<%= asset_path("forest_background.png") %>); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
-  <div class="container new-quest-page">
-    <div class="header-row">
+  <div class="container new-quest-page py-5 d-flex flex-column align-items-center">
+    <div class="header-row mb-3 w-100">
       <%= link_to user_quests_path, class: "pixel-back-btn text-white" do %>
         <i class="fa-solid fa-arrow-left"></i> <span>Back</span>
       <% end %>
     </div>
 
-    <div class="preset-quests-grid">
-      <% @quests.each_with_index do |quest, index| %>
-        <div class="preset-quest-card" data-bs-toggle="modal" data-bs-target="#presetModal-<%= index %>">
-          <div class="quest-icon-wrapper">
-            <%= image_tag "warrior.png", alt: "Quest Icon", class: "quest-icon" %>
-          </div>
-          <div class="preset-quest-info">
-            <h5><%= quest.title %></h5>
-            <p><%= quest.description %></p>
-          </div>
+    <div id="questCarousel" class="carousel slide" data-bs-ride="false" data-bs-interval="false">
+      <div class="carousel-inner">
+
+        <!-- Custom Quest Slide -->
+        <div class="carousel-item active">
+          <%= link_to new_quest_path, class: "text-decoration-none" do %>
+            <div class="scroll-wrapper">
+              <div class="custom-scroll-content text-center d-flex flex-column justify-content-center align-items-center">
+                <div class="plus-sign mb-3" style="font-size: 16px">+</div>
+                <h3>Custom Quest</h3>
+                <p>Create your own adventure tailored to your goals.</p>
+              </div>
+            </div>
+          <% end %>
         </div>
 
-        <div class="modal fade" id="presetModal-<%= index %>" tabindex="-1" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content quest-modal-content">
-              <button type="button" class="close-button" data-bs-dismiss="modal" aria-label="Close">✕</button>
-              <div class="quest-icon-wrapper">
-                <%= image_tag "warrior.png", alt: "Quest Icon", class: "quest-icon" %>
-              </div>
-              <div class="quest-info">
-                <h5 class="quest-title"><%= quest.title.upcase %></h5>
-                <p class="quest-description"><%= quest.description %></p>
-                <p class="xp-gain">+<%= quest.xp_granted %> XP</p>
-              </div>
-              <div class="quest-action">
-                <%= simple_form_for UserQuest.new, url: user_quests_path do |f| %>
-                  <%= f.hidden_field :quest_id, value: quest.id %>
-                  <%= f.hidden_field :completed_frequency, value: 0 %>
-                  <%= f.hidden_field :completed, value: false %>
-                  <%= f.submit "Add Quest", class: "quest-slide-button" %>
-                <% end %>
+        <% @quests.each do |quest| %>
+          <div class="carousel-item">
+            <div class="d-flex flex-column align-items-center">
+              <div class="scroll-wrapper">
+                <div class="scroll-content text-center d-flex flex-column justify-content-center align-items-center">
+                  <div class="quest-img" style="background-image: url('<%= asset_path("warrior.png") %>');"></div>
+                  <h3><%= quest.title %></h3>
+                  <p><%= quest.description %></p>
+                  <p class="xp-gain">+<%= quest.xp_granted %> XP</p>
+              <%= simple_form_for UserQuest.new, url: user_quests_path do |f| %>
+                <%= f.hidden_field :quest_id, value: quest.id %>
+                <%= f.hidden_field :completed_frequency, value: 0 %>
+                <%= f.hidden_field :completed, value: false %>
+                <%= f.submit "Add Quest", class: "quest-slide-button mt-3" %>
+              <% end %>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      <% end %>
+        <% end %>
 
-      <%= link_to new_quest_path, class: "preset-quest-card custom-quest-block" do %>
-        <div class="preset-quest-info">
-          <div class="plus-sign">+</div>
-          <p>Custom Quest</p>
-        </div>
-      <% end %>
+      </div>
     </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#questCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#questCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </button>
   </div>
 </div>

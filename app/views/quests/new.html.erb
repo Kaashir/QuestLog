@@ -5,18 +5,19 @@
         <i class="fa-solid fa-arrow-left"></i> <span>Back</span>
       <% end %>
     </div>
-
-    <%= simple_form_for(@quest) do |f| %>
-      <div class="form-inputs">
-        <h4>Add Custom Quest</h4>
-        <hr>
-        <%= f.input :title, label: "Quest Name" %>
-        <%= f.input :description, label: "Quest Description" %>
-        <%= f.input :quest_category_id, label: "Quest Category", collection: @quest_categories.collect { |c| [c.name, c.id] }, prompt: "Select a category" %>
-        <%= f.input :frequency, label: "Frequency" %>
-      </div>
-      <div class="form-actions">
-        <%= f.submit "Create Quest", class: "btn" %>
+    <div class="mt-5">
+      <%= simple_form_for(@quest) do |f| %>
+        <div class="form-inputs">
+          <h4>Add Custom Quest</h4>
+          <hr>
+          <%= f.input :title, label: "Quest Name" %>
+          <%= f.input :description, label: "Quest Description" %>
+          <%= f.input :quest_category_id, label: "Quest Category", collection: @quest_categories.collect { |c| [c.name, c.id] }, prompt: "Select a category" %>
+          <%= f.input :frequency, label: "Frequency" %>
+          <div class="form-actions">
+            <%= f.submit "Create Quest", class: "btn" %>
+          </div>
+        </div>
       </div>
     <% end %>
   </div>
