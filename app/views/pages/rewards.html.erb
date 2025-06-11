@@ -1,12 +1,9 @@
-<div class="container" style="min-height: 100vh; background-image: url(<%= asset_path("forest_background.png") %>); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
-  <div class="container rewards-page">
-    <div class="header-row">
-      <%= link_to user_quests_path, class: "pixel-back-btn text-white" do %>
-        <i class="fa-solid fa-arrow-left"></i> <span>Back</span>
-      <% end %>
-    </div>
-    <div class="mt-5">
-      <h1 class="text-white"><strong>Special Offers</strong></h1>
+<div class="container" style="position: relative; min-height: 100vh; background-image: url(<%= asset_path("forest-animated.gif") %>); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
+
+    <%= link_to user_quests_path, style: "position: absolute; top: 15px; left: 20px;" do %>
+      <%= image_tag "blue_arrow.png", class: "back-button-icon", style: "width: 40px; height: 40px;" %>
+    <% end %>
+    <h1 class="text-white pt-5"><strong>Special Offers</strong></h1>
       <div class="offer-card d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#modal-offer_1">
           <div class="offer-image">
@@ -22,4 +19,3 @@
     </div>
     <%= render "reward_modal_1" %>
   </div>
-</div>
