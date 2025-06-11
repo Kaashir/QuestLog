@@ -20,7 +20,6 @@ class UserQuest < ApplicationRecord
       .where(quests: { quest_category: hero_class.quest_categories })
     }
     
-
   private
 
   def assign_next_position
