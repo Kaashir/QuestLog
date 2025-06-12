@@ -1,12 +1,39 @@
 <div id="<%= dom_id(question) %>" class="question">
   <%= turbo_stream_from dom_id(question) %>
 
-  <p class="user-question" style="display: flex; align-items: flex-start; gap: 8px;">
-    <span style="font-size: 1.2em; line-height: 1; font-weight: bold;">-</span>
-    <span style="font-weight: bold;"><%= question.user_question %></span>
-  </p>
-  <p class="ai-answer" style="display: flex; align-items: flex-start; gap: 8px;">
-    <span style="font-size: 1.2em; line-height: 1;">-</span>
-    <span><%= question.ai_answer || "..." %></span>
-  </p>
+  <div class="user-question" style="
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 8px;
+  ">
+    <div style="
+      background-color: #2A3B6E;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 12px;
+      border-top-right-radius: 4px;
+      max-width: 80%;
+      word-wrap: break-word;
+    ">
+      <%= question.user_question %>
+    </div>
+  </div>
+
+  <div class="ai-answer" style="
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 8px;
+  ">
+    <div style="
+      background-color: #F0F0F0;
+      color: black;
+      padding: 8px 12px;
+      border-radius: 12px;
+      border-top-left-radius: 4px;
+      max-width: 80%;
+      word-wrap: break-word;
+    ">
+      <%= question.ai_answer || "..." %>
+    </div>
+  </div>
 </div>

@@ -1,20 +1,22 @@
 <%= simple_form_for question,
-  html: { data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset" }} do |f|
+  html: {
+    data: {
+      controller: "reset-form",
+      action: "turbo:submit-end->reset-form#reset"
+    }
+  } do |f|
 %>
-  <div class="form-inputs" style="margin-bottom: 0.5rem; padding: 0 1rem;">
-    <%= f.input :user_question,
-                label: false,
-                placeholder: "Ask your question...",
-                input_html: {
-                  style: "height: 36px; padding: 0px 10px; border-radius: 8px; border: 1px solid #ced4da;"
-                } %>
-  </div>
-
-  <div class="form-actions">
-    <div style="display: flex; justify-content: center; margin-bottom: 0.75rem;">
-      <div style="display: inline-block; border: 6px solid rgba(166, 199, 230, 0.2); border-radius: 999px; padding: 2px;">
-        <%= f.button :submit, "Ask", style: "background-color: #2A3B6E; color: #fff; border-radius: 999px; width: 120px; height: 36px; border: none; font-size: 1.1rem; font-family: 'GNF', sans-serif;" %>
-      </div>
+  <div class="form-inputs" style="margin: 0;">
+    <div style="display: flex; gap: 8px;">
+      <%= f.input :user_question,
+                  label: false,
+                  placeholder: "Ask your question...",
+                  wrapper_html: { style: "margin: 0; flex-grow: 1;" },
+                  input_html: {
+                    style: "height: 36px; padding: 0px 10px; border-radius: 8px; border: 1px solid #ced4da; width: 100%;",
+                    onkeydown: "if(event.key === 'Enter') { event.preventDefault(); this.form.requestSubmit(); }"
+                  } %>
+      <%= f.button :submit, "Ask", style: "margin-top: 0; background-color: #2A3B6E; color: #fff; border-radius: 8px; height: 36px; border: none; font-size: 1rem; font-family: 'GNF', sans-serif; padding: 0 16px; white-space: nowrap; align-self: flex-start;" %>
     </div>
   </div>
 <% end %>
