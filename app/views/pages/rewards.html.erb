@@ -1,21 +1,25 @@
-<div class="container" style="position: relative; min-height: 100vh; background-image: url(<%= asset_path("forest-animated.gif") %>); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
+<%= link_to user_quests_path, style: "position: fixed; top: 100px; left: 20px; z-index: 1000;" do %>
+  <%= image_tag "blue_arrow.png", class: "back-button-icon", style: "width: 40px; height: 40px;" %>
+<% end %>
 
-    <%= link_to user_quests_path, style: "position: absolute; top: 15px; left: 20px;" do %>
-      <%= image_tag "blue_arrow.png", class: "back-button-icon", style: "width: 40px; height: 40px;" %>
+<div class="container"
+     style="min-height: 100vh; background-image: url(<%= asset_path("forest-animated.gif") %>); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
+  <div class="px-3" style="padding-top: 75px; height: calc(100vh - 75px); overflow-y: auto;">
+    <h2 class="text-white mb-4" style="font-weight: 800; text-shadow: 0 2px 8px rgba(0,0,0,0.18); letter-spacing: 1px;">
+      Rewards
+    </h2>
+    <% if @current_user_class == "Warrior" %>
+      <%= render "warrior_1" %>
+      <%= render "warrior_2" %>
+      <%= render "warrior_3" %>
+    <% elsif @current_user_class == "Monk" %>
+      <%= render "monk_1" %>
+      <%= render "monk_2" %>
+      <%= render "monk_3" %>
+    <% elsif @current_user_class == "Healer" %>
+      <%= render "healer_1" %>
+      <%= render "healer_2" %>
+      <%= render "healer_3" %>
     <% end %>
-    <h1 class="text-white pt-5"><strong>Special Offers</strong></h1>
-      <div class="offer-card d-flex justify-content-between align-items-center">
-        <div class="d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#modal-offer_1">
-          <div class="offer-image">
-            <img src="<%= asset_path("chest.png") %>" alt="Chest" class="img-fluid">
-          </div>
-          <div class="offer-details">
-            <h4 class="mb-0">Basic-Fit Deal</h4>
-          </div>
-        </div>
-        <div class="offer-action">
-          <h4 class="mb-0">LOCKED</h4>
-      </div>
-    </div>
-    <%= render "reward_modal_1" %>
   </div>
+</div>

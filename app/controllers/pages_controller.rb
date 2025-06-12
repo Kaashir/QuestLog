@@ -10,4 +10,8 @@ class PagesController < ApplicationController
   def choose_class
   end
 
+  def rewards
+    @current_user_class = current_user.current_class.hero_class.name
+  end
+
 end
