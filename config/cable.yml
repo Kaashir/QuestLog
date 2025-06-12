@@ -7,8 +7,6 @@ test:
   adapter: test
 
 production:
-  adapter: redis
-  url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
+  adapter: solid_cable
   channel_prefix: quest_log_production
-  ssl_params: { verify_mode: <%= OpenSSL::SSL::VERIFY_NONE %> }
-  polling_interval: 1.0.seconds
+  polling_interval: 1.0
