@@ -10,24 +10,7 @@
 
       <div class="character-info">
         <div class="character-name"><%= current_user.username.capitalize %></div>
-
-        <%= turbo_frame_tag "level_xp" do %>
-          <% if user_class.present? %>
-            <div class="character-level">Lvl: <%= user_class.level %></div>
-            <div class="xp-display-row">
-              <div class="xp-pill">
-                <div class="xp-fill" style="width: <%= user_class.xp_progress_percentage %>%"></div>
-                  <%= image_tag("#{user_class.hero_class.name.downcase}-icon.png", alt: "XP Icon", class: "xp-icon") %>
-                  <span><%= user_class.xp %> / <%= user_class.xp_needed_for_next_level %></span>
-                </div>
-              </div>
-            </div>
-          <% else %>
-            <div class="character-level">
-              <%= link_to "Choose your class", choose_class_path, class: "btn btn-primary btn-sm" %>
-            </div>
-          <% end %>
-        <% end %>
+        <div class="character-level">Lvl: <%= user_class.level %></div>
       </div>
     </div>
 
@@ -42,6 +25,16 @@
         <li><%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item" %></li>
       </ul>
     </div>
+
+    <%= turbo_frame_tag "level_xp" do %>
+      <% if user_class.present? %>
+        <div class="xp-bar-pill">
+          <div class="xp-bar-fill" style="width: <%= user_class.xp_progress_percentage %>%"></div>
+          <%= image_tag("#{user_class.hero_class.name.downcase}-icon.png", alt: "XP Icon", class: "xp-bar-icon") %>
+          <span class="xp-bar-text"><%= user_class.xp %> / <%= user_class.xp_needed_for_next_level %></span>
+        </div>
+      <% end %>
+    <% end %>
   </nav>
 <% else %>
   <nav class="navbar">

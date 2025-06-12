@@ -33,15 +33,8 @@
 
   .quest-icon-wrapper {
     margin: 1rem auto;
-    background: $cloud-whisper;
-    border-radius: 0.5rem;
     padding: 1rem;
     display: inline-block;
-  }
-
-  .quest-icon {
-    max-width: 100px;
-    height: auto;
   }
 
   .quest-info {
@@ -104,6 +97,74 @@
     100% {
       transform: scale(1);
       box-shadow: 0 0 0px transparent;
+    }
+  }
+}
+
+.delete-quest-btn {
+  position: absolute;
+  top: -14px;
+  right: 25px;
+  line-height: 36px;
+  color: $crimson-cloak;
+  font-size: 18px;
+  transition: transform 0.2s ease;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: $mountain-shadow;
+  font-family: 'GNF', monospace;
+  font-size: 1.4rem;
+  text-align: center;
+  padding: 0;
+  border: none;
+  z-index: 10;
+
+  &:hover {
+    transform: scale(1.1);
+    color: darken($crimson-cloak, 10%);
+  }
+}
+
+.custom-confirmation-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: $cloud-whisper;
+  border: 2px solid $summit-stone;
+  padding: 1rem;
+  border-radius: 8px;
+  z-index: 99999; // higher than Bootstrap modal
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  width: 90%;
+  max-width: 320px;
+
+  &.hidden {
+    display: none;
+  }
+
+  .modal-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+
+    .btn {
+      padding: 6px 12px;
+      font-family: 'GNF', sans-serif;
+      border-radius: 4px;
+      border: 2px solid $summit-stone;
+
+      &.confirm {
+        background-color: $crimson-cloak;
+        color: white;
+      }
+
+      &.cancel {
+        background-color: $twilight-sky;
+        color: white;
+      }
     }
   }
 }

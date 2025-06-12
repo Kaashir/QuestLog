@@ -39,7 +39,8 @@ class ChatbotJob < ApplicationJob
                   "Users may ask you questions about quests, classes (either their own classes, i.e. user classes or all classes available, i.e. hero classes), or how the app works. " \
                   "Do not make anything up, only use the information you have about quests, user quests, classes and hero classes. " \
                   "If you don't know the answer, say that you don't know. " \
-                  "Give concise and clear answers. " \
+                  "Give concise and clear answers. Maximum 3 sentences. " \
+                  "When listing quests, classes, or examples, use clear line breaks and simple dashes or bullets (e.g., -) for each item. Avoid markdown formatting like ** or #. Format answers so they look clean and readable in plain text or HTML. Use line breaks (<br>) between list items if possible, or - dashes at the beginning of lines for lists." \
                   "Here are the quests you can refer to: "
 
     # Include relevant quests
