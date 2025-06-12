@@ -41,10 +41,16 @@ class UserQuestsController < ApplicationController
     end
   end
 
-  def destroy
-    @user_quest.destroy
-    redirect_to user_quests_path, notice: 'Quest was successfully deleted.'
+def destroy
+  @user_quest = UserQuest.find(params[:id])
+  @user_quest.destroy
+
+  respond_to do |format|
+    format.turbo_stream
+    format.html { redirect_to user_quests_path, notice: "Quest deleted." }
   end
+end
+
 
   private
 
@@ -56,3 +62,5 @@ class UserQuestsController < ApplicationController
     @user_quest = UserQuest.find(params[:id])
   end
 end
+
+

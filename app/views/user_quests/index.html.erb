@@ -1,9 +1,6 @@
 <div class="container" style="min-height: 100vh; height: 100%; background-image: url(<%= asset_path("forest-animated.gif") %>); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; padding-bottom: 120px;">
   <div class="quest-path">
     <%
-      # Get quests ordered with completed ones at the bottom
-
-      # Create a hash mapping positions to quests
       quest_positions = {}
       position = 1
       @current_user_quests.each do |quest|
@@ -11,46 +8,39 @@
         position += 1
       end
 
-      # Function to determine column position (1-4) based on quest position
       def get_column(position)
-        # Create a repeating pattern that goes: 4->3->2->1->2->3->4->3->2->1
-        # This creates a zigzag pattern from right to left and back
         base_sequence = [4,3,2,1,2,3,4,3,2,1]
         position_in_sequence = (position - 1) % base_sequence.length
         base_sequence[position_in_sequence]
       end
 
-      # Iterate through quests in order
       quest_positions.each do |position, quest|
         column = get_column(position)
     %>
-      <div class="quest-row">
-        <div class="quest-node" style="margin-left: <%= (column - 1) * 25 %>%;">
-          <div class="quest-card <%= quest.completed_frequency == quest.quest.frequency ? 'completed' : '' %>
-            <%=
-              completion_percentage = (quest.completed_frequency.to_f / quest.quest.frequency.to_f) * 100
-              case completion_percentage
-              when 0..15
-                'progress-blue'
-              when 16..34
-                'progress-25'
-              when 35..64
-                'progress-50'
-              when 65..99
-                'progress-75'
-              when 100
-                'progress-gold'
-              end
-            %>"
-            data-bs-toggle="modal" data-bs-target="#modal-<%= quest.id %>">
-            <div class="quest-icon">
-              <%= image_tag quest.quest.quest_category.icon, alt: "Quest Icon", class: "quest-icon-img" %>
-            </div>
-            <div class="quest-progress">
-              <p><%= quest.completed_frequency %>/<%= quest.quest.frequency %></p>
-            </div>
-            <div class="quest-title">
-              <h3><%= quest.quest.title %></h3>
+      <div id="quest-<%= quest.id %>">
+        <div class="quest-row">
+          <div class="quest-node" style="margin-left: <%= (column - 1) * 25 %>%;">
+            <div class="quest-card <%= quest.completed_frequency == quest.quest.frequency ? 'completed' : '' %>
+              <%= begin
+                completion_percentage = (quest.completed_frequency.to_f / quest.quest.frequency.to_f) * 100
+                case completion_percentage
+                when 0..15 then 'progress-blue'
+                when 16..34 then 'progress-25'
+                when 35..64 then 'progress-50'
+                when 65..99 then 'progress-75'
+                when 100 then 'progress-gold'
+                end
+              end %>"
+              data-bs-toggle="modal" data-bs-target="#modal-<%= quest.id %>">
+              <div class="quest-icon">
+                <%= image_tag quest.quest.quest_category.icon, alt: "Quest Icon", class: "quest-icon-img" %>
+              </div>
+              <div class="quest-progress">
+                <p><%= quest.completed_frequency %>/<%= quest.quest.frequency %></p>
+              </div>
+              <div class="quest-title">
+                <h3><%= quest.quest.title %></h3>
+              </div>
             </div>
           </div>
           <%= render "show_modal", user_quest: quest %>
@@ -58,53 +48,55 @@
       </div>
     <% end %>
   </div>
+</div>
 
-  <div style="position: fixed; bottom: 24px; left: 24px; z-index: 10; display: flex; align-items: flex-end;">
-    <% hero_class_name = @current_user_class.first.hero_class.name.downcase %>
-    <% image_name =
-      case hero_class_name
-      when "warrior"
-        "warrior-no-background.png"
-      when "monk"
-        "monk-no-background.png"
-      when "healer"
-        "healer-no-background.png"
-      end
-    %>
-    <% if image_name %>
-      <div style="position: relative; display: inline-block;">
-        <%= image_tag image_name, style: "max-width: 100px; display: block;" %>
-        <div style="position: absolute; top: 50%; right: 0; transform: translateY(-50%) translateX(50%); border: 6px solid rgba(166, 199, 230, 0.2); border-radius: 999px; padding: 2px; background: transparent;">
-          <%= link_to "+", new_user_quest_path, class: "add-quest-button" %>
-        </div>
-      </div>
-    <% end %>
-  </div>
+<%= render "user_quests/confirm_modal" %>
 
-  <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10;">
+<div style="position: fixed; bottom: 24px; left: 24px; z-index: 10; display: flex; align-items: flex-end;">
+  <% hero_class_name = @current_user_class.first.hero_class.name.downcase %>
+  <% image_name =
+    case hero_class_name
+    when "warrior"
+      "warrior-no-background.png"
+    when "monk"
+      "monk-no-background.png"
+    when "healer"
+      "healer-no-background.png"
+    end
+  %>
+  <% if image_name %>
     <div style="position: relative; display: inline-block;">
-      <%= image_tag "fairy-icon.png", style: "max-width: 60px; display: block; cursor: pointer;", class: "fairy-icon", data: { bs_toggle: "modal", bs_target: "#fairy-modal" } %>
-      <div class="sparkle-effect"></div>
+      <%= image_tag image_name, style: "max-width: 100px; display: block;" %>
+      <div style="position: absolute; top: 50%; right: 0; transform: translateY(-50%) translateX(50%); border: 6px solid rgba(166, 199, 230, 0.2); border-radius: 999px; padding: 2px; background: transparent;">
+        <%= link_to "+", new_user_quest_path, class: "add-quest-button" %>
+      </div>
     </div>
-  </div>
+  <% end %>
+</div>
 
-  <!-- Fairy Modal -->
-  <div class="modal fade" id="fairy-modal" tabindex="-1" aria-labelledby="fairyModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style="width: 400px;">
-      <div class="modal-content" style="background-color: #FFD066; border-radius: 12px; border: none; box-shadow: 0 4px 16px rgba(0,0,0,0.12); height: 400px;">
-        <div class="modal-header border-0">
-            <h5 class="modal-title w-100 text-center" id="fairyModalLabel">Fairy Talks</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" style="background-color: #FFF8E1; margin: 0 8px 8px 8px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); height: calc(100% - 60px); overflow-y: auto;">
-          <div class="container chatbot">
-            <div id="questions">
-              <% @questions.where("created_at > ?", session[:chat_started_at]).each do |question| %>
-                <%= render question %>
-              <% end %>
-            </div>
-            <%= render "questions/form", question: @question %>
+<div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10;">
+  <div style="position: relative; display: inline-block;">
+    <%= image_tag "fairy-icon.png", style: "max-width: 60px; display: block; cursor: pointer;", class: "fairy-icon", data: { bs_toggle: "modal", bs_target: "#fairy-modal" } %>
+    <div class="sparkle-effect"></div>
+  </div>
+</div>
+
+<!-- Fairy Modal -->
+<div class="modal fade" id="fairy-modal" tabindex="-1" aria-labelledby="fairyModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" style="width: 400px;">
+    <div class="modal-content" style="background-color: #FFD066; border-radius: 12px; border: none; box-shadow: 0 4px 16px rgba(0,0,0,0.12); height: 400px;">
+      <div class="modal-header border-0">
+        <h5 class="modal-title w-100 text-center" id="fairyModalLabel">Fairy Talks</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="background-color: #FFF8E1; margin: 0 8px 8px 8px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); height: calc(100% - 60px); overflow-y: auto;">
+        <div class="container chatbot">
+          <div id="questions">
+            <% @questions.where("created_at > ?", session[:chat_started_at]).each do |question| %>
+              <%= render question %>
+            <% end %>
           </div>
+          <%= render "questions/form", question: @question %>
         </div>
       </div>
     </div>
