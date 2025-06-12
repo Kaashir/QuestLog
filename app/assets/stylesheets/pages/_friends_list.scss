@@ -1,0 +1,96 @@
+.back-button {
+  position: fixed;
+  top: 100px;
+  left: 20px;
+
+  &-icon {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.add-friend-button {
+  background-color: $twilight-sky;
+  color: white;
+  margin-left: 10px;
+  border-radius: 5px;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.friends-page {
+  &-container {
+    margin-top: 10px;
+    padding: 20px;
+    height: calc(100vh - 120px); // Subtract navbar height
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-header {
+    position: sticky;
+    top: 120px; // Navbar height
+    padding: 20px 0;
+    margin-bottom: 20px;
+  }
+
+  &-title {
+    font-family: 'GNF', sans-serif;
+    color: #2B2E4A;
+  }
+
+  &-content {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 10px; // Add some padding for the scrollbar
+  }
+}
+
+.friends-container {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.friend-item {
+  border-bottom: 1px solid #eee;
+
+  .friend-avatar {
+    .avatar {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  .friend-info {
+    h5 {
+      font-family: 'GNF', sans-serif;
+    }
+
+    p {
+      font-size: 0.9rem;
+    }
+  }
+
+  .other-classes {
+    .class-icon {
+      width: 32px;
+      height: 32px;
+    }
+
+    .small {
+      margin-top: -2px;
+    }
+  }
+}
+
+.add-friend-form {
+  margin-bottom: 20px;
+}
+
+.trash-can-icon {
+  color: $twilight-sky;
+  font-size: 16px;
+}

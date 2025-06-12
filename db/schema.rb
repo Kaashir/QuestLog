@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_10_125625) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_12_091206) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "vector"
@@ -22,6 +22,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_10_125625) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_chat_messages_on_user_id"
+  end
+
+  create_table "friendships", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "friend_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["friend_id"], name: "index_friendships_on_friend_id"
+    t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
   create_table "hero_classes", force: :cascade do |t|
@@ -255,6 +264,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_10_125625) do
   end
 
   add_foreign_key "chat_messages", "users"
+  add_foreign_key "friendships", "users"
+  add_foreign_key "friendships", "users", column: "friend_id"
   add_foreign_key "quest_categories", "hero_classes"
   add_foreign_key "quest_embeddings", "user_quests"
   add_foreign_key "questions", "users"

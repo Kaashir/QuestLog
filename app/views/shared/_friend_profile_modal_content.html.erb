@@ -1,0 +1,82 @@
+<div class="container mx-auto friend-profile-container" style="max-width: 500px;">
+  <!-- Character image -->
+  <div class="text-center mt-5">
+    <%= image_tag asset_path("#{@friend.current_class.hero_class.name.downcase}-no-background.png"), alt: "Big Character", class: "img-fluid", style: "width: 160px; border-radius: 50%; background: #eee;" %>
+  </div>
+
+  <!-- Name, username, joined -->
+  <div class="text-center mt-3">
+    <h2 class="fw-bold" style="font-size: 2rem; margin-bottom: 0.2em;"><%= @friend.username.capitalize %></h2>
+    <div class="text-muted" style="font-size: 1.1rem;">@<%= @friend.username %> &bull; Joined <%= @friend.created_at.strftime("%B %Y") %></div>
+  </div>
+
+  <!-- Following / Followers row -->
+  <div class="d-flex justify-content-center align-items-center gap-4 mt-4 mb-2">
+    <div class="text-center">
+      <div class="fw-bold" style="font-size: 1.3rem;"><%= @friend.following.count %></div>
+      <div class="text-muted" style="font-size: 1rem;">Following</div>
+    </div>
+    <div style="width: 2px; height: 32px; background: #eee;"></div>
+    <div class="text-center">
+      <div class="fw-bold" style="font-size: 1.3rem;"><%= @friend.followers.count %></div>
+      <div class="text-muted" style="font-size: 1rem;">Followers</div>
+    </div>
+  </div>
+
+  <!-- Overview section -->
+  <div class="mt-4">
+    <h4 class="fw-bold mb-3">Overview</h4>
+    <div class="row g-3">
+      <div class="col-6">
+        <div class="stat-card p-3 rounded shadow-sm text-center" style="background: #fff;">
+          <div class="stat-label text-muted">Current Level</div>
+          <div class="stat-value fw-bold" style="font-size: 1.3rem;"><%= @friend.current_class.level %></div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="stat-card p-3 rounded shadow-sm text-center" style="background: #fff;">
+          <div class="stat-label text-muted">Total XP</div>
+          <div class="stat-value fw-bold" style="font-size: 1.3rem;"><%= @friend.current_class.xp %></div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="stat-card p-3 rounded shadow-sm text-center" style="background: #fff;">
+          <div class="stat-label text-muted">Active Quests</div>
+          <div class="stat-value fw-bold" style="font-size: 1.3rem;"><%= @friend.user_quests.for_hero_class(@friend.current_class.hero_class).where(completed: false).count %></div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="stat-card p-3 rounded shadow-sm text-center" style="background: #fff;">
+          <div class="stat-label text-muted">Completed Quests</div>
+          <div class="stat-value fw-bold" style="font-size: 1.3rem;"><%= @friend.user_quests.for_hero_class(@friend.current_class.hero_class).where(completed: true).count %></div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="stat-card p-3 rounded shadow-sm text-center" style="background: #fff;">
+          <div class="stat-label text-muted">Total Quests</div>
+          <div class="stat-value fw-bold" style="font-size: 1.3rem;"><%= @friend.user_quests.count %></div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="stat-card p-3 rounded shadow-sm text-center" style="background: #fff;">
+          <div class="stat-label text-muted">User Since</div>
+          <div class="stat-value fw-bold" style="font-size: 1.3rem;"><%= @friend.created_at.strftime("%b %Y") %></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Classes section -->
+  <section class="classes-section mt-5">
+    <h5 class="section-title text-center mb-3">Classes</h5>
+    <div class="d-flex flex-wrap justify-content-center gap-3">
+      <% @friend.user_classes.each do |user_class| %>
+        <div class="class-item text-center <%= 'active' if user_class.active %>" style="min-width: 90px;">
+          <%= image_tag "#{user_class.hero_class.name.downcase}-icon.png", class: "class-item-icon mb-1", style: "width: 40px;" %>
+          <div><%= user_class.hero_class.name.capitalize %></div>
+          <div class="text-muted" style="font-size: 0.9em;">Lvl <%= user_class.level %></div>
+        </div>
+      <% end %>
+    </div>
+  </section>
+</div>

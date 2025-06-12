@@ -133,7 +133,7 @@ healer_quests = [
   { title: 'Volunteer Time', description: 'Give an hour of service to others — a quest of kindness.', frequency: 1, quest_category: QuestCategory.find_by(name: 'Community Volunteering') },
   { title: 'Emotional Check-in', description: 'Pause to check in with your feelings — wisdom lies within.', frequency: 4, quest_category: QuestCategory.find_by(name: 'Emotional Check-in') },
   { title: 'Attend Therapy', description: 'Attend a therapy or counseling session — courage is healing.', frequency: 1, quest_category: QuestCategory.find_by(name: 'Therapy Session') },
-  { title: 'Write 3 Gratitudes', description: 'Log three things you are grateful for — a ritual of light.', frequency: 5, quest_category: QuestCategory.find_by(name: 'Gratitude Practice') },
+  { title: 'Write 5 Gratitudes', description: 'Log three things you are grateful for — a ritual of light.', frequency: 5, quest_category: QuestCategory.find_by(name: 'Gratitude Practice') },
   { title: 'Digital Detox Day', description: 'Embark on a one-day digital detox — reclaim your presence.', frequency: 1, quest_category: QuestCategory.find_by(name: 'Digital Detox') },
   { title: 'Mindful Eating', description: 'Eat one meal with full awareness and gratitude.', frequency: 5, quest_category: QuestCategory.find_by(name: 'Mindful Eating') },
   { title: 'Sleep Hygiene Ritual', description: 'Complete your night ritual for deep, restful sleep.', frequency: 4, quest_category: QuestCategory.find_by(name: 'Sleep Hygiene') },

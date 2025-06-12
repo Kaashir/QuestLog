@@ -1,0 +1,38 @@
+<!-- Back button -->
+<%= link_to user_quests_path, style: "position: fixed; top: 100px; left: 20px; z-index: 1000;" do %>
+  <%= image_tag "blue_arrow.png", class: "back-button-icon", style: "width: 40px; height: 40px;" %>
+<% end %>
+
+<!-- Main content container -->
+<div class="container mx-auto friends-page-container">
+
+  <!-- Fixed header section -->
+  <div class="friends-page-header mb-3" style="z-index: 900;">
+    <h2 class="text-center mb-4 friends-page-title">Friends List</h2>
+
+    <!-- Add friend form -->
+    <%= simple_form_for :friendship, url: add_friend_path, html: {
+      class: 'add-friend-form',
+      data: {
+        controller: "reset-form",
+        action: "turbo:submit-end->reset-form#reset",
+      }
+    } do |f| %>
+      <div class="input-group">
+        <%= f.input :username, label: false, placeholder: "Enter friend's username", wrapper: false, input_html: { class: 'form-control' } %>
+        <%= f.button :submit, "Add Friend", class: 'add-friend-button' %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Scrollable content section -->
+  <div class="friends-page-content">
+    <!-- Friends list container -->
+    <div class="friends-container" id="friends_list">
+      <% current_user.all_friends.each do |friend| %>
+        <!-- Friend item template -->
+        <%= render "shared/friend_bar", friend: friend %>
+      <% end %>
+    </div>
+  </div>
+</div>

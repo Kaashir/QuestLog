@@ -14,5 +14,7 @@ Rails.application.routes.draw do
 
   # Public routes that don't require authentication
   get 'choose_class', to: 'pages#choose_class'
-
+  get 'friends_list', to: 'pages#friends_list'
+  post 'add_friend', to: 'pages#add_friend'
+  delete 'remove_friend', to: 'pages#remove_friend'
 end

@@ -1,0 +1,22 @@
+<div class="friend-item d-flex align-items-center p-3 position-relative" style="height: 130px; width: 100%;">
+  <%= link_to remove_friend_path(friend.username), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this friend?"} do %>
+    <button class="btn btn-link text-danger position-absolute" style="top: 0px; left: -2px;">
+      <i class="fas fa-times"></i>
+    </button>
+  <% end %>
+  <div class="friend-avatar me-3">
+    <%= image_tag "class_avatars/#{friend.current_class.hero_class.name.downcase}-avatar.png", class: "avatar" %>
+  </div>
+  <div class="friend-info flex-grow-1">
+    <h5 class="mb-1"><%= friend.username.capitalize %></h5>
+    <p class="mb-0 text-muted">Level <%= friend.current_class.level %> <%= friend.current_class.hero_class.name %></p>
+  </div>
+  <div class="other-classes d-flex flex-column align-items-center ms-3 gap-0" style="width: 80px; height: 100%; padding-left: 30px;">
+    <% friend.user_classes.where.not(id: friend.current_class.id).each do |user_class| %>
+      <div class="text-center">
+        <%= image_tag "class_avatars/#{user_class.hero_class.name.downcase}-avatar.png", class: "class-icon" %>
+        <div class="small text-muted">Lvl <%= user_class.level %></div>
+      </div>
+    <% end %>
+  </div>
+</div>
