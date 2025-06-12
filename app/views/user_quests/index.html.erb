@@ -90,21 +90,21 @@
 
   <!-- Fairy Modal -->
   <div class="modal fade" id="fairy-modal" tabindex="-1" aria-labelledby="fairyModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style="width: 400px;">
-      <div class="modal-content" style="background-color: #FFD066; border-radius: 12px; border: none; box-shadow: 0 4px 16px rgba(0,0,0,0.12); height: 400px;">
+    <div class="modal-dialog modal-dialog-centered" style="width: 400px; max-width: 95%; margin: 1.75rem auto;">
+      <div class="modal-content" style="background-color: #FFD066; border-radius: 12px; border: none; box-shadow: 0 4px 16px rgba(0,0,0,0.12); height: 600px; max-height: 90vh; display: flex; flex-direction: column;">
         <div class="modal-header border-0">
-            <h5 class="modal-title w-100 text-center" id="fairyModalLabel">Fairy Talks</h5>
+            <h5 class="modal-title w-100 text-center" id="fairyModalLabel">Ask Questelle</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body" style="background-color: #FFF8E1; margin: 0 8px 8px 8px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); height: calc(100% - 60px); overflow-y: auto;">
-          <div class="container chatbot">
-            <div id="questions">
-              <% @questions.where("created_at > ?", session[:chat_started_at]).each do |question| %>
-                <%= render question %>
-              <% end %>
-            </div>
-            <%= render "questions/form", question: @question %>
+        <div class="modal-body" style="background-color: #FFF8E1; margin: 0 8px; border-radius: 10px 10px 0 0; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-grow: 1; overflow-y: auto; padding: 1rem;">
+          <div id="questions">
+            <% @questions.where("created_at > ?", session[:chat_started_at]).each do |question| %>
+              <%= render question %>
+            <% end %>
           </div>
+        </div>
+        <div style="background-color: #FFF8E1; margin: 0 8px 8px 8px; border-radius: 0 0 10px 10px; padding: 1rem; border-top: 1px solid rgba(0,0,0,0.1);">
+          <%= render "questions/form", question: @question %>
         </div>
       </div>
     </div>
