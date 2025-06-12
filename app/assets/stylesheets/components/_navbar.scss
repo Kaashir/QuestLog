@@ -1,7 +1,7 @@
 .navbar {
   background-color: $solar-flare;
   color: $mountain-shadow;
-  padding: 0.75rem 1rem 1.75rem;
+  padding: 1rem 1rem 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -13,8 +13,6 @@
   width: 100%;
   z-index: 2;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  padding-bottom: 1.75rem;
 }
 
 .navbar-left {
@@ -23,8 +21,8 @@
 }
 
 .avatar {
-  width: 52px;
-  height: 52px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   margin-right: 0.75rem;
   border: 2px solid $twilight-sky;
@@ -60,6 +58,7 @@
   color: $cloud-whisper;
   padding: 6px 12px;
   border-radius: 4px;
+  margin-right: 1rem;
 
   &:hover {
     background-color: $twilight-sky;
@@ -90,15 +89,14 @@
 .xp-bar-pill {
   position: absolute;
   bottom: 0;
-  left: 1rem;
-  right: 1rem;
-  height: 26px;
+  left: 0;
+  right: 0;
+  height: 16px;
   background-color: rgba(255, 255, 255, 0.25);
-  border-radius: 999px;
   overflow: hidden;
   display: flex;
   align-items: center;
-  padding-left: 32px;
+  padding-left: 24px;
   padding-right: 12px;
   font-size: 0.75rem;
   font-weight: bold;
@@ -110,9 +108,8 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 20px;
-  right: 0;
-  background-color: $green;
+  left: 0;
+  background-color: $aurora-mist;
   z-index: 1;
   transition: width 0.4s ease;
 }
@@ -120,9 +117,12 @@
 .xp-bar-icon {
   position: absolute;
   left: 0;
-  width: 25px;
-  height: 25px;
+  top: 50%;
+  width: 20px;
+  height: 20px;
   z-index: 3;
+  object-fit: contain;
+  transform: translateY(-50%);
 }
 
 .xp-bar-text {
