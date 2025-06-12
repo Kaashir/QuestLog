@@ -13,13 +13,6 @@ class PagesController < ApplicationController
   def friends_list
   end
 
-  def friend_profile
-    @friend = User.find_by(username: params[:username].downcase)
-    if @friend.nil?
-      redirect_to friends_list_path, alert: "Friend not found"
-    end
-  end
-
   def add_friend
     @friend = User.find_by(username: params[:friendship][:username].downcase)
     if @friend && current_user.add_friend(@friend)
@@ -46,16 +39,9 @@ class PagesController < ApplicationController
     redirect_to friends_list_path
   end
 
-  def rewards
-    @current_user_class = current_user.current_class.hero_class.name
-  end
-  
   private
 
   def friend_params
     params.require(:friendship).permit(:username)
   end
-
-
-
 end

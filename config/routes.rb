@@ -17,5 +17,4 @@ Rails.application.routes.draw do
   get 'friends_list', to: 'pages#friends_list'
   post 'add_friend', to: 'pages#add_friend'
   delete 'remove_friend', to: 'pages#remove_friend'
-  get 'friend/:username', to: 'pages#friend_profile', as: 'friend_profile'
 end

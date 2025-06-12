@@ -2,7 +2,6 @@
   position: fixed;
   top: 100px;
   left: 20px;
-  z-index: 1000;
 
   &-icon {
     width: 40px;
@@ -33,7 +32,6 @@
   &-header {
     position: sticky;
     top: 120px; // Navbar height
-    z-index: 100;
     padding: 20px 0;
     margin-bottom: 20px;
   }
