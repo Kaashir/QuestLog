@@ -4,6 +4,16 @@
 
       <button type="button" class="close-button" data-bs-dismiss="modal" aria-label="Close">✕</button>
 
+      <button
+        data-controller="confirm"
+        data-action="click->confirm#show"
+        data-confirm-url-value="<%= user_quest_path(user_quest) %>"
+        data-confirm-method-value="delete"
+        data-confirm-message-value="Really delete this quest?"
+        class="delete-quest-btn">
+        <i class="fa-solid fa-trash fa-sm"></i>
+      </button>
+
       <div class="quest-icon-wrapper">
         <%= image_tag user_quest.quest.quest_category.icon, alt: "Quest Icon", class: "quest-img" %>
       </div>
@@ -33,6 +43,18 @@
         <% end %>
       </div>
 
+    </div>
+  </div>
+</div>
+
+<!-- Styled Custom Confirmation Modal -->
+<div id="confirmModal" class="custom-confirmation-modal hidden">
+  <div class="modal-content">
+    <h5 class="modal-title">Are you sure?</h5>
+    <p id="confirmMessage">Do you really want to delete this quest?</p>
+    <div class="modal-buttons">
+      <button type="button" class="btn cancel" id="cancelConfirm">Cancel</button>
+      <button type="button" class="btn confirm" id="confirmAction">Delete</button>
     </div>
   </div>
 </div>
