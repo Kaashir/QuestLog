@@ -9,7 +9,6 @@
       <% end %>
 
       <div class="character-info">
-        <div class="character-name"><%= current_user.username.capitalize %></div>
         <div class="character-level">Lvl: <%= user_class.level %></div>
       </div>
     </div>
@@ -29,7 +28,7 @@
       <% if user_class.present? %>
         <div class="xp-bar-pill">
           <div class="xp-bar-fill" style="width: <%= user_class.xp_progress_percentage %>%"></div>
-          <%= image_tag("#{user_class.hero_class.name.downcase}-icon.png", alt: "XP Icon", class: "xp-bar-icon") %>
+          <%= image_tag("#{user_class.hero_class.name.downcase}-icon-navbar.png", alt: "XP Icon", class: "xp-bar-icon") %>
           <span class="xp-bar-text"><%= user_class.xp %> / <%= user_class.xp_needed_for_next_level %></span>
         </div>
       <% end %>

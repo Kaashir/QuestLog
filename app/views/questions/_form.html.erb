@@ -14,9 +14,11 @@
                   wrapper_html: { style: "margin: 0; flex-grow: 1;" },
                   input_html: {
                     style: "height: 36px; padding: 0px 10px; border-radius: 8px; border: 1px solid #ced4da; width: 100%;",
-                    onkeydown: "if(event.key === 'Enter') { event.preventDefault(); this.form.requestSubmit(); }"
+                    onkeydown: "if(event.key === 'Enter') { event.preventDefault(); if(this.value.trim()) this.form.requestSubmit(); }"
                   } %>
-      <%= f.button :submit, "Ask", style: "margin-top: 0; background-color: #2A3B6E; color: #fff; border-radius: 8px; height: 36px; border: none; font-size: 1rem; font-family: 'GNF', sans-serif; padding: 0 16px; white-space: nowrap; align-self: flex-start;" %>
+      <%= f.button :submit, "Ask",
+          onclick: "event.preventDefault(); if(this.form.querySelector('#question_user_question').value.trim()) this.form.requestSubmit();",
+          style: "margin-top: 0; background-color: #2A3B6E; color: #fff; border-radius: 8px; height: 36px; border: none; font-size: 1rem; font-family: 'GNF', sans-serif; padding: 0 16px; white-space: nowrap; align-self: flex-start;" %>
     </div>
   </div>
 <% end %>
