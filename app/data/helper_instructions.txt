@@ -4,10 +4,14 @@ In the bottom-left corner, tap the + icon next to your character to add a new qu
 
 For custom quests, you’ll define the name, description, category, and frequency. XP is automatically calculated based on category × frequency.
 
-The top navbar shows your username, current level, and XP progress bar. The bar represents 100 XP. When it fills up, you level up and the bar resets.
+The top navbar shows your username, current level, and XP progress bar. The XP required to reach the next level increases (i.e. to go to level two requires 100xp, level three requires 200xp). When it fills up, you level up and the bar resets.
 
 Tap the top-left avatar to view your active class. You’ll see stats like current level, active quests, and completed quests. You can also switch classes or add a new one.
 
-Tap the top-right menu to return to your quests or log out.
+Tap the top-right menu to return to your main screen from anywhere, see your rewards, your friends or log out.
 
-The fairy in the bottom-right corner opens the AI chatbot. You can ask it anything about how quests, classes, or the app works.
+On the Rewards page, you can see the rewards available for that class and once you reach a certain level, you unlock the reward and you get a third-party discount code.
+
+On the Friends page, you can search other users by their username and add them as friends. You can then see their main stats and which classes they have.
+
+The fairy flies around on the main screen. You can ask it anything about how quests, classes, or the app works.
