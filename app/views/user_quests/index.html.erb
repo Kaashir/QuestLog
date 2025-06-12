@@ -98,6 +98,14 @@
         </div>
         <div class="modal-body" style="background-color: #FFF8E1; margin: 0 8px; border-radius: 10px 10px 0 0; box-shadow: 0 2px 8px rgba(0,0,0,0.08); flex-grow: 1; overflow-y: auto; padding: 1rem;">
           <div id="questions">
+            <div style="background-color: #F0F0F0; color: black; padding: 8px 12px;border-radius: 12px;border-top-left-radius: 4px;max-width: 80%; word-wrap: break-word; margin-bottom: 8px;">
+              <span class="d-block mb-2">Greetings, adventurer! I am Questelle, your guide through these lands.</span>
+              <span class="d-block mb-2">Here, you can ask me about your quests, the world around you, or anything else you seek to know.</span>
+              <span class="d-block mb-2">I will do my best to assist you on your journey.</span>
+            <span
+                class="<%= current_user.questions.any? ? 'd-none' : ' ' %>">
+              Welcome, adventurer! Your quests await — complete them to grow stronger and earn rewards. <br> Tap + to begin your journey, and level up through each challenge. <br> If you ever lose your way… ask me for guidance.</span>
+              </div>
             <% @questions.where("created_at > ?", session[:chat_started_at]).each do |question| %>
               <%= render question %>
             <% end %>
