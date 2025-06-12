@@ -1,0 +1,53 @@
+<div class="unlocked-offer-card d-flex justify-content-between align-items-center"
+     data-bs-toggle="modal" data-bs-target="#healer-1"
+     style="background: #FFD066; color: #000; border-radius: 12px; box-shadow: 0 2px 8px #FFD066;">
+  <div class="d-flex align-items-center">
+    <div class="offer-image">
+      <img src="<%= asset_path("open-chest.png") %>" alt="Chest" class="img-fluid">
+    </div>
+    <div class="offer-details" style="color: #000;">
+      <h4 class="mb-0" style="color: #000;"><strong>Dream Chest</strong></h4>
+    </div>
+  </div>
+  <div class="offer-action" style="color: #000;">
+    <h4 class="mb-0" style="color: #000;">UNLOCKED</h4>
+  </div>
+</div>
+<div class="modal fade quest-modal" id="healer-1" tabindex="-1" aria-labelledby="modal-offer" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content quest-modal-content">
+      <button type="button" class="close-button" data-bs-dismiss="modal" aria-label="Close">✕</button>
+      <div class="reward-logo-wrapper">
+        <%= image_tag "reward_logos/SleepCycle.png", alt: "Logo", class: "quest-icon" %>
+      </div>
+      <div class="reward-info">
+        <h5 class="quest-title pb-2"><strong>Unlock premium features to gently guide your sleep into harmony.</strong></h5>
+        <div id="redeem-offer-flip" style="position: relative;">
+          <div id="redeem-front" style="display: block; cursor: pointer;" onclick="toggleRedeemOffer()">
+            <div class="reward-description-unlocked">
+              <p class="m-0">REDEEM OFFER</p>
+            </div>
+          </div>
+          <div id="redeem-back" style="display: none; cursor: pointer;" onclick="toggleRedeemOffer()">
+            <div class="reward-description-unlocked">
+              <p class="m-0">Here is your secret code: <strong>ABC123</strong></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function toggleRedeemOffer() {
+    var front = document.getElementById('redeem-front');
+    var back = document.getElementById('redeem-back');
+    if (front.style.display === 'none') {
+      front.style.display = 'block';
+      back.style.display = 'none';
+    } else {
+      front.style.display = 'none';
+      back.style.display = 'block';
+    }
+  }
+</script>
