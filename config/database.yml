@@ -77,3 +77,10 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
+production:
+  <<: *default
+  database: <%= ENV['DATABASE_URL'] %>
+
+  queue:
+    <<: *default
+    url: <%= ENV["QUEUE_DATABASE_URL"] || ENV["DATABASE_URL"] %>
