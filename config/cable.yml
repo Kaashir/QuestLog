@@ -9,4 +9,4 @@ test:
 production:
   adapter: solid_cable
   channel_prefix: quest_log_production
-  polling_interval: 1.0
+  polling_interval: 1.seconds
