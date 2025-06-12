@@ -4,14 +4,14 @@ class QuestsController < ApplicationController
 
   def new
     @quest = Quest.new
-    @quest_categories = QuestCategory.where(hero_class: current_user.hero_classes)
+    @quest_categories = QuestCategory.where(hero_class: current_user.current_class.hero_class)
   end
 
   def create
     @quest = Quest.new(quest_params)
     @quest.user_created = true
     @current_user_class = current_user.user_classes.where(active: true)
-    @quest_categories = QuestCategory.where(hero_class: @current_user.user_classes.where(active: true).first)
+    @quest_categories = QuestCategory.where(hero_class: current_user.current_class.hero_class)
     if @quest.save
       UserQuest.create(user: current_user, quest: @quest, completed: false, completed_frequency: 0)
       redirect_to user_quests_path

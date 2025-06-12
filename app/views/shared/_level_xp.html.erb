@@ -2,7 +2,11 @@
   <div id="level-xp" class="character-level">Lvl: <%= user_class.level %></div>
 
   <div class="xp-bar-wrapper">
-    <div class="xp-bar" style="width: <%= user_class.xp_progress_percentage %>%"></div>
+    <% if user_class.xp_progress_percentage > 0 %>
+     <div class="xp-bar" style="width: <%= user_class.xp_progress_percentage %>%"><p id="xp-bar-text"><%= user_class.xp_progress_percentage %> / <%= user_class.xp_needed_for_next_level %></p></div>
+    <% else %>
+      <div><p id="xp-bar-text"><%= user_class.xp_progress_percentage %> / <%= user_class.xp_needed_for_next_level %></div>
+    <% end %>
   </div>
 <% else %>
   <div id="level-xp" class="character-level">No class selected</div>

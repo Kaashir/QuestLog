@@ -1,3 +1,6 @@
+  <%= link_to user_quests_path, style: "position: fixed; top: 100px; left: 20px; z-index: 1000;" do %>
+    <%= image_tag "blue_arrow.png", class: "back-button-icon", style: "width: 40px; height: 40px;" %>
+  <% end %>
 
   <!-- ====== MAIN PROFILE CONTENT ====== -->
 
@@ -13,7 +16,6 @@
     <div class="character-card mt-4">
       <h2 class="display-name"><%= current_user.username.capitalize %></h2>
       <div class="active-class-section">
-        <div class="label strong">Active Class:</div>
         <div class="active-class"><%= current_user.current_class.hero_class.name %></div>
       </div>
     </div>
@@ -26,12 +28,12 @@
         <div class="stat-value"><%= current_user.current_class.level %></div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">On-going Quests</div>
-        <div class="stat-value"><%= current_user.user_quests.where(completed: false).count %></div>
+        <div class="stat-label">Ongoing Quests</div>
+        <div class="stat-value"><%= current_user.user_quests.for_hero_class(current_user.current_class.hero_class).where(completed: false).count %></div>
       </div>
       <div class="stat-card">
         <div class="stat-label">Completed Quests</div>
-        <div class="stat-value"><%= current_user.user_quests.where(completed: true).count  %></div>
+        <div class="stat-value"><%= current_user.user_quests.for_hero_class(current_user.current_class.hero_class).where(completed: true).count %></div>
       </div>
     </section>
 

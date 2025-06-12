@@ -1,9 +1,13 @@
 <div class=" d-flex justify-content-center align-items-center min-vh-100" style="background-color: #FEF4DF;">
-  <div class="signup-container" style="background-color: #FEF4DF; border-radius: 10px; padding: 0.9rem; max-width: 500px; margin: 1rem auto; font-family: 'GNF', sans-serif;">
+  <div class="signup-container" class="mt-0", style="background-color: #FEF4DF; border-radius: 10px; padding: 0.9rem; max-width: 450px; margin: 1rem auto; font-family: 'GNF', sans-serif;">
+
+  <%= link_to root_path, style: "position: absolute; top: 20px; left: 20px; z-index: 1000;" do %>
+    <%= image_tag "blue_arrow.png", class: "back-button-icon", style: "width: 40px; height: 40px;" %>
+  <% end %>
 
     <% character_type = params[:type]&.downcase %>
     <div class="d-flex justify-content-center mb-4">
-      <div class="card border-0" style="width: 208px; height: 472px; background-color: #FFD066; box-shadow: 0 4px 16px rgba(0,0,0,0.12); border-radius: 12px; position: relative;">
+      <div class="card border-0" style="width: 260px; height: 500px; background-color: #FFD066; box-shadow: 0 4px 16px rgba(0,0,0,0.12); border-radius: 12px; position: relative;">
       <div style="position: absolute; bottom: 16px; left: 16px; right: 16px; text-align: center;">
         <% if character_type %>
           <h3 style="margin-bottom: 8px; font-family: 'GNF', sans-serif"><%= character_type.capitalize%></h3>
@@ -22,9 +26,9 @@
         </p>
       </div>
       <% if character_type %>
-        <div style="width: 192px; height: 280px; background-color: #FFF8E1; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-radius: 10px; position: absolute; left: 50%; top: 8px; transform: translateX(-50%); background-image: url('<%= asset_path("#{character_type}.png") %>'); background-size: cover; background-position: center;">
+        <div style="width: 240px; height: 350px; background-color: #FFF8E1; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-radius: 10px; position: absolute; left: 50%; top: 8px; transform: translateX(-50%); background-image: url('<%= asset_path("#{character_type}-gif.gif") %>'); background-size: contain; background-position: center; animation: none; -webkit-animation: none;">
       <% else %>
-        <div style="width: 192px; height: 280px; background-color: #FFF8E1; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-radius: 10px; position: absolute; left: 50%; top: 8px; transform: translateX(-50%); background-image: url('<%= asset_path("#{@hero_class.name.downcase}.png") %>'); background-size: cover; background-position: center;">
+        <div style="width: 240px; height: 350px; background-color: #FFF8E1; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-radius: 10px; position: absolute; left: 50%; top: 8px; transform: translateX(-50%); background-image: url('<%= asset_path("#{@hero_class.name.downcase}-gif.gif") %>'); background-size: contain; background-position: center; animation: none; -webkit-animation: none;">
       <% end %>
       </div>
       </div>
@@ -33,37 +37,46 @@
     <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 
 
-      <div class="form-inputs" style="margin-bottom: 0.5rem;">
+      <div class="form-inputs" style="margin-bottom: 0.5rem; padding: 0 1rem;">
         <%= f.input :username,
+                    placeholder: "Choose your user name",
                     autofocus: true,
                     input_html: { style: "height: 36px; padding: 0px 10px;" } %>
         <%= f.input :email,
+                    placeholder: "your.email@example.com",
                     input_html: { autocomplete: "email", style: "height: 36px; padding: 0px 10px;" } %>
-        <div class="row" style="display: flex; gap: 0%;">
-          <div class="col" style="flex: 1;">
-            <%= f.input :password,
-                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                input_html: { autocomplete: "new-password", style: "height: 36px; padding: 0px 10px;" } %>
-          </div>
-          <div class="col" style="flex: 1;">
-            <%= f.input :password_confirmation,
-                input_html: { autocomplete: "new-password", style: "height: 36px; padding: 0px 10px;" } %>
-          </div>
-        </div>
+        <%= f.input :password,
+            placeholder: "Min. 6 characters",
+            label: "Password",
+            input_html: { autocomplete: "new-password", style: "height: 36px; padding: 0px 10px;" } %>
+        <%= f.input :password_confirmation,
+            placeholder: "Repeat password",
+            label: "Password confirmation",
+            input_html: { autocomplete: "new-password", style: "height: 36px; padding: 0px 10px;" } %>
         <div class="row" style="display: flex; gap: 4%; margin-top: 1rem;">
           <div class="col" style="flex: 1;">
             <%= f.input :first_name,
+                placeholder: "Your first name",
                 input_html: { autocomplete: "first-name", style: "height: 36px; padding: 0px 10px;" } %>
           </div>
           <div class="col" style="flex: 1;">
             <%= f.input :last_name,
+                placeholder: "Your last name",
                 input_html: { autocomplete: "last-name", style: "height: 36px; padding: 0px 10px;" } %>
           </div>
         </div>
         <%= f.input :date_birth,
+                    placeholder: "Your birth date",
                     as: :string,
-                    input_html: { data: { controller: "datepicker" } } %>
+                    input_html: {
+                      data: {
+                        controller: "datepicker",
+                        datepicker_position_value: "bottom"
+                      },
+                      style: "height: 36px; padding: 0px 10px;"
+                    } %>
           <%= f.input :address,
+                    placeholder: "Your current location",
                     input_html: { autocomplete: "address", style: "height: 36px; padding: 0px 10px;" } %>
       </div>
 

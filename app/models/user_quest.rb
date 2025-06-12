@@ -14,6 +14,12 @@ class UserQuest < ApplicationRecord
   has_neighbors :embedding
   after_create :set_embedding
 
+  # Scope to get quests for a specific hero class and completion status
+  scope :for_hero_class, lambda { |hero_class|
+    joins(:quest)
+      .where(quests: { quest_category: hero_class.quest_categories })
+    }
+
   private
 
   def assign_next_position

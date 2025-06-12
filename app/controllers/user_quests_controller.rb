@@ -5,6 +5,8 @@ class UserQuestsController < ApplicationController
   def index
     @current_user_quests = UserQuest.quest_by_class(current_user.current_class.hero_class.name, current_user).order(completed: :desc, position: :asc)
     @current_user_class = current_user.user_classes.where(active: true)
+    @questions = Question.all
+    @question = Question.new
   end
 
   def new
@@ -12,6 +14,7 @@ class UserQuestsController < ApplicationController
     @current_user_class = current_user.current_class
     # Get IDs of quests that are currently active for the user
     active_quest_ids = current_user.user_quests.where(completed: false).pluck(:quest_id)
+    # Get quests that are not currently active for the user
     @quests = Quest.where(quest_category: @current_user_class.hero_class.quest_categories)
                    .where(user_created: false)
                    .where.not(id: active_quest_ids)

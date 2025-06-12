@@ -21,26 +21,17 @@
     transition: margin-left 0.3s ease;
 
     .quest-card {
-      background: url('blue-stone-quest-button.png');
-      background-size: cover;
-      background-position: center;
       border-radius: 8px;
-      padding: 8px;
+      padding: 23px 8px 8px 8px;
       width: 100%;
       height: 100%;
       cursor: pointer;
       transition: transform 0.1s ease;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       text-align: center;
-
-      &.completed {
-        background: url('gold-stone-quest-button.png');
-        background-size: cover;
-        background-position: center;
-      }
 
       &:hover {
         transform: translateY(-2px);
@@ -50,11 +41,39 @@
         transform: scale(0.95);
       }
 
+      .quest-icon {
+        width: 56px;
+        height: 56px;
+        margin-bottom: 0px;
+
+        .quest-icon-img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+
+      .quest-progress {
+        text-align: center;
+        width: 100%;
+        margin-bottom: 10px;
+        p {
+          margin: 0;
+          font-size: 1rem;
+          font-weight: bold;
+          color: rgb(0, 0, 0);
+          text-shadow: 0 0 8px rgba(255, 255, 255, 0.8),
+                       0 0 12px rgba(255, 255, 255, 0.6);
+        }
+      }
+
       .quest-title {
         h3 {
-          font-size: 0.9rem;
-          margin: 0 0 4px 0;
-          color: black;
+          font-size: 2rem;
+          margin: 8px 0 0 0;
+          color: rgb(255, 255, 255);
+          text-shadow: 0 0 8px rgba(255, 255, 255, 0.8),
+                       0 0 12px rgba(255, 255, 255, 0.6);
           overflow: hidden;
           text-overflow: ellipsis;
           display: -webkit-box;
@@ -65,15 +84,30 @@
         }
       }
 
-      .quest-progress {
-        text-align: center;
-        width: 100%;
-        p {
-          margin: 0;
-          font-size: 0.8rem;
-          font-weight: bold;
-          color: black;
-        }
+      /* Default state - blue */
+      background-image: url(asset-path('blue-stone-quest-button.png'));
+      background-size: cover;
+      background-position: center;
+
+      &.progress-blue {
+        background-image: url(asset-path('blue-stone-quest-button.png'));
+      }
+
+      &.progress-25 {
+        background-image: url(asset-path('25-stone-quest-button.png'));
+      }
+
+      &.progress-50 {
+        background-image: url(asset-path('50-stone-quest-button.png'));
+      }
+
+      &.progress-75 {
+        background-image: url(asset-path('75-stone-quest-button.png'));
+      }
+
+      &.progress-gold,
+      &.completed {
+        background-image: url(asset-path('gold-stone-quest-button.png'));
       }
     }
   }
@@ -95,12 +129,22 @@
       .quest-card {
         padding: 6px;
 
-        .quest-title h3 {
-          font-size: 0.7rem;
+        .quest-icon {
+          width: 50px;
+          height: 50px;
+          margin-bottom: 2px;
         }
 
-        .quest-progress p {
-          font-size: 0.6rem;
+        .quest-progress {
+          margin-bottom: 10px;
+          p {
+            font-size: 0.8rem;
+          }
+        }
+
+        .quest-title h3 {
+          font-size: 0.9rem;
+          margin: 12px 0 0 0;
         }
       }
     }
@@ -121,12 +165,22 @@
       width: 150px;
 
       .quest-card {
-        .quest-title h3 {
-          font-size: 1.1rem;
+        .quest-icon {
+          width: 56px;
+          height: 56px;
+          margin-bottom: 10px;
         }
 
-        .quest-progress p {
+        .quest-progress {
+          margin-bottom: 10px;
+          p {
+            font-size: 1.4rem;
+          }
+        }
+
+        .quest-title h3 {
           font-size: 0.9rem;
+          margin: 10px 0 0 0;
         }
       }
     }
@@ -146,14 +200,117 @@
       width: 200px;
 
       .quest-card {
-        .quest-title h3 {
-          font-size: 1.2rem;
+        .quest-icon {
+          width: 60px;
+          height: 60px;
+          margin-bottom: 12px;
         }
 
-        .quest-progress p {
+        .quest-progress {
+          margin-bottom: 12px;
+          p {
+            font-size: 1.6rem;
+          }
+        }
+
+        .quest-title h3 {
           font-size: 1rem;
+          margin: 12px 0 0 0;
         }
       }
     }
   }
+}
+
+@keyframes pulseButton {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.8);
+  }
+
+  70% {
+    transform: scale(1.2);
+    box-shadow: 0 0 0 15px rgba(249, 184, 126, 0);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(249, 184, 126, 0);
+  }
+}
+
+.add-quest-button {
+  background-color: #2A3B6E;
+  color: #fff;
+  border-radius: 999px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-family: 'GNF', sans-serif;
+  animation: pulseButton 2s infinite;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #3a4d87;
+  }
+}
+
+@keyframes floatAroundPage {
+  0% {
+    transform: translate(0, 0) scale(1.3);
+  }
+  20% {
+    transform: translate(-200px, -100px) scale(1.3);
+  }
+  40% {
+    transform: translate(-100px, 100px) scale(1.3);
+  }
+  60% {
+    transform: translate(100px, -150px) scale(1.3);
+  }
+  80% {
+    transform: translate(200px, 50px) scale(1.3);
+  }
+  100% {
+    transform: translate(0, 0) scale(1.3);
+  }
+}
+
+.fairy-icon {
+  transform: scale(1.3);
+  transition: transform 0.3s ease;
+  animation: floatAroundPage 25s ease-in-out infinite;
+}
+
+.fairy-icon:hover {
+  transform: scale(1.5);
+  animation-play-state: paused;
+
+  & + .sparkle-effect {
+    animation-play-state: paused;
+  }
+}
+
+.sparkle-effect {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(255,255,255,0.8) 10%, transparent 60%);
+  opacity: 0;
+  animation: sparkle 2s infinite, floatAroundPage 25s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0% { opacity: 0; transform: scale(0.8) translate(0, 0); }
+  50% { opacity: 0.5; transform: scale(1.2) translate(0, 0); }
+  100% { opacity: 0; transform: scale(0.8) translate(0, 0); }
 }

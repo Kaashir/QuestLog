@@ -51,7 +51,7 @@
 }
 
 .active-class {
-  background-color: #2B2E4A;
+  background-color: $twilight-sky;
   color: white;
   padding: 3px 75px;
   font-size: 35px;
@@ -61,6 +61,7 @@
   display: inline-block;
   border-radius: 1px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 0.3rem;
 }
 
 .stats-section {
@@ -79,7 +80,7 @@
 
 .stat-label {
   font-size: 20px;
-  color: #2B2E4A;
+  color: $twilight-sky;
   font-weight: 500;
 }
 
@@ -87,11 +88,12 @@
   font-size: 20px;
   font-weight: bold;
   color: white;
-  background-color: #2B2E4A;
+  background-color: $twilight-sky;
   padding: 3px 20px;
   min-width: 60px;
   text-align: center;
   display: inline-block;
+  border-radius: 0.3rem;
 }
 
 .stat-value[data-digits="2"] {

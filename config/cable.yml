@@ -1,6 +1,7 @@
 development:
   adapter: async
   adapter: solid_cable
+  polling_interval: 5.seconds
 
 test:
   adapter: test
@@ -11,3 +12,4 @@ production:
   channel_prefix: quest_log_production
   adapter: solid_cable
   ssl_params: { verify_mode: <%= OpenSSL::SSL::VERIFY_NONE %> }
+  polling_interval: 1.0.seconds

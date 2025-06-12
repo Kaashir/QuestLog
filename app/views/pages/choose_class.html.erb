@@ -1,4 +1,8 @@
 <div class="d-flex justify-content-center align-items-center min-vh-100" style="background-color: #FEF4DF;">
+  <%= link_to root_path, style: "position: absolute; top: 20px; left: 20px; z-index: 1000;" do %>
+    <%= image_tag "blue_arrow.png", class: "back-button-icon", style: "width: 40px; height: 40px;" %>
+  <% end %>
+
   <div class="text-center">
     <h1 style="font-family: 'GNF', sans-serif">Welcome to Questlog</h1>
     <p class="mb-4" style="font-family: 'GNF', sans-serif">choose your character</p>
@@ -7,7 +11,6 @@
       <div id="cardCarousel" class="carousel slide h-100" data-bs-ride="false">
         <div class="carousel-inner mb-3">
 
-<%# Below needs to be an each do %>
 
           <!-- Carousel Item 1 -->
           <%= link_to new_user_registration_path(type: "warrior") do %>
@@ -18,7 +21,7 @@
                     <h3 style="margin-bottom: 10px; font-family: 'GNF', sans-serif">Warrior</h3>
                     <p style="font-size: 14px; font-family: 'GNF', sans-serif">Forged through fire and discipline. Warriors thrive on strength, resilience, and relentless momentum. Every quest is a battlefield — and they never back down.</p>
                   </div>
-                <div style="width: 240px; height: 350px; background-color: #FFF8E1; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-radius: 10px; position: absolute; left: 50%; top: 10px; transform: translateX(-50%); background-image: url('<%= asset_path("warrior.png") %>'); background-size: cover; background-position: center;">
+                <div style="width: 240px; height: 350px; background-color: #FFF8E1; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-radius: 10px; position: absolute; left: 50%; top: 10px; transform: translateX(-50%); background-image: url('<%= asset_path("warrior-gif.gif") %>'); background-size: cover; background-position: center;">
                 </div>
               </div>
             </div>
@@ -34,7 +37,7 @@
                     <h3 style="margin-bottom: 10px; font-family: 'GNF', sans-serif">Monk</h3>
                     <p style="font-size: 14px; font-family: 'GNF', sans-serif">Seekers of stillness and self-mastery. They walk the path of discipline, clarity, and inner balance. Their strength lies not in force, but in unwavering focus.</p>
                   </div>
-                <div style="width: 240px; height: 350px; background-color: #FFF8E1; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-radius: 10px; position: absolute; left: 50%; top: 10px; transform: translateX(-50%); background-image: url('<%= asset_path("monk.png") %>'); background-size: cover; background-position: center;">
+                <div style="width: 240px; height: 350px; background-color: #FFF8E1; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-radius: 10px; position: absolute; left: 50%; top: 10px; transform: translateX(-50%); background-image: url('<%= asset_path("monk-gif.gif") %>'); background-size: cover; background-position: center;">
                   <!-- Optional content inside -->
                 </div>
               </div>
@@ -51,7 +54,7 @@
                     <h3 style="margin-bottom: 10px; font-family: 'GNF', sans-serif">Healer</h3>
                     <p style="font-size: 14px; font-family: 'GNF', sans-serif">Guardians of restoration and care. Healers channel kindness, compassion, and emotional clarity. They mend not just the body, but the spirit.</p>
                   </div>
-                <div style="width: 240px; height: 350px; background-color: #FFF8E1; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-radius: 10px; position: absolute; left: 50%; top: 10px; transform: translateX(-50%); background-image: url('<%= asset_path("healer.png") %>'); background-size: cover; background-position: center;">
+                <div style="width: 240px; height: 350px; background-color: #FFF8E1; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-radius: 10px; position: absolute; left: 50%; top: 10px; transform: translateX(-50%); background-image: url('<%= asset_path("healer-gif.gif") %>'); background-size: cover; background-position: center;">
                   <!-- Optional content inside -->
                 </div>
               </div>
