@@ -63,6 +63,11 @@
   display: inline-block;
 }
 
+.reward-image {
+  width: 200px;
+  object-fit: contain;
+}
+
 .reward-description {
     font-size: 0.9rem;
     color: white;
