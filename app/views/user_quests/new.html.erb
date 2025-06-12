@@ -1,9 +1,9 @@
-<div class="container" style="min-height: 100vh; background-image: url(<%= asset_path("forest_background.png") %>); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
+<div class="container" style="min-height: 100vh; background-image: url(<%= asset_path("forest-animated.gif") %>); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
   <div class="container new-quest-page py-5 d-flex flex-column align-items-center">
     <div class="header-row mb-3 w-100">
-      <%= link_to user_quests_path, class: "pixel-back-btn text-white" do %>
-        <i class="fa-solid fa-arrow-left"></i> <span>Back</span>
-      <% end %>
+    <%= link_to user_quests_path do %>
+      <%= image_tag "blue_arrow.png", style: "width: 40px; height: 40px;" %>
+    <% end %>
     </div>
 
     <div id="questCarousel" class="carousel slide" data-bs-ride="false" data-bs-interval="false">
@@ -30,7 +30,8 @@
                   <div class="quest-img"><%= image_tag quest.quest_category.icon, alt: "Quest Icon", class: "quest-icon-img" %></div>
                   <h3><%= quest.title %></h3>
                   <p><%= quest.description %></p>
-                  <p class="xp-gain">+<%= quest.xp_granted %> XP</p>
+                  <p>Frequency: <%= quest.frequency %></p>
+                  <p class="bold-text">+<%= quest.xp_granted %> XP</p>
               <%= simple_form_for UserQuest.new, url: user_quests_path do |f| %>
                 <%= f.hidden_field :quest_id, value: quest.id %>
                 <%= f.hidden_field :completed_frequency, value: 0 %>

@@ -13,7 +13,142 @@
   left: 0;
   width: 100%;
   z-index: 2;
+}.navbar {
+  background-color: $solar-flare;
+  color: $mountain-shadow;
+  padding: 0.75rem 1rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'GNF', sans-serif;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2;
 }
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  margin-right: 0.75rem;
+  border: 2px solid $twilight-sky;
+}
+
+.character-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.character-name {
+  font-family: 'GNF', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: $mountain-shadow;
+}
+
+.character-level {
+  font-family: 'GNF', sans-serif;
+  font-size: 0.9rem;
+  color: $summit-stone;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+// dropdown
+
+.pixel-button {
+  font-family: 'GNF', sans-serif;
+  background-color: $twilight-sky;
+  border: 2px solid $summit-stone;
+  color: $cloud-whisper;
+  padding: 6px 12px;
+  border-radius: 4px;
+
+  &:hover {
+    background-color: $twilight-sky;
+    color: $solar-flare;
+  }
+}
+
+.pixel-dropdown {
+  font-family: 'GNF', sans-serif;
+  background-color: $cloud-whisper;
+  border: 2px solid $summit-stone;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+
+  .dropdown-item {
+    color: $mountain-shadow;
+    font-weight: 600;
+    border-radius: 4px;
+
+    &:hover {
+      background-color: $solar-flare;
+      color: $crimson-cloak;
+    }
+  }
+}
+
+// XP Pill System
+
+.xp-display-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 2px;
+}
+
+.xp-pill {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.25);
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: $mountain-shadow;
+  min-width: 80px;
+  padding: 2px 8px 2px 25px;
+  overflow: hidden;
+
+  span {
+    position: relative;
+    z-index: 2;
+  }
+
+.xp-fill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 16px;
+  width: 100%;
+  z-index: 1;
+  background: $green; 
+  transition: width 0.4s ease;
+}
+
+
+  .xp-icon {
+    position: absolute;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    z-index: 3;
+  }
+}
+
 
 .navbar-left {
   display: flex;
@@ -89,27 +224,49 @@
 
 // xp bar
 
+.xp-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
 .xp-bar-wrapper {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  position: relative;
   width: 100%;
   height: 16px;
   background-color: $aurora-mist;
   border-top: 1px solid darken($aurora-mist, 10%);
   overflow: hidden;
+  border-radius: 8px;
 }
 
 .xp-bar {
-  padding-top: 2px;
   height: 100%;
   background-color: $twilight-sky;
   transition: width 0.3s ease;
 }
 
 #xp-bar-text {
-  margin-left: 20px;
+  position: absolute;
+  width: 100%;
+  text-align: center;
   color: white;
   font-weight: bold;
   font-size: 10px;
+  line-height: 16px;
 }
+
+.xp-display-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 2px;
+}
+
+.xp-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
+}
+

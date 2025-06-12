@@ -1,27 +1,33 @@
 <% if user_signed_in? %>
   <nav class="navbar">
     <% user_class = current_user.current_class %>
-
     <%= turbo_stream_from "user_#{current_user.id}_level_xp" %>
 
     <div class="navbar-left">
       <%= link_to user_class_path(user_class) do %>
-      <%# Below needs to be cloudinary and linked to hero classes %>
         <%= image_tag "class_avatars/#{user_class.hero_class.name.downcase}-avatar.png", alt: 'Avatar', class: 'avatar' %>
       <% end %>
+
       <div class="character-info">
         <div class="character-name"><%= current_user.username.capitalize %></div>
 
         <%= turbo_frame_tag "level_xp" do %>
           <% if user_class.present? %>
-            <%= render "shared/level_xp", user_class: user_class %>
+            <div class="character-level">Lvl: <%= user_class.level %></div>
+            <div class="xp-display-row">
+              <div class="xp-pill">
+                <div class="xp-fill" style="width: <%= user_class.xp_progress_percentage %>%"></div>
+                  <%= image_tag("#{user_class.hero_class.name.downcase}-icon.png", alt: "XP Icon", class: "xp-icon") %>
+                  <span><%= user_class.xp %> / <%= user_class.xp_needed_for_next_level %></span>
+                </div>
+              </div>
+            </div>
           <% else %>
             <div class="character-level">
               <%= link_to "Choose your class", choose_class_path, class: "btn btn-primary btn-sm" %>
             </div>
           <% end %>
         <% end %>
-
       </div>
     </div>
 
