@@ -26,12 +26,12 @@
           <div class="carousel-item">
             <div class="d-flex flex-column align-items-center">
               <div class="scroll-wrapper">
-                <div class="scroll-content text-center d-flex flex-column justify-content-center align-items-center">
+                <div class="scroll-content text-center d-flex flex-column justify-content-center align-items-center" style="font-family: 'Gnf', sans-serif;">
                   <div class="quest-img"><%= image_tag quest.quest_category.icon, alt: "Quest Icon", class: "quest-icon-img" %></div>
                   <h3><%= quest.title %></h3>
                   <p><%= quest.description %></p>
-                  <p>Frequency: <%= quest.frequency %></p>
-                  <p class="bold-text">+<%= quest.xp_granted %> XP</p>
+                  <p>Complete: <%= quest.frequency %>x to</p>
+                  <p class="bold-text"> gain +<%= quest.xp_granted %> XP</p>
               <%= simple_form_for UserQuest.new, url: user_quests_path do |f| %>
                 <%= f.hidden_field :quest_id, value: quest.id %>
                 <%= f.hidden_field :completed_frequency, value: 0 %>
