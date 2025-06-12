@@ -24,16 +24,18 @@
   &-container {
     margin-top: 10px;
     padding: 20px;
-    height: calc(100vh - 120px); // Subtract navbar height
+    height: calc(100vh - 130px); // Subtract navbar height
     display: flex;
     flex-direction: column;
   }
 
   &-header {
     position: sticky;
-    top: 120px; // Navbar height
+    top: 130px; // Navbar height
     padding: 20px 0;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
+    background-color: #f4f4f4;
+    padding-bottom: 10px;
   }
 
   &-title {
